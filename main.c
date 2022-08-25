@@ -3,7 +3,8 @@
 #include <math.h>
 #include <locale.h>
 
-int main() //LEO
+
+int main()
 {
     setlocale(LC_ALL, "Portuguese");
 
