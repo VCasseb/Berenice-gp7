@@ -6,7 +6,6 @@
 
 int main()
 {
-    //LEO
     setlocale(LC_ALL, "Portuguese");
 
     float totalfinal,total, quantidade, parcelas, total_parcelas, valor_recebido, troco,desconto, valor_sem_desconto; //VARIAVEIS DO TIPO FLOAT
