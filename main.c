@@ -12,11 +12,11 @@ int main()
     int opc,opcao; //VARIAVEIS DO TIPO INTEIRO
 
     printf("\t\t\t\t---------- Catalogo Padaria ----------\n\n");
-    printf("\t\t\t\t1 - Pao de forma ------ R$7,50\n");
-    printf("\t\t\t\t2 - Pao de centeio ---- R$8,69\n");
+    printf("\t\t\t\t1 - Pão de forma ------ R$7,50\n");
+    printf("\t\t\t\t2 - Pão de centeio ---- R$8,69\n");
     printf("\t\t\t\t3 - Broa de milho ----- R$5,00\n");
     printf("\t\t\t\t4 - Sonho ------------- R$4,50\n");
-    printf("\t\t\t\t5 - Tubaina ----------- R$3,25\n\n");
+    printf("\t\t\t\t5 - Tubaína ----------- R$3,25\n\n");
     printf("\t\t\t\t------Selecione a opção desejada: ");
 
     scanf("%d",&opc); //Switch
