@@ -1,14 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <math.h>
 #include <locale.h>
-
 
 int main()
 {
     setlocale(LC_ALL, "Portuguese");
 
-    float totalfinal,total, quantidade, parcelas, total_parcelas, valor_recebido, troco,desconto, valor_sem_desconto; //VARIAVEIS DO TIPO FLOAT
+    float totalfinal,total, quantidade, parcelas, total_parcelas, valor_recebido, troco,desconto, valor_sem_desconto,price; //VARIAVEIS DO TIPO FLOAT
     int opc,opcao; //VARIAVEIS DO TIPO INTEIRO
 
     printf("\t\t\t\t---------- Catalogo Padaria ----------\n\n");
@@ -17,8 +15,8 @@ int main()
     printf("\t\t\t\t3 - Broa de milho ----- R$5,00\n");
     printf("\t\t\t\t4 - Sonho ------------- R$4,50\n");
     printf("\t\t\t\t5 - Tubaína ----------- R$3,25\n\n");
-    printf("\t\t\t\t------Selecione a opção desejada: ");
 
+    printf("\t\t\t\t------Selecione a opção desejada: ");
     scanf("%d",&opc); //Switch
     getchar();
     system("cls"); //limpar a tela
@@ -26,98 +24,47 @@ int main()
     switch(opc){
     case 1:
         printf("\t\t----------Você selecionou Pão de forma----------\n\n");
-        printf("\t\tQual seria a quantidade desejada? ");
-        scanf("%f",&quantidade);
-        getchar();
-
-        total=quantidade*7.50; //Quantidade * item
-        system("cls");
-
-        printf("\t\tO valor total foi de R$%.2f\n\n",total);
-        printf("\t\t--------------------------\n",opcao);
-        printf("\t\t(1) Parcelar \n\t\t(2) A vista\n",opcao);
-        printf("\n\t\tQual seria a Forma de Pagamento? ",opcao);
-
-        scanf("%d",&opcao); //Selecionar forma de Pagamento
-        getchar();
-        system("cls");
+        price=7.50;
     break;
 
     case 2:
         printf("\t\t----------Você selecionou Pão de centeio----------\n\n");
-        printf("\t\tQual seria a quantidade desejada? ");
-        scanf("%f",&quantidade);
-        getchar();
-
-        total=quantidade*8.69;
-        system("cls");
-
-        printf("\n\t\tO valor total foi de R$%.2f\n\n",total);
-        printf("\t\t--------------------------\n",opcao);
-        printf("\t\t(1) Parcelar \n\t\t(2) A vista\n",opcao);
-        printf("\n\t\tQual seria a Forma de Pagamento? ",opcao);
-
-        scanf("%d",&opcao);
-        getchar();
-        system("cls");
+        price=8.69;
     break;
 
     case 3:
         printf("\t\t----------Você selecionou Broa de Milho----------\n\n");
-        printf("\t\tQual seria a quantidade desejada? ");
-        scanf("%f",&quantidade);
-        getchar();
-
-        total=quantidade*5;
-        system("cls");
-
-        printf("\n\t\tO valor total foi de R$%.2f\n\n",total);
-        printf("\t\t(1) Parcelar \n\t\t(2) A vista\n",opcao);
-        printf("\n\t\tQual seria a Forma de Pagamento? ",opcao);
-
-        scanf("%d",&opcao);
-        getchar();
-        system("cls");
+        price=5.00;
     break;
 
     case 4:
         printf("\t\t----------Você selecionou Sonho----------\n\n");
-        printf("\t\tQual seria a quantidade desejada? ");
-        scanf("%f",&quantidade);
-        getchar();
-
-        total=quantidade*4.50;
-        system("cls");
-
-        printf("\n\t\tO valor total foi de R$%.2f\n\n",total);
-        printf("\t\t(1) Parcelar \n\t\t(2) A vista\n",opcao);
-        printf("\n\t\tQual seria a Forma de Pagamento? ",opcao);
-
-        scanf("%d",&opcao);
-        getchar();
-        system("cls");
+        price=4.50;
     break;
 
     case 5:
         printf("\t\t----------Você selecionou Tubaina----------\n\n");
-        printf("\t\tQual seria a quantidade desejada? ");
-        scanf("%f",&quantidade);
-        getchar();
-
-        total=quantidade*3.25;
-        system("cls");
-
-        printf("\n\t\tO valor total foi de R$%.2f\n\n",total);
-        printf("\t\t(1) Parcelar \n\t\t(2) A vista\n",opcao);
-        printf("\n\t\tQual seria a Forma de Pagamento? ",opcao);
-
-        scanf("%d",&opcao);
-        getchar();
-        system("cls");
+        price=3.25;
     break;
     default:
         printf("\n\t\tOpção inválida!!! Digite de 1 a 5\n");
     }//Fim do switch case
+
+    printf("\t\tQual seria a quantidade desejada? ");
+    scanf("%f",&quantidade); //Quantidade usuario
+    getchar();
+    system("cls");
+
+    total=quantidade*price; //Quantidade * item
+
+    printf("\n\t\tO valor total foi de R$%.2f\n\n",total);
+    printf("\t\t--------------------------\n",opcao);
+    printf("\t\t(1) Parcelar \n\t\t(2) A vista\n",opcao);
+    printf("\n\t\tQual seria a Forma de Pagamento? ",opcao);
+
+    scanf("%d",&opcao);
+    getchar();
+    system("cls");
 
     if (opcao == 1){ //Parcelado
         printf("\tQual a quantidade de parcelas? ");
@@ -127,7 +74,8 @@ int main()
         if(parcelas<=3){ //5% Juros
             totalfinal=total*1.05;
             total_parcelas=totalfinal/parcelas;
-            }else if (parcelas>3){ //8% Juros
+            }
+            else if (parcelas>3){ //8% Juros
                 totalfinal=total*1.08;
                 total_parcelas=totalfinal/parcelas;
                 }
@@ -150,11 +98,13 @@ int main()
             valor_sem_desconto=total*0.05;
             desconto=total-valor_sem_desconto;
             troco=valor_recebido-desconto;
-            }else if(total>50 && total<100){ //10% Desconto
+            }
+            else if(total>50 && total<100){ //10% Desconto
                     valor_sem_desconto=total*0.10;
                     desconto=total-valor_sem_desconto;
                     troco=valor_recebido-desconto;
-                    }else if(total>=100){ //18% Desconto
+                    }
+                    else if(total>=100){ //18% Desconto
                         valor_sem_desconto=total*0.18;
                         desconto=total-valor_sem_desconto;
                         troco=valor_recebido-desconto;
