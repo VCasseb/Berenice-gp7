@@ -7,7 +7,7 @@ int main()
     setlocale(LC_ALL, "Portuguese");
 
     float totalfinal,total, quantidade, parcelas, total_parcelas, valor_recebido, troco,desconto, valor_sem_desconto,price; //VARIAVEIS DO TIPO FLOAT
-    int opc,opcao; //VARIAVEIS DO TIPO INTEIRO
+    int opc; //VARIAVEIS DO TIPO INTEIRO
 
     printf("\t\t\t\t---------- Catalogo Padaria ----------\n\n");
     printf("\t\t\t\t1 - Pão de forma ------ R$7,50\n");
@@ -58,15 +58,15 @@ int main()
     total=quantidade*price; //Quantidade * item
 
     printf("\n\t\tO valor total foi de R$%.2f\n\n",total);
-    printf("\t\t--------------------------\n",opcao);
-    printf("\t\t(1) Parcelar \n\t\t(2) A vista\n",opcao);
-    printf("\n\t\tQual seria a Forma de Pagamento? ",opcao);
+    printf("\t\t--------------------------\n");
 
-    scanf("%d",&opcao);
+    printf("\t\t(1) Parcelar \n\t\t(2) A vista\n");
+    printf("\n\t\tQual seria a Forma de Pagamento? ");
+    scanf("%d",&opc); //Forma de pagamento
     getchar();
     system("cls");
 
-    if (opcao == 1){ //Parcelado
+    if (opc == 1){ //Parcelado
         printf("\tQual a quantidade de parcelas? ");
         scanf("%f",&parcelas);
         getchar();
@@ -87,7 +87,7 @@ int main()
         printf("\t|-----------------------------------------|\n");
         }//Fim if Parcelado
 
-    if(opcao == 2){//A vista
+    if(opc == 2){//A vista
 
         printf("\n\tO valor total foi de R$%.2f (Sem desconto) \n\n",total);
         printf("\tInsira seu dinheiro: ");
