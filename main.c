@@ -6,8 +6,8 @@ int main()
 {
     setlocale(LC_ALL, "Portuguese");
 
-    float totalfinal,total, quantidade, parcelas, total_parcelas, valor_recebido, troco,desconto, valor_sem_desconto,price;
-    int opc;
+    float totalfinal,total, quantidade, total_parcelas, valor_recebido, troco,desconto, valor_sem_desconto,price;
+    int opc,parcelas;
 
     printf("\t\t\t\t---------- Catalogo Padaria ----------\n\n");
     printf("\t\t\t\t1 - Pão de forma ------ R$7,50\n");
@@ -56,7 +56,7 @@ int main()
     getchar();
     system("cls");
 
-    total=quantidade*price; //Quantidade * item
+    total=quantidade*price; //Quantidade * valor do item
 
     printf("\n\t\tO valor total foi de R$%.2f\n\n",total);
     printf("\t\t--------------------------\n");
@@ -69,7 +69,7 @@ int main()
 
     if (opc == 1){ //Parcelado
         printf("\tQual a quantidade de parcelas? ");
-        scanf("%f",&parcelas);
+        scanf("%d",&parcelas);
         getchar();
 
         if(parcelas<=3){ //5% Juros
@@ -83,7 +83,7 @@ int main()
 
         system("cls");
         printf("\n\t|------------------NOTA-------------------|\n\n");\
-        printf("\t|O valor a prazo (%.0f meses) ficou: R$%.2f\n",parcelas,total_parcelas);
+        printf("\t|O valor a prazo (%d meses) ficou: R$%.2f\n",parcelas,total_parcelas);
         printf("\t|O valor total das parcelas ficou: R$%.2f\n\n",totalfinal);
         printf("\t|-----------------------------------------|\n");
         }//Fim if Parcelado
@@ -96,18 +96,15 @@ int main()
         getchar();
 
         if(total<=50){ //5% Desconto
-            valor_sem_desconto=total*0.05;
-            desconto=total-valor_sem_desconto;
+            desconto=total*0.95;
             troco=valor_recebido-desconto;
             }
             else if(total>50 && total<100){ //10% Desconto
-                    valor_sem_desconto=total*0.10;
-                    desconto=total-valor_sem_desconto;
+                    desconto=total*0.90;
                     troco=valor_recebido-desconto;
                     }
                     else if(total>=100){ //18% Desconto
-                        valor_sem_desconto=total*0.18;
-                        desconto=total-valor_sem_desconto;
+                        desconto=total*0.82;
                         troco=valor_recebido-desconto;
                         }
 
