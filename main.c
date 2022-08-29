@@ -6,8 +6,8 @@ int main()
 {
     setlocale(LC_ALL, "Portuguese");
 
-    float totalfinal,total, quantidade, parcelas, total_parcelas, valor_recebido, troco,desconto, valor_sem_desconto,price; //VARIAVEIS DO TIPO FLOAT
-    int opc; //VARIAVEIS DO TIPO INTEIRO
+    float totalfinal,total, quantidade, parcelas, total_parcelas, valor_recebido, troco,desconto, valor_sem_desconto,price;
+    int opc;
 
     printf("\t\t\t\t---------- Catalogo Padaria ----------\n\n");
     printf("\t\t\t\t1 - Pão de forma ------ R$7,50\n");
@@ -48,6 +48,7 @@ int main()
     break;
     default:
         printf("\n\t\tOpção inválida!!! Digite de 1 a 5\n");
+        return 0; //fechar codigo caso opc errada
     }//Fim do switch case
 
     printf("\t\tQual seria a quantidade desejada? ");
