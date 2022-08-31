@@ -6,48 +6,48 @@ int main()
 {
     setlocale(LC_ALL, "Portuguese");
 
-    float totalfinal,total, quantidade, total_parcelas, valor_recebido, troco,desconto, valor_sem_desconto,price;
+    float totalfinal,total, quantidade, total_parcelas, valor_recebido, troco,desconto,price;
     int opc,parcelas;
 
     printf("\t\t\t\t---------- Catalogo Padaria ----------\n\n");
-    printf("\t\t\t\t1 - Pão de forma ------ R$7,50\n");
-    printf("\t\t\t\t2 - Pão de centeio ---- R$8,69\n");
+    printf("\t\t\t\t1 - PÃ£o de forma ------ R$7,50\n");
+    printf("\t\t\t\t2 - PÃ£o de centeio ---- R$8,69\n");
     printf("\t\t\t\t3 - Broa de milho ----- R$5,00\n");
     printf("\t\t\t\t4 - Sonho ------------- R$4,50\n");
-    printf("\t\t\t\t5 - Tubaína ----------- R$3,25\n\n");
+    printf("\t\t\t\t5 - TubaÃ­na ----------- R$3,25\n\n");
 
-    printf("\t\t\t\t------Selecione a opção desejada: ");
+    printf("\t\t\t\t------Selecione a opÃ§Ã£o desejada: ");
     scanf("%d",&opc); //Switch
     getchar(); //pra garantir que vai pegar o enter
     system("cls"); //limpar a tela
 
     switch(opc){
         case 1:
-            printf("\t\t----------Você selecionou Pão de forma----------\n\n");
+            printf("\t\t----------VocÃª selecionou PÃ£o de forma----------\n\n");
             price=7.50;
         break;
 
         case 2:
-            printf("\t\t----------Você selecionou Pão de centeio----------\n\n");
+            printf("\t\t----------VocÃª selecionou PÃ£o de centeio----------\n\n");
             price=8.69;
         break;
 
         case 3:
-            printf("\t\t----------Você selecionou Broa de Milho----------\n\n");
+            printf("\t\t----------VocÃª selecionou Broa de Milho----------\n\n");
             price=5.00;
         break;
 
         case 4:
-            printf("\t\t----------Você selecionou Sonho----------\n\n");
+            printf("\t\t----------VocÃª selecionou Sonho----------\n\n");
             price=4.50;
         break;
 
         case 5:
-            printf("\t\t----------Você selecionou Tubaina----------\n\n");
+            printf("\t\t----------VocÃª selecionou Tubaina----------\n\n");
             price=3.25;
         break;
         default:
-            printf("\n\t\tOpção inválida!!! Digite de 1 a 5\n");
+            printf("\n\t\tOpÃ§Ã£o invÃ¡lida!!! Digite de 1 a 5\n");
             return 0; //fechar codigo caso opc errada
     }//Fim do switch case
 
