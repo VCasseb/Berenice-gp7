@@ -22,33 +22,33 @@ int main()
     system("cls"); //limpar a tela
 
     switch(opc){
-    case 1:
-        printf("\t\t----------Você selecionou Pão de forma----------\n\n");
-        price=7.50;
-    break;
+        case 1:
+            printf("\t\t----------Você selecionou Pão de forma----------\n\n");
+            price=7.50;
+        break;
 
-    case 2:
-        printf("\t\t----------Você selecionou Pão de centeio----------\n\n");
-        price=8.69;
-    break;
+        case 2:
+            printf("\t\t----------Você selecionou Pão de centeio----------\n\n");
+            price=8.69;
+        break;
 
-    case 3:
-        printf("\t\t----------Você selecionou Broa de Milho----------\n\n");
-        price=5.00;
-    break;
+        case 3:
+            printf("\t\t----------Você selecionou Broa de Milho----------\n\n");
+            price=5.00;
+        break;
 
-    case 4:
-        printf("\t\t----------Você selecionou Sonho----------\n\n");
-        price=4.50;
-    break;
+        case 4:
+            printf("\t\t----------Você selecionou Sonho----------\n\n");
+            price=4.50;
+        break;
 
-    case 5:
-        printf("\t\t----------Você selecionou Tubaina----------\n\n");
-        price=3.25;
-    break;
-    default:
-        printf("\n\t\tOpção inválida!!! Digite de 1 a 5\n");
-        return 0; //fechar codigo caso opc errada
+        case 5:
+            printf("\t\t----------Você selecionou Tubaina----------\n\n");
+            price=3.25;
+        break;
+        default:
+            printf("\n\t\tOpção inválida!!! Digite de 1 a 5\n");
+            return 0; //fechar codigo caso opc errada
     }//Fim do switch case
 
     printf("\t\tQual seria a quantidade desejada? ");
