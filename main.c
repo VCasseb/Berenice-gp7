@@ -76,10 +76,10 @@ int main()
             totalfinal=total*1.05;
             total_parcelas=totalfinal/parcelas;
             }
-            else if (parcelas>3){ //8% Juros
-                totalfinal=total*1.08;
-                total_parcelas=totalfinal/parcelas;
-                }
+        else if (parcelas>3){ //8% Juros
+            totalfinal=total*1.08;
+            total_parcelas=totalfinal/parcelas;
+            }
 
         system("cls");
         printf("\n\t|------------------NOTA-------------------|\n\n");\
@@ -100,13 +100,13 @@ int main()
             troco=valor_recebido-desconto;
             }
             else if(total>50 && total<100){ //10% Desconto
-                    desconto=total*0.90;
-                    troco=valor_recebido-desconto;
-                    }
-                    else if(total>=100){ //18% Desconto
-                        desconto=total*0.82;
-                        troco=valor_recebido-desconto;
-                        }
+            desconto=total*0.90;
+               troco=valor_recebido-desconto;
+            }
+            else if(total>=100){ //18% Desconto
+                desconto=total*0.82;
+                troco=valor_recebido-desconto;
+            }
 
         system("cls");
         printf("\n\t|------------------NOTA-------------------|\n\n");\
