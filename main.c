@@ -3,66 +3,9 @@
 #include <locale.h>
 
 //Função para os Metodos de pagamento.
-float parcelamento(float total)
-{
-    float totalfinal,total_parcelas;
-    int parcelas;
 
-        printf("\tQual a quantidade de parcelas? ");
-        scanf("%d",&parcelas);
-        getchar();
-
-        if(parcelas<=3){ //5% Juros
-            totalfinal=total*1.05;
-            total_parcelas=totalfinal/parcelas;
-        }
-        else if (parcelas>3){ //8% Juros
-                totalfinal=total*1.08;
-                total_parcelas=totalfinal/parcelas;
-             }
-
-        system("cls");
-        printf("\n\t|------------------NOTA-------------------|\n\n");\
-        printf("\t|O valor a prazo (%d meses) ficou: R$%.2f\n",parcelas,total_parcelas);
-        printf("\t|O valor total das parcelas ficou: R$%.2f\n\n",totalfinal);
-        printf("\t|-----------------------------------------|\n");
-        return totalfinal;
-}
-
-float avista(float total)
-{
-    float valor_recebido,desconto,troco;
-        printf("\n\tO valor total foi de R$%.2f (Sem desconto) \n\n",total);
-        printf("\tInsira seu dinheiro: ");
-        scanf("%f",&valor_recebido);
-        getchar();
-
-        if(total<=50){ //5% Desconto
-            desconto=total*0.95;
-            troco=valor_recebido-desconto;
-        }
-            else if(total>50 && total<100){ //10% Desconto
-                    desconto=total*0.90;
-                    troco=valor_recebido-desconto;
-                 }
-                    else if(total>=100){ //18% Desconto
-                        desconto=total*0.82;
-                        troco=valor_recebido-desconto;
-                        }
-
-        system("cls");
-        printf("\n\t|------------------NOTA-------------------|\n\n");\
-        printf("\t|Total com desconto: R$%.2f\n",desconto);
-        printf("\t|Valor entregue: R$%.2f\n",valor_recebido);
-        printf("\t|Troco: R$%.2f\n\n",troco);
-        printf("\t|-----------------------------------------|\n");
-
-        if(troco<0){
-            printf("\n\t--__-- Ficou faltando R$%.2f --__--\n",troco);
-        }
-        return troco;
-}
-
+float parcelamento(float total);
+float avista(float total);
 int main()
 {
     setlocale(LC_ALL, "Portuguese");
@@ -145,4 +88,63 @@ int main()
         printf("\t\tSeleção de pagamento invalido. Selecione opções de 1 a 2\n");
     }//Fim do if da opc invalida de pagamento.
     return 0;
+}
+float parcelamento(float total)
+{
+    float totalfinal,total_parcelas;
+    int parcelas;
+
+        printf("\tQual a quantidade de parcelas? ");
+        scanf("%d",&parcelas);
+        getchar();
+
+        if(parcelas<=3){ //5% Juros
+            totalfinal=total*1.05;
+            total_parcelas=totalfinal/parcelas;
+        }
+        else if (parcelas>3){ //8% Juros
+                totalfinal=total*1.08;
+                total_parcelas=totalfinal/parcelas;
+             }
+
+        system("cls");
+        printf("\n\t|------------------NOTA-------------------|\n\n");\
+        printf("\t|O valor a prazo (%d meses) ficou: R$%.2f\n",parcelas,total_parcelas);
+        printf("\t|O valor total das parcelas ficou: R$%.2f\n\n",totalfinal);
+        printf("\t|-----------------------------------------|\n");
+        return totalfinal;
+}
+
+float avista(float total)
+{
+    float valor_recebido,desconto,troco;
+        printf("\n\tO valor total foi de R$%.2f (Sem desconto) \n\n",total);
+        printf("\tInsira seu dinheiro: ");
+        scanf("%f",&valor_recebido);
+        getchar();
+
+        if(total<=50){ //5% Desconto
+            desconto=total*0.95;
+            troco=valor_recebido-desconto;
+        }
+            else if(total>50 && total<100){ //10% Desconto
+                    desconto=total*0.90;
+                    troco=valor_recebido-desconto;
+                 }
+                    else if(total>=100){ //18% Desconto
+                        desconto=total*0.82;
+                        troco=valor_recebido-desconto;
+                        }
+
+        system("cls");
+        printf("\n\t|------------------NOTA-------------------|\n\n");\
+        printf("\t|Total com desconto: R$%.2f\n",desconto);
+        printf("\t|Valor entregue: R$%.2f\n",valor_recebido);
+        printf("\t|Troco: R$%.2f\n\n",troco);
+        printf("\t|-----------------------------------------|\n");
+
+        if(troco<0){
+            printf("\n\t--__-- Ficou faltando R$%.2f --__--\n",troco);
+        }
+        return troco;
 }
