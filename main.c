@@ -4,8 +4,8 @@
 
 //Função para os Metodos de pagamento.
 
-float parcelamento(float total);
-float avista(float total);
+float parcelamento(float total); //declaração da funçao parcelamento
+float avista(float total);//declaração da funçao a vista
 int main()
 {
     setlocale(LC_ALL, "Portuguese");
@@ -78,11 +78,11 @@ int main()
     system("cls");
 
     if (opc == 1){ //Parcelado
-        parcelamento(total);
+        parcelamento(total); //chamando a funçao parcelamento
     }//Fim if Parcelado
 
     if(opc == 2){//A vista
-        avista(total);
+        avista(total); //chamando a função a vista
     }// Fim if A VISTA
     if(opc != 1 && opc !=2){
         printf("\t\tSeleção de pagamento invalido. Selecione opções de 1 a 2\n");
