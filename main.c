@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <locale.h>
 
-//Utilizar funcao para mostrar a nota e para o metodo de pagamento
+//Função para os Metodos de pagamento.
 float parcelamento(float total)
 {
     float totalfinal,total_parcelas;
