@@ -3,7 +3,7 @@
 #include <locale.h>
 
 //Função para os Metodos de pagamento.
-
+void catalogo(void);
 float parcelamento(float total);
 float avista(float total);
 int main()
@@ -11,17 +11,12 @@ int main()
     setlocale(LC_ALL, "Portuguese");
 
     float total, quantidade[5],price[] = {7.50,8.69,5.00,4.50,3.25},subtt[5],subtt_qty[5];
-    int opc,continuar;
+    int opc;
     do{
-        system("cls");
-        printf("\t\t\t\t---------- Catalogo Padaria ----------\n\n");
-        printf("\t\t\t\t1 - Pão de forma ------ R$7,50\n");
-        printf("\t\t\t\t2 - Pão de centeio ---- R$8,69\n");
-        printf("\t\t\t\t3 - Broa de milho ----- R$5,00\n");
-        printf("\t\t\t\t4 - Sonho ------------- R$4,50\n");
-        printf("\t\t\t\t5 - Tubaína ----------- R$3,25\n\n");
 
-        //arrumar isso
+        system("cls");
+        catalogo(); //Chama a funcao do menu de itens disponiveis
+
         printf("\t\t\t\t------Selecione a opção desejada: ");
         scanf("%d",&opc); //Switch e condição do loop
         getchar(); //pra garantir que vai pegar o enter
@@ -101,7 +96,7 @@ int main()
     printf("\t\tDeseja selecionar outro produto?\n\t\t(1) - Sim\n\t\t\(2) - Não\n\t\t");
     scanf("%d", &opc);
     getchar();
-    }while(continuar!=1);
+    }while(opc  ==1);
 
     printf("\t\t(1) Parcelar \n\t\t(2) A vista\n");
     printf("\n\t\tQual seria a Forma de Pagamento? ");
@@ -121,6 +116,18 @@ int main()
     }//Fim do if da opc invalida de pagamento.
     return 0;
 }
+
+void catalogo(void){
+        printf("\t\t\t\t---------- Catalogo Padaria ----------\n\n");
+        printf("\t\t\t\t1 - Pão de forma ------ R$7,50\n");
+        printf("\t\t\t\t2 - Pão de centeio ---- R$8,69\n");
+        printf("\t\t\t\t3 - Broa de milho ----- R$5,00\n");
+        printf("\t\t\t\t4 - Sonho ------------- R$4,50\n");
+        printf("\t\t\t\t5 - Tubaína ----------- R$3,25\n\n");
+
+        return 0;
+}
+
 float parcelamento(float total)
 {
     float totalfinal,total_parcelas;
@@ -180,3 +187,4 @@ float avista(float total)
         }
         return troco;
 }
+
