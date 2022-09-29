@@ -7,6 +7,7 @@
 void catalogo(void);
 float parcelamento(float total);
 float avista(float total);
+float itemselec(float fsubtt_qty[5]);
 //char pnome [5][35] = {"pao de forma","pao de centeio","broa","sonho","tubaina"};
 int menu();
 
@@ -89,16 +90,8 @@ int main()
         //subtt_qty[i] += quantidade[i];
     }
     */
-    system("cls");
-    printf("\n\t\t-----Qtd Selecionada----");
-    printf("\n\t\t Pao de Forma   --- %.0fx",subtt_qty[0]);
-    printf("\n\t\t Pao de Centeio --- %.0fx",subtt_qty[1]);
-    printf("\n\t\t Broa de Milho  --- %.0fx",subtt_qty[2]);
-    printf("\n\t\t Sonho          --- %.0fx",subtt_qty[3]);
-    printf("\n\t\t Tubaina        --- %.0fx",subtt_qty[4]);
+    itemselec(subtt_qty);
 
-
-    printf("\n\t\t-------------------------");
     printf("\n\n\t\tO valor total foi de R$%.2f\n\n",total);
     printf("\t\t--------------------------\n");
     printf("\t\tDeseja selecionar outro produto?\n\t\t(1) - Sim\n\t\t\(2) - Não\n\t\t");
@@ -167,6 +160,19 @@ int main()
     if(opc != 1 && opc !=2){
         printf("\t\tSeleção de pagamento invalido. Selecione opções de 1 a 2\n");
     }//Fim do if da opc invalida de pagamento.
+    return 0;
+}
+float itemselec(float fsubtt_qty[5]){
+    system("cls");
+    printf("\n\t\t-----Qtd Selecionada----");
+    printf("\n\t\t Pao de Forma   --- %.0fx",fsubtt_qty[0]);
+    printf("\n\t\t Pao de Centeio --- %.0fx",fsubtt_qty[1]);
+    printf("\n\t\t Broa de Milho  --- %.0fx",fsubtt_qty[2]);
+    printf("\n\t\t Sonho          --- %.0fx",fsubtt_qty[3]);
+    printf("\n\t\t Tubaina        --- %.0fx",fsubtt_qty[4]);
+
+
+    printf("\n\t\t-------------------------");
     return 0;
 }
 
