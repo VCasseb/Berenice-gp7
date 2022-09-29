@@ -16,7 +16,12 @@ int main()
     int nome[5]={1,2,3,4,5};
     float total, quantidade[5],price[] = {7.50,8.69,5.00,4.50,3.25},subtt[5],subtt_qty[5];
     int opc;
-    subtt_qty[2]=0;
+
+    for(int i=0;i<=5;i++){ //Inicializar os valores de subtt_qty como 0 pois o programa estava retornando lixo para as variaveis.
+    subtt_qty[i] = 0;
+    subtt[i] = 0;
+    }
+
     do{
 
         opc= menu(); //Chama a funcao do menu de itens disponiveis
@@ -30,6 +35,7 @@ int main()
             getchar();
             subtt[0] = price[0] * quantidade[0];
             subtt_qty[0] += quantidade[0]; //Somar a quantidade anterior com a atual
+            total+=subtt[0];
         break;
 
         case 2:
@@ -39,6 +45,7 @@ int main()
             getchar();
             subtt[1] = price[1] * quantidade[1];
             subtt_qty[1] += quantidade[1];
+            total+=subtt[1];
         break;
 
         case 3:
@@ -48,6 +55,7 @@ int main()
             getchar();
             subtt[2] = price[2] * quantidade[2];
             subtt_qty[2] += quantidade[2];
+            total+=subtt[2];
         break;
 
         case 4:
@@ -57,6 +65,7 @@ int main()
             getchar();
             subtt[3] = price[3] * quantidade[3];
             subtt_qty[3] += quantidade[3];
+            total+=subtt[3];
         break;
 
         case 5:
@@ -66,22 +75,22 @@ int main()
             getchar();
             subtt[4] = price[4] * quantidade[4];
             subtt_qty[4] += quantidade[4];
+            total+=subtt[4];
         break;
 
         default:
             printf("\n\t\tOpção inválida!!! Digite de 1 a 5\n");
             system("cls");
             return 0; //fechar codigo caso opc errada
-
     }//Fim do switch case
-
+    /*
     for(int i=0;i<=5;i++){
         total+=subtt[i]; //Quantidade * valor do item
         //subtt_qty[i] += quantidade[i];
     }
-
+    */
     system("cls");
-    printf("\n\t\t----Itens Selecionados---");
+    printf("\n\t\t-----Qtd Selecionada----");
     printf("\n\t\t Pao de Forma   --- %.0fx",subtt_qty[0]);
     printf("\n\t\t Pao de Centeio --- %.0fx",subtt_qty[1]);
     printf("\n\t\t Broa de Milho  --- %.0fx",subtt_qty[2]);
@@ -116,33 +125,34 @@ int main()
 
         }
     }
+        printf("\n\t\t---Itens Selecionados---\n");
     for (int i=0; i<5; i++){
             if(subtt[i]>0){
+                        //printf("\n\t\t---Itens Selecionados---");
                     if(nome[i]==1){
-                          // strcpy (pnome,"pao de centeio");
-
-                        printf("\n\t\tPao de centeio --- %.2f",subtt[i]);
-
+                        printf("\n\t\tPao de centeio --- R$%.2f",subtt[i]);
                     }
                     if(nome[i]==2){
-                        printf("\n\t\tPao de forma --- %.2f",subtt[i]);
+                        printf("\n\t\tPao de forma ----- R$%.2f",subtt[i]);
                     }
                     if(nome[i]==3){
-                        printf("\n\t\tBroa de Milho --- %.2f",subtt[i]);
+                        printf("\n\t\tBroa de Milho ---- R$%.2f",subtt[i]);
                     }
                     if(nome[i]==4){
-                        printf("\n\t\tSonho --- %.2f",subtt[i]);
+                        printf("\n\t\tSonho ------------ R$%.2f",subtt[i]);
                     }
                      if(nome[i]==5){
-                        printf("\n\t\tTubaina --- %.2f",subtt[i]);
+                        printf("\n\t\tTubaina ---------- R$%.2f",subtt[i]);
                     }
-
-        //printf("\n item comprado foi %d subtotal %.2f\n",nome[i],subtt[i]);
-            }
-    }
-
-    printf("\t\t(1) Parcelar \n\t\t(2) A vista\n");
-    printf("\n\t\tQual seria a Forma de Pagamento? ");
+                    //printf("\n\t\t-------------------------");
+            }//Fim Cadeia IF
+    }//Fim For
+    printf("\n\n\t\t-------------------------\n");
+    printf("\t\tTotal da compra: R$%.2f",total);
+    printf("\n\t\t-------------------------\n\n");
+    printf("\n\t\tInsira a Forma de Pagamento\n");;
+    printf("\n\t\t(1) Parcelar \n\t\t(2) A vista\n\t\t--->");
+    //printf("\n\t\tQual seria a Forma de Pagamento? ");
     scanf("%d",&opc); //Forma de pagamento
     getchar();
     system("cls");
