@@ -1,27 +1,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <locale.h>
+#include <string.h>
 
 //Função para os Metodos de pagamento.
 void catalogo(void);
 float parcelamento(float total);
 float avista(float total);
+//char pnome [5][35] = {"pao de forma","pao de centeio","broa","sonho","tubaina"};
+int menu();
+
 int main()
 {
     setlocale(LC_ALL, "Portuguese");
-
+    int nome[5]={1,2,3,4,5};
     float total, quantidade[5],price[] = {7.50,8.69,5.00,4.50,3.25},subtt[5],subtt_qty[5];
     int opc;
+    subtt_qty[2]=0;
     do{
 
-        system("cls");
-        catalogo(); //Chama a funcao do menu de itens disponiveis
-
-        printf("\t\t\t\t------Selecione a opção desejada: ");
-        scanf("%d",&opc); //Switch e condição do loop
-        getchar(); //pra garantir que vai pegar o enter
+        opc= menu(); //Chama a funcao do menu de itens disponiveis
         system("cls"); //limpar a tela
-
     switch(opc){
         case 1:
 
@@ -96,7 +95,51 @@ int main()
     printf("\t\tDeseja selecionar outro produto?\n\t\t(1) - Sim\n\t\t\(2) - Não\n\t\t");
     scanf("%d", &opc);
     getchar();
+    system("cls");
+
     }while(opc  ==1);
+
+    //A MERDA SERA FEITA AQUI
+    //printf("---->%f",subtt_qty[2]);
+    for(int i=0;i<5;i++){
+        for(int j=0;j<5;j++){
+                if(subtt[i]>subtt[j]){
+                    int tempor1 = nome[i];
+                    int tempor2 = subtt[i];
+
+                    subtt[i] = subtt[j];
+                    nome[i] = nome[j];
+
+                    subtt[j] = tempor2;
+                    nome[j] = tempor1;
+                }
+
+        }
+    }
+    for (int i=0; i<5; i++){
+            if(subtt[i]>0){
+                    if(nome[i]==1){
+                          // strcpy (pnome,"pao de centeio");
+
+                        printf("\n\t\tPao de centeio --- %.2f",subtt[i]);
+
+                    }
+                    if(nome[i]==2){
+                        printf("\n\t\tPao de forma --- %.2f",subtt[i]);
+                    }
+                    if(nome[i]==3){
+                        printf("\n\t\tBroa de Milho --- %.2f",subtt[i]);
+                    }
+                    if(nome[i]==4){
+                        printf("\n\t\tSonho --- %.2f",subtt[i]);
+                    }
+                     if(nome[i]==5){
+                        printf("\n\t\tTubaina --- %.2f",subtt[i]);
+                    }
+
+        //printf("\n item comprado foi %d subtotal %.2f\n",nome[i],subtt[i]);
+            }
+    }
 
     printf("\t\t(1) Parcelar \n\t\t(2) A vista\n");
     printf("\n\t\tQual seria a Forma de Pagamento? ");
@@ -117,7 +160,9 @@ int main()
     return 0;
 }
 
-void catalogo(void){
+int menu()
+{
+    int opc;
         printf("\t\t\t\t---------- Catalogo Padaria ----------\n\n");
         printf("\t\t\t\t1 - Pão de forma ------ R$7,50\n");
         printf("\t\t\t\t2 - Pão de centeio ---- R$8,69\n");
@@ -125,7 +170,11 @@ void catalogo(void){
         printf("\t\t\t\t4 - Sonho ------------- R$4,50\n");
         printf("\t\t\t\t5 - Tubaína ----------- R$3,25\n\n");
 
-        return 0;
+        printf("\t\t\t\t------Selecione a opção desejada: ");
+        scanf("%d",&opc); //Switch e condição do loop
+        getchar(); //pra garantir que vai pegar o enter
+
+        return opc;
 }
 
 float parcelamento(float total)
