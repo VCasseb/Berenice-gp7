@@ -19,7 +19,7 @@ int main()
     setlocale(LC_ALL, "Portuguese");
 
     int nome[5]= {1,2,3,4,5},opc;
-    float total, quantidade[5],price[] = {7.50,8.69,5.00,4.50,3.25},subtt[5],subtt_qty[5],estoque[5],subtt_stock[5];
+    float total, quantidade[5],price[] = {7.50,8.69,5.00,4.50,3.25},subtt[5],subtt_qty[5],estoque[5],subtt_stock[5],subtt_stockva[5];
 
     int opcase=0;
     for(int i=0; i<=5; i++) //Inicializar os valores de subtt_qty como 0 pois o programa estava retornando lixo para as variaveis.
@@ -104,7 +104,9 @@ int main()
             //do
             //{
         //opc= menu(opc); //Chama a funcao do menu de itens disponiveis
+
         opc= menu(subtt_stock);
+
         system("cls"); //limpar a tela
         switch(opc)
         {
@@ -115,8 +117,13 @@ int main()
             scanf("%f",&quantidade[0]); //Quantidade usuario
             getchar();
             subtt[0] = price[0] * quantidade[0];
-            subtt_qty[0] += quantidade[0]; //Somar a quantidade anterior com a atual
+            subtt_qty[0] += quantidade[0];
             total+=subtt[0];
+            subtt_stock[0]-= quantidade[0]; //subtrair quantidade com o estoque
+
+                if(subtt_stock[0]<0){
+                    printf("\n\t\t\tQuantidade inválida ou insuficiente. Voltando ao menu iniciar...\n");
+                    return main();}
             break;
 
         case 2:
@@ -127,6 +134,11 @@ int main()
             subtt[1] = price[1] * quantidade[1];
             subtt_qty[1] += quantidade[1];
             total+=subtt[1];
+                    subtt_stock[1]-= quantidade[1]; //subtrair quantidade com o estoque
+
+                if(subtt_stock[1]<0){
+                    printf("\n\t\t\tQuantidade inválida ou insuficiente. Voltando ao menu iniciar...\n");
+                    return main();}
             break;
 
         case 3:
@@ -137,6 +149,11 @@ int main()
             subtt[2] = price[2] * quantidade[2];
             subtt_qty[2] += quantidade[2];
             total+=subtt[2];
+                subtt_stock[2]-= quantidade[2]; //subtrair quantidade com o estoque
+
+                if(subtt_stock[2]<0){
+                    printf("\n\t\t\tQuantidade inválida ou insuficiente. Voltando ao menu iniciar...\n");
+                    return main();}
             break;
 
         case 4:
@@ -147,6 +164,11 @@ int main()
             subtt[3] = price[3] * quantidade[3];
             subtt_qty[3] += quantidade[3];
             total+=subtt[3];
+                subtt_stock[3]-= quantidade[3]; //subtrair quantidade com o estoque
+
+                if(subtt_stock[3]<0){
+                    printf("\n\t\t\tQuantidade inválida ou insuficiente. Voltando ao menu iniciar...\n");
+                    return main();}
             break;
 
         case 5:
@@ -157,6 +179,11 @@ int main()
             subtt[4] = price[4] * quantidade[4];
             subtt_qty[4] += quantidade[4];
             total+=subtt[4];
+                subtt_stock[4]-= quantidade[4]; //subtrair quantidade com o estoque
+
+                if(subtt_stock[0]<0){
+                    printf("\n\t\t\tQuantidade inválida ou insuficiente. Voltando ao menu iniciar...\n");
+                    return main();}
             break;
 
         default:
