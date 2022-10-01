@@ -260,6 +260,17 @@ int main()
     getchar();
     system("cls");
 
+    if(opc != 1 && opc !=2)//cair no loop caso opc de pagamento errada
+    {
+    do{
+        printf("\n\t\t\tSeleção de pagamento invalido.\n\n Tente novamente ou digite 4 para retornar ao menu inicial\n");
+        scanf("%d",&opc);
+        if(opc == 4){
+            main();
+        }
+    }while(opc != 1 && opc != 2);
+    }
+
     if (opc == 1)  //Parcelado
     {
         parcelamento(total);
@@ -269,11 +280,7 @@ int main()
     {
         avista(total);
     }// Fim if A VISTA
-    if(opc != 1 && opc !=2)
-    {
-        printf("\t\tSeleção de pagamento invalido. Selecione opções de 1 a 2\n");
-    }//Fim do if da opc invalida de pagamento.
-    return 0;
+
         break;
 
     default:
@@ -342,11 +349,17 @@ float menu(float fsubtt_stock[5])
 {
     int opc;
     printf("\t\t\t\t---------- Catalogo Padaria ----------\n\n");
+    if(fsubtt_stock[0]>0){
     printf("\t\t\t\t1 - Pão de forma ------ R$7,50 --- %.0fx\n",fsubtt_stock[0]);
+    }if(fsubtt_stock[1]>0){
     printf("\t\t\t\t2 - Pão de centeio ---- R$8,69 --- %.0fx\n",fsubtt_stock[1]);
+    }if(fsubtt_stock[2]>0){
     printf("\t\t\t\t3 - Broa de milho ----- R$5,00 --- %.0fx\n",fsubtt_stock[2]);
+    }if(fsubtt_stock[3]>0){
     printf("\t\t\t\t4 - Sonho ------------- R$4,50 --- %.0fx\n",fsubtt_stock[3]);
+    }if(fsubtt_stock[4]>0){
     printf("\t\t\t\t5 - Tubaína ----------- R$3,25 --- %.0fx\n\n",fsubtt_stock[4]);
+    }
 
     printf("\t\t\t\t------Selecione a opção desejada: ");
     scanf("%d",&opc); //Switch e condição do loop
