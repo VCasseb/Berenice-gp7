@@ -35,8 +35,7 @@ int main()
     opc = catalogo_inic(); //funcao para switch case
     system("cls");
 
-    switch(opc)
-    {
+    switch(opc){
     case 1:
         system("cls");
         printf("\n\t\t\t        -----------Cadastrar estoque----------\n\n");
@@ -48,11 +47,10 @@ int main()
             printf("\n\t\tDigite a quantidade para Estoque: ");
             scanf("%f",&estoque[0]);
             subtt_stock[0] += estoque[0];
-                    if(subtt_stock[0]<=0) // fazer || subtt_stock[1]<=0) || subtt_stock[2]<=0) || subtt_stock[3]<=0) || subtt_stock[4]<=0)
+                    if(subtt_stock[0]<=0)
         {
-            printf("\n\t\tDigite um valor acima de 0!");
+            printf("\n\t\t\tQuantidade inválida");
         }
-            //printf("%f",subtt_stock[0]);
 
         }
         else if(opcase == 2)
@@ -60,6 +58,10 @@ int main()
             printf("\n\t\tDigite a quantidade para Estoque: ");
             scanf("%f",&estoque[1]);
             subtt_stock[1] += estoque[1];
+                    if(subtt_stock[1]<=0)
+        {
+            printf("\n\t\t\tQuantidade inválida");
+        }
 
         }
         else if(opcase == 3)
@@ -67,21 +69,30 @@ int main()
             printf("\n\t\tDigite a quantidade para Estoque: ");
             scanf("%f",&estoque[2]);
             subtt_stock[2] += estoque[2];
-
+                    if(subtt_stock[2]<=0)
+        {
+            printf("\n\t\t\tQuantidade inválida");
+        }
         }
         else if(opcase == 4)
         {
             printf("\n\t\tDigite a quantidade para Estoque: ");
             scanf("%f",&estoque[3]);
             subtt_stock[3] += estoque[3];
-
+                    if(subtt_stock[3]<=0)
+        {
+            printf("\n\t\t\tQuantidade inválida");
+        }
         }
         else if(opcase == 5)
         {
             printf("\n\t\tDigite a quantidade para Estoque: ");
             scanf("%f",&estoque[4]);
             subtt_stock[4] += estoque[4];
-
+                    if(subtt_stock[4]<=0)
+        {
+            printf("\n\t\t\tQuantidade inválida");
+        }
         }
         else if(opcase <=0 || opcase >=5)
         {
@@ -101,13 +112,10 @@ int main()
         printf("\t\t----------Você selecionou Realizar Venda----------\n\n");
         do
         {
-            //do
-            //{
-        //opc= menu(opc); //Chama a funcao do menu de itens disponiveis
-
-        opc= menu(subtt_stock);
-
+        do{
+        opc= menu(subtt_stock); //Chama a funcao do menu de itens disponiveis
         system("cls"); //limpar a tela
+
         switch(opc)
         {
         case 1:
@@ -185,13 +193,11 @@ int main()
                     printf("\n\t\t\tQuantidade inválida ou insuficiente. Voltando ao menu iniciar...\n");
                     return main();}
             break;
-
         default:
-            printf("\n\t\tOpção inválida!!! Digite de 1 a 5\n");
-            system("cls");
+            printf("\n\t\t\t\tCodigo inválido!\n\n");
+        }
+        }while(opc<1 || opc>5);//Fim do switch case //PAREI AQUI
 
-            return 0; //fechar codigo caso opc errada
-        }//}while(opc >0 || opc<=5);//Fim do switch case //PAREI AQUI
         itemselec(subtt_qty);
 
         printf("\n\n\t\tO valor total foi de R$%.2f\n\n",total);
@@ -284,7 +290,7 @@ int main()
         break;
 
     default:
-        printf("Digite uma opc valida!");
+        printf("\t\t\tCódigo inválido\n");
 
         }
     }while(opc!=4);
@@ -372,11 +378,15 @@ float parcelamento(float total)
 {
     float totalfinal,total_parcelas;
     int parcelas;
-
+    do{
     printf("\tQual a quantidade de parcelas? ");
     scanf("%d",&parcelas);
+    if(parcelas<1){
+        system("cls");
+        printf("\n\tNúmero de parcelas inválido, digite um valor acima de 1.\n");
+    }
     getchar();
-
+    }while(parcelas <1);
     if(parcelas<=3)  //5% Juros
     {
         totalfinal=total*1.05;
@@ -401,9 +411,15 @@ float avista(float total)
 {
     float valor_recebido,desconto,troco;
     printf("\n\tO valor total foi de R$%.2f (Sem desconto) \n\n",total);
+    //do{
+    //printf("\n\tPrecisa de troco?\n\n");
     printf("\tInsira seu dinheiro: ");
     scanf("%f",&valor_recebido);
+    //if(valor_recebido<total){
+    //    printf("\n\tDinheiro Invalido ou insuficiente");
+    //}
     getchar();
+    //}while(valor_recebido<total);
 
     if(total<=50)  //5% Desconto
     {
