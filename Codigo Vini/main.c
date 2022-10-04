@@ -181,13 +181,14 @@ void zerar()
 
 void caso1()
 {
-    printf("\n\t\t\tDigite um item\n\t\t\t--->");
+    printf("\n\t\t\t\t----------> Digite um item <----------\n\t\t\t\t--->");
     scanf("%d",&opcase);
     if(opcase == 1)
     {
-        printf("\n\t\tDigite a quantidade para Estoque: ");
+        printf("\n\t\t\t\tDigite a quantidade para Estoque: ");
         scanf("%f",&estoque[0]);
-        subtt_stock[0] += estoque[0]; //Somar estoque antigo + atual;
+        subtt_stock[0] += estoque[0];//Somar estoque antigo + atual;
+        system("cls");
         if(subtt_stock[0]<=0)
         {
             printf("\n\t\t\tQuantidade inválida");
@@ -196,7 +197,7 @@ void caso1()
     }else
         if(opcase == 2)
         {
-            printf("\n\t\tDigite a quantidade para Estoque: ");
+            printf("\n\t\t\t\tDigite a quantidade para Estoque: ");
             scanf("%f",&estoque[1]);
             subtt_stock[1] += estoque[1];
                 if(subtt_stock[1]<=0)
@@ -207,7 +208,7 @@ void caso1()
         }else
             if(opcase == 3)
             {
-                printf("\n\t\tDigite a quantidade para Estoque: ");
+                printf("\n\t\t\t\tDigite a quantidade para Estoque: ");
                 scanf("%f",&estoque[2]);
                 subtt_stock[2] += estoque[2];
                     if(subtt_stock[2]<=0)
@@ -217,7 +218,7 @@ void caso1()
             }else
                 if(opcase == 4)
                 {
-                    printf("\n\t\tDigite a quantidade para Estoque: ");
+                    printf("\n\t\t\t\tDigite a quantidade para Estoque: ");
                     scanf("%f",&estoque[3]);
                     subtt_stock[3] += estoque[3];
                         if(subtt_stock[3]<=0)
@@ -227,7 +228,7 @@ void caso1()
                 }else
                     if(opcase == 5)
                     {
-                        printf("\n\t\tDigite a quantidade para Estoque: ");
+                        printf("\n\t\t\t\tDigite a quantidade para Estoque: ");
                         scanf("%f",&estoque[4]);
                         subtt_stock[4] += estoque[4];
                             if(subtt_stock[4]<=0)
@@ -344,11 +345,13 @@ void caso3()
 int catalogo_inic()
 {
     int opc;
-    printf("\n\t\t\t1. Cadastrar estoque");
-    printf("\n\t\t\t2. Visualizar estoque");
-    printf("\n\t\t\t3. Realizar Venda");
-    printf("\n\t\t\t4. Sair");
-    printf("\n\t\t\t--->");
+    printf("\t\t\t\t=====================================\n");
+    printf("\n\t\t\t\t1. Cadastrar estoque");
+    printf("\n\t\t\t\t2. Visualizar estoque");
+    printf("\n\t\t\t\t3. Realizar Venda");
+    printf("\n\t\t\t\t4. Sair\n\n");
+    printf("\t\t\t\t=====================================\n");
+    printf("\n\t\t\t\t--->");
     scanf("%d",&opc);
     getchar();
 
@@ -359,11 +362,11 @@ void itens()
 {
 
     printf("\t\t\t\t---------- Catalogo Estoque ----------\n\n");
-    printf("\t\t\t\t1 - Pão de forma\n");
-    printf("\t\t\t\t2 - Pão de centeio\n");
-    printf("\t\t\t\t3 - Broa de milho\n");
-    printf("\t\t\t\t4 - Sonho\n");
-    printf("\t\t\t\t5 - Tubaína\n\n");
+    printf("\t\t\t\t\t1 -> Pão de forma\n");
+    printf("\t\t\t\t\t2 -> Pão de centeio\n");
+    printf("\t\t\t\t\t3 -> Broa de milho\n");
+    printf("\t\t\t\t\t4 -> Sonho\n");
+    printf("\t\t\t\t\t5 -> Tubaína\n\n");
 
 
 }
