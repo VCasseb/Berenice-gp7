@@ -4,20 +4,20 @@
 #include <string.h>
 
 //Funcoes
-void itens();
-float menu(float fsubtt_stock[5]);
-int catalogo_inic();
-void catalogo(void);
-float parcelamento(float total);
-float avista(float total);
-float itemselec(float fsubtt_qty[5]);
-float menu_stock(float fsubtt_stock[5]);
+void itens();//Catalogo Estoque
 void zerar(); //Inicializar vetores em 0
+void catalogo(void); // funcao n estamos usando
+int catalogo_inic(); // menu opcoes 1 a 4
+float menu(float fsubtt_stock[5]); //Catalogo Padaria, mostra a quantidade de estoque de cada item
+float parcelamento(float total); // funcao do pagamento parcelado
+float avista(float total);// funcao pagamento a vista
+float itemselec(float fsubtt_qty[5]); //mostra os produtos e quantidades selecionadas no final
+float menu_stock(float fsubtt_stock[5]);//mostra os produtos e sua quantidade em estoque
 
 int opcase,opc;
-float subtt[5],subtt_qty[5],estoque[5],subtt_stock[5],subtt_stockva[5];
 int nome[5]= {1,2,3,4,5};
-float total, quantidade[5],price[] = {7.50,8.69,5.00,4.50,3.25};//subtt[5],subtt_qty[5],estoque[5],subtt_stock[5],subtt_stockva[5];
+float subtt[5],subtt_qty[5],estoque[5],subtt_stock[5],subtt_stockva[5];
+float total, quantidade[5],price[] = {7.50,8.69,5.00,4.50,3.25};
 
 int main()
 {
@@ -49,11 +49,11 @@ int main()
 
                 do
                 {
-                    caso3();
+                    caso3();// item/produto selecionado em cada switch case
                 }
                 while(opc<1 || opc>5);
 
-                itemselec(subtt_qty);
+                itemselec(subtt_qty); //mostra os produtos e quantidades selecionadas no final
 
                 printf("\n\n\t\tO valor total foi de R$%.2f\n\n",total);
                 printf("\t\t--------------------------\n");
@@ -72,7 +72,6 @@ int main()
             printf("\n\t\t-------------------------\n\n");
             printf("\n\t\tInsira a Forma de Pagamento\n");;
             printf("\n\t\t(1) Parcelar \n\t\t(2) A vista\n\t\t--->");
-            //printf("\n\t\tQual seria a Forma de Pagamento? ");
             scanf("%d",&opc); //Forma de pagamento
             getchar();
             system("cls");
@@ -80,12 +79,12 @@ int main()
             if (opc == 1)  //Parcelado
             {
                 parcelamento(total);
-            }//Fim if Parcelado
+            }else
+                 if(opc == 2) //A vista
+                    {
+                        avista(total);
+                    }// Fim if A VISTA
 
-            if(opc == 2) //A vista
-            {
-                avista(total);
-            }// Fim if A VISTA
             if(opc != 1 && opc !=2)
             {
                 printf("\t\tSeleção de pagamento invalido. Selecione opções de 1 a 2\n");
@@ -93,8 +92,8 @@ int main()
         }
 
     }
-    while(opc!=4);
-    relatorio();
+    while(opc!=4); // caso seja selecionado a opc 4, o programa encerra
+    relatorio(); //nota dos itens
     return 0;
 }//FIM INT MAIN
 
@@ -122,13 +121,13 @@ void buble_sort()
         {
             if(subtt[i]>subtt[j])//Maior pro menor
             {
-                int tempor1 = nome[i];
+                int tempor1 = nome[i]; //variaveis locais, existentes somente nesse if
                 int tempor2 = subtt[i];
 
-                subtt[i] = subtt[j];
+                subtt[i] = subtt[j]; //i recebe j, ou seja, posicao seguinte inverte
                 nome[i] = nome[j];
 
-                subtt[j] = tempor2;
+                subtt[j] = tempor2; // j recebe o q esta na variavel aux, nesse caso tempor2, q vale subtt[i]
                 nome[j] = tempor1;
             }
 
@@ -137,29 +136,29 @@ void buble_sort()
     printf("\n\t\t---Itens Selecionados---\n");
     for (int i=0; i<5; i++)
     {
-        if(subtt[i]>0)
+        if(subtt[i]>0) // printar somente itens selecionados
         {
             //printf("\n\t\t---Itens Selecionados---");
-            if(nome[i]==1)
+            if(nome[i]==1) // se nome for 1, printf pao de centeio
             {
                 printf("\n\t\tPao de centeio --- R$%.2f",subtt[i]);
-            }
-            if(nome[i]==2)
-            {
-                printf("\n\t\tPao de forma ----- R$%.2f",subtt[i]);
-            }
-            if(nome[i]==3)
-            {
-                printf("\n\t\tBroa de Milho ---- R$%.2f",subtt[i]);
-            }
-            if(nome[i]==4)
-            {
-                printf("\n\t\tSonho ------------ R$%.2f",subtt[i]);
-            }
-            if(nome[i]==5)
-            {
-                printf("\n\t\tTubaina ---------- R$%.2f",subtt[i]);
-            }
+            }else
+                if(nome[i]==2)
+                {
+                    printf("\n\t\tPao de forma ----- R$%.2f",subtt[i]);
+                }else
+                    if(nome[i]==3)
+                    {
+                        printf("\n\t\tBroa de Milho ---- R$%.2f",subtt[i]);
+                    }else
+                        if(nome[i]==4)
+                        {
+                            printf("\n\t\tSonho ------------ R$%.2f",subtt[i]);
+                        }else
+                            if(nome[i]==5)
+                            {
+                                printf("\n\t\tTubaina ---------- R$%.2f",subtt[i]);
+                            }
             //printf("\n\t\t-------------------------");
         }//Fim Cadeia IF
     }//Fim For
@@ -194,53 +193,53 @@ void caso1()
             printf("\n\t\t\tQuantidade inválida");
         }
 
-    }
-    else if(opcase == 2)
-    {
-        printf("\n\t\tDigite a quantidade para Estoque: ");
-        scanf("%f",&estoque[1]);
-        subtt_stock[1] += estoque[1];
-        if(subtt_stock[1]<=0)
+    }else
+        if(opcase == 2)
         {
-            printf("\n\t\t\tQuantidade inválida");
-        }
+            printf("\n\t\tDigite a quantidade para Estoque: ");
+            scanf("%f",&estoque[1]);
+            subtt_stock[1] += estoque[1];
+                if(subtt_stock[1]<=0)
+                {
+                    printf("\n\t\t\tQuantidade inválida");
+                }
 
-    }
-    else if(opcase == 3)
-    {
-        printf("\n\t\tDigite a quantidade para Estoque: ");
-        scanf("%f",&estoque[2]);
-        subtt_stock[2] += estoque[2];
-        if(subtt_stock[2]<=0)
-        {
-            printf("\n\t\t\tQuantidade inválida");
-        }
-    }
-    else if(opcase == 4)
-    {
-        printf("\n\t\tDigite a quantidade para Estoque: ");
-        scanf("%f",&estoque[3]);
-        subtt_stock[3] += estoque[3];
-        if(subtt_stock[3]<=0)
-        {
-            printf("\n\t\t\tQuantidade inválida");
-        }
-    }
-    else if(opcase == 5)
-    {
-        printf("\n\t\tDigite a quantidade para Estoque: ");
-        scanf("%f",&estoque[4]);
-        subtt_stock[4] += estoque[4];
-        if(subtt_stock[4]<=0)
-        {
-            printf("\n\t\t\tQuantidade inválida");
-        }
-    }
-    else if(opcase <=0 || opcase >=5)
-    {
-        system("cls");
-        printf("\n\t\t\t---Codigo invalido!---\n");
-    }
+        }else
+            if(opcase == 3)
+            {
+                printf("\n\t\tDigite a quantidade para Estoque: ");
+                scanf("%f",&estoque[2]);
+                subtt_stock[2] += estoque[2];
+                    if(subtt_stock[2]<=0)
+                    {
+                        printf("\n\t\t\tQuantidade inválida");
+                    }
+            }else
+                if(opcase == 4)
+                {
+                    printf("\n\t\tDigite a quantidade para Estoque: ");
+                    scanf("%f",&estoque[3]);
+                    subtt_stock[3] += estoque[3];
+                        if(subtt_stock[3]<=0)
+                        {
+                        printf("\n\t\t\tQuantidade inválida");
+                        }
+                }else
+                    if(opcase == 5)
+                    {
+                        printf("\n\t\tDigite a quantidade para Estoque: ");
+                        scanf("%f",&estoque[4]);
+                        subtt_stock[4] += estoque[4];
+                            if(subtt_stock[4]<=0)
+                            {
+                                printf("\n\t\t\tQuantidade inválida");
+                            }
+                    }else
+                        if(opcase <=0 || opcase >=5)
+                        {
+                            system("cls");
+                            printf("\n\t\t\t---Codigo invalido!---\n");
+                        }
 }
 
 void caso3()
@@ -329,7 +328,7 @@ void caso3()
         total+=subtt[4];
         subtt_stock[4]-= quantidade[4]; //subtrair quantidade com o estoque
 
-        if(subtt_stock[0]<0)
+        if(subtt_stock[4]<0)
         {
             printf("\n\t\t\tQuantidade inválida ou insuficiente. Voltando ao menu iniciar...\n");
             return main();
@@ -404,23 +403,23 @@ float menu(float fsubtt_stock[5])
     if(fsubtt_stock[0]>0)
     {
         printf("\t\t\t\t1 - Pão de forma ------ R$7,50 --- %.0fx\n",fsubtt_stock[0]);
-    }
-    if(fsubtt_stock[1]>0)
-    {
-        printf("\t\t\t\t2 - Pão de centeio ---- R$8,69 --- %.0fx\n",fsubtt_stock[1]);
-    }
-    if(fsubtt_stock[2]>0)
-    {
-        printf("\t\t\t\t3 - Broa de milho ----- R$5,00 --- %.0fx\n",fsubtt_stock[2]);
-    }
-    if(fsubtt_stock[3]>0)
-    {
-        printf("\t\t\t\t4 - Sonho ------------- R$4,50 --- %.0fx\n",fsubtt_stock[3]);
-    }
-    if(fsubtt_stock[4]>0)
-    {
-        printf("\t\t\t\t5 - Tubaína ----------- R$3,25 --- %.0fx\n\n",fsubtt_stock[4]);
-    }
+    }else
+        if(fsubtt_stock[1]>0)
+        {
+            printf("\t\t\t\t2 - Pão de centeio ---- R$8,69 --- %.0fx\n",fsubtt_stock[1]);
+        }else
+            if(fsubtt_stock[2]>0)
+            {
+                printf("\t\t\t\t3 - Broa de milho ----- R$5,00 --- %.0fx\n",fsubtt_stock[2]);
+            }else
+                if(fsubtt_stock[3]>0)
+                {
+                    printf("\t\t\t\t4 - Sonho ------------- R$4,50 --- %.0fx\n",fsubtt_stock[3]);
+                }else
+                    if(fsubtt_stock[4]>0)
+                    {
+                        printf("\t\t\t\t5 - Tubaína ----------- R$3,25 --- %.0fx\n\n",fsubtt_stock[4]);
+                    }
 
     printf("\t\t\t\t------Selecione a opção desejada: ");
     scanf("%d",&opc); //Switch e condição do loop
@@ -450,11 +449,12 @@ float parcelamento(float total)
         totalfinal=total*1.05;
         total_parcelas=totalfinal/parcelas;
     }
-    else if (parcelas>3)  //8% Juros
-    {
-        totalfinal=total*1.08;
-        total_parcelas=totalfinal/parcelas;
-    }
+    else
+        if (parcelas>3)  //8% Juros
+        {
+            totalfinal=total*1.08;
+            total_parcelas=totalfinal/parcelas;
+        }
 
     system("cls");
     printf("\n\t|------------------NOTA-------------------|\n\n");
@@ -491,16 +491,18 @@ float avista(float total)
         desconto=total*0.95;
         troco=valor_recebido-desconto;
     }
-    else if(total>50 && total<100)  //10% Desconto
-    {
-        desconto=total*0.90;
-        troco=valor_recebido-desconto;
-    }
-    else if(total>=100)  //18% Desconto
-    {
-        desconto=total*0.82;
-        troco=valor_recebido-desconto;
-    }
+    else
+        if(total>50 && total<100)  //10% Desconto
+        {
+            desconto=total*0.90;
+            troco=valor_recebido-desconto;
+        }
+            else
+                if(total>=100)  //18% Desconto
+                {
+                    desconto=total*0.82;
+                    troco=valor_recebido-desconto;
+                }
 
     //system("cls");
     printf("\n\t|------------------NOTA-------------------|\n\n");
