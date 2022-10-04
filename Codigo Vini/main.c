@@ -35,25 +35,25 @@ int main()
         {
         case 1://Cadastrar stock
             system("cls");
-            itens();
-            caso1();
+            itens();//Printa as opcoes LINHA 358
+            caso1();//Cadastrar estoque LINHA 182
             break;
 
         case 2://Visualizar Stock
-            menu_stock(subtt_stock);
+            menu_stock(subtt_stock);//Printa as opcoes e suas quantidades de estoque LINHA 385
             break;
 
         case 3://Realizar Venda
             do  //Loop para selecionar outro produto
             {
 
-                do
+                do //Loop para caso digite uma opcao invalida, seguir o cod ate digitar uma opc correta.
                 {
-                    caso3();// item/produto selecionado em cada switch case
+                    caso3();// item/produto selecionado em cada switch case LINHA 245
                 }
                 while(opc<1 || opc>5);
 
-                itemselec(subtt_qty); //mostra os produtos e quantidades selecionadas no final
+                itemselec(subtt_qty); //mostra os produtos e quantidades selecionadas no final LINHA 371
 
                 printf("\n\n\t\tO valor total foi de R$%.2f\n\n",total);
                 printf("\t\t--------------------------\n");
@@ -65,7 +65,7 @@ int main()
             }
             while(opc  ==1); //Loop para selecionar outro produto
 
-            buble_sort();
+            buble_sort(); //ordenar de forma crescente LINHA 115
 
             printf("\n\n\t\t-------------------------\n");
             printf("\t\tTotal da compra: R$%.2f",total);
@@ -78,14 +78,14 @@ int main()
 
             if (opc == 1)  //Parcelado
             {
-                parcelamento(total);
+                parcelamento(total);//Opc Parcelamento LINHA 431
             }else
                  if(opc == 2) //A vista
                     {
-                        avista(total);
+                        avista(total);//Opc A Vista LINHA 468
                     }// Fim if A VISTA
 
-            if(opc != 1 && opc !=2)
+            if(opc != 1 && opc !=2)//Caso a opc n seja 1 ou 2, printar erro
             {
                 printf("\t\tSeleção de pagamento invalido. Selecione opções de 1 a 2\n");
             }//Fim do if da opc invalida de pagamento.
@@ -93,7 +93,7 @@ int main()
 
     }
     while(opc!=4); // caso seja selecionado a opc 4, o programa encerra
-    relatorio(); //nota dos itens
+    relatorio(); //Printar nota final LINHA 100
     return 0;
 }//FIM INT MAIN
 
@@ -101,11 +101,11 @@ void relatorio(){
 
     system("cls");
     printf("\n\t\t-----Relatorio----");
-    printf("\n\t\t Pao de Forma   --- %.0fx --- R$%.2f",subtt_qty[0],subtt_stock[0]);
-    printf("\n\t\t Pao de Centeio --- %.0fx --- R$%.2f",subtt_qty[1],subtt_stock[1]);
-    printf("\n\t\t Broa de Milho  --- %.0fx --- R$%.2f",subtt_qty[2],subtt_stock[2]);
-    printf("\n\t\t Sonho          --- %.0fx --- R$%.2f",subtt_qty[3],subtt_stock[3]);
-    printf("\n\t\t Tubaina        --- %.0fx --- R$%.2f",subtt_qty[4],subtt_stock[4]);
+    printf("\n\t\t Pao de Forma   --- %.0fx --- R$%.2f",subtt_qty[0]);
+    printf("\n\t\t Pao de Centeio --- %.0fx --- R$%.2f",subtt_qty[1]);
+    printf("\n\t\t Broa de Milho  --- %.0fx --- R$%.2f",subtt_qty[2]);
+    printf("\n\t\t Sonho          --- %.0fx --- R$%.2f",subtt_qty[3]);
+    printf("\n\t\t Tubaina        --- %.0fx --- R$%.2f",subtt_qty[4]);
 
 
     printf("\n\t\t-------------------------");
@@ -403,19 +403,19 @@ float menu(float fsubtt_stock[5])
     if(fsubtt_stock[0]>0)
     {
         printf("\t\t\t\t1 - Pão de forma ------ R$7,50 --- %.0fx\n",fsubtt_stock[0]);
-    }else
+    }
         if(fsubtt_stock[1]>0)
         {
             printf("\t\t\t\t2 - Pão de centeio ---- R$8,69 --- %.0fx\n",fsubtt_stock[1]);
-        }else
+        }
             if(fsubtt_stock[2]>0)
             {
                 printf("\t\t\t\t3 - Broa de milho ----- R$5,00 --- %.0fx\n",fsubtt_stock[2]);
-            }else
+            }
                 if(fsubtt_stock[3]>0)
                 {
                     printf("\t\t\t\t4 - Sonho ------------- R$4,50 --- %.0fx\n",fsubtt_stock[3]);
-                }else
+                }
                     if(fsubtt_stock[4]>0)
                     {
                         printf("\t\t\t\t5 - Tubaína ----------- R$3,25 --- %.0fx\n\n",fsubtt_stock[4]);
