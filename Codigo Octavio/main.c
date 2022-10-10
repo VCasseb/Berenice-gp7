@@ -86,9 +86,9 @@ int main()
             {
                 printf("\t\tSelecao de pagamento invalido. Selecione opcoes de 1 a 2\n");
             }//Fim do if da opc invalida de pagamento.
-            for(int i=0;i<5;i++){
-                subtt_stockva[i]=subtt_qty[i];
-                subtt_qty[i]=0;
+            for(int i=0;i<5;i++){//foi feito devido a funçao relatorio
+                subtt_stockva[i]=subtt_qty[i]; // atribuir qty em stockva
+                subtt_qty[i]=0; //zerar variavel quantidade
             }
             total=0;
         }
