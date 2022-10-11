@@ -273,7 +273,7 @@ void caso3()
         subtt_qty[0] += quantidade[0];
         total+=subtt[0];
         subtt_stock[0]-= quantidade[0]; //subtrair estoque a quantidade
-        if(subtt_stock[0]<=0)
+        if(subtt_stock[0]<0)
         {
             printf("\n\t\t\tQuantidade inválida ou insuficiente. Voltando ao menu iniciar...\n");
             return main();
