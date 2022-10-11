@@ -143,8 +143,9 @@ void buble_sort()
         {
             if(subtt[i]>subtt[j])//Maior pro menor
             {
-                int tempor1 = nome[i]; //variaveis locais, existentes somente nesse if
-                int tempor2 = subtt[i];
+                //variaveis locais
+                int tempor1 = nome[i]; //tempor1 recebe o que esta em nome[i]
+                int tempor2 = subtt[i];//tempor2 recebe o que esta em subtt[i]
                 int tempor3 = subtt_stockva[i];
 
                 subtt[i] = subtt[j]; //i recebe j, ou seja, posicao seguinte inverte
