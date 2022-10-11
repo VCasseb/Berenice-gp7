@@ -6,7 +6,7 @@
 //Funcoes
 void itens();//Catalogo Estoque
 void catalogo(void); // funcao n estamos usando
-int catalogo_inic(); // menu opcoes 1 a 4
+int catalogo_inic(); // menu opcoes 1 a 5
 float menu(float fsubtt_stock[5]); //Catalogo Padaria, mostra a quantidade de estoque de cada item
 float parcelamento(float total); // funcao do pagamento parcelado
 float avista(float total);// funcao pagamento a vista
@@ -32,12 +32,12 @@ int main()
         {
         case 1://Cadastrar stock
             system("cls");
-            itens();//Printa as opcoes LINHA 358
-            caso1();//Cadastrar estoque LINHA 182
+            itens();//Printa as opcoes LINHA 373
+            caso1();//Cadastrar estoque LINHA 194
             break;
 
         case 2://Visualizar Stock
-            menu_stock(subtt_stock);//Printa as opcoes e suas quantidades de estoque LINHA 385
+            menu_stock(subtt_stock);//Printa as opcoes e suas quantidades de estoque LINHA 400
             break;
 
         case 3://Realizar Venda
@@ -46,11 +46,11 @@ int main()
 
                 do //Loop para caso digite uma opcao invalida, seguir o cod ate digitar uma opc correta.
                 {
-                    caso3();// item/produto selecionado em cada switch case LINHA 245
+                    caso3();// item/produto selecionado em cada switch case LINHA 258
                 }
                 while(opc<1 || opc>5);
 
-                itemselec(subtt_qty); //mostra os produtos e quantidades selecionadas no final LINHA 371
+                itemselec(subtt_qty); //mostra os produtos e quantidades selecionadas no final LINHA 386
 
                 printf("\n\n\t\tO valor total foi de R$%.2f\n\n",total);
                 printf("\t\t--------------------------\n");
@@ -62,7 +62,7 @@ int main()
             }
             while(opc  ==1); //Loop para selecionar outro produto
 
-            buble_sort(); //ordenar de forma crescente LINHA 115
+            buble_sort(); //ordenar de forma crescente LINHA 137
 
             printf("\n\n\t\t-------------------------\n");
             printf("\t\tTotal da compra: R$%.2f",total);
@@ -75,11 +75,11 @@ int main()
 
             if (opc == 1)  //Parcelado
             {
-                parcelamento(total);//Opc Parcelamento LINHA 431
+                parcelamento(total);//Opc Parcelamento LINHA 446
             }else
                  if(opc == 2) //A vista
                     {
-                        avista(total);//Opc A Vista LINHA 468
+                        avista(total);//Opc A Vista LINHA 484
                     }// Fim if A VISTA
 
             if(opc != 1 && opc !=2)//Caso a opc n seja 1 ou 2, printar erro
@@ -94,7 +94,7 @@ int main()
         }
     }
     while(opc!=4); // caso seja selecionado a opc 4, o programa encerra
-    relatorio(); //Printar nota final LINHA 100
+    relatorio(); //Printar nota final LINHA 101
     return 0;
 }//FIM INT MAIN
 
@@ -273,7 +273,7 @@ void caso3()
         subtt_qty[0] += quantidade[0];
         total+=subtt[0];
         subtt_stock[0]-= quantidade[0]; //subtrair estoque a quantidade
-        if(subtt_stock[0]<0)
+        if(subtt_stock[0]<=0)
         {
             printf("\n\t\t\tQuantidade inválida ou insuficiente. Voltando ao menu iniciar...\n");
             return main();
