@@ -15,8 +15,14 @@ float menu_stock(float fsubtt_stock[5]);//mostra os produtos e sua quantidade em
 
 int opcase,opc;
 int nome[5]= {1,2,3,4,5};
-float subtt[5]={0,0,0,0,0},subtt_qty[5]={0,0,0,0,0},estoque[5]={0,0,0,0,0},subtt_stock[5]={0,0,0,0,0},subtt_stockva[5]={0,0,0,0,0};
-float total, quantidade[5],price[] = {7.50,8.69,5.00,4.50,3.25};
+float subtt[5]={0,0,0,0,0};
+float subtt_qty[5]={0,0,0,0,0};
+float estoque[5]={0,0,0,0,0};
+float subtt_stock[5]={0,0,0,0,0};
+float subtt_stockva[5]={0,0,0,0,0};
+float total;
+float quantidade[5];
+float price[] = {7.50,8.69,5.00,4.50,3.25};
 
 int main()
 {
