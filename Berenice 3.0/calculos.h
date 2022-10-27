@@ -73,7 +73,74 @@ void sub_vendas(){
 }
 //----------Funcoes para o menu iniciar
 
+void ler_base_txt(){
 
+    FILE *base;
+
+    base = fopen("base.txt","r");
+
+    if(base == NULL){
+        printf("Problemas com a base");
+        exit(0);
+    }
+
+    char txt[1000];
+
+    while(fgets(txt,1000,base)!=NULL){
+        printf("%s",txt);
+    }
+    fclose(base);
+
+    return;
+}
+
+void cadastrar_base_txt(){
+
+    FILE *base;
+
+    int x,sair;
+    float y;
+    char palavra[25];
+
+    base = fopen("base.txt","a");
+
+    if(base == NULL){
+        printf("Problemas com a base");
+        exit(0);
+    }
+
+    printf("digite a qtd item ");
+    scanf("%d",&x);
+    fprintf(base,"%d\n",x);
+    getchar();
+
+    do{
+    printf("digite o codigo ");
+    scanf("%d",&x);
+    fprintf(base,"%d\n",x);
+    getchar();
+
+    printf("digite o nome ");
+    gets(palavra);
+    fprintf(base,"%s\n",palavra);
+
+    printf("digite o valor unitario ");
+    scanf("%f",&y);
+    fprintf(base,"%f\n",y);
+
+    printf("digite a qtd estoque ");
+    scanf("%d",&x);
+    fprintf(base,"%d\n",x);
+
+    printf("digite a qtd vendida ");
+    scanf("%d",&x);
+    fprintf(base,"%d\n\n",x);
+
+    printf("4 para sair");
+    scanf("%d",&sair);
+    }while(sair !=4);
+    fclose(base);
+}
 
 
 
