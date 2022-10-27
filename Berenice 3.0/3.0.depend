@@ -1,0 +1,11 @@
+# depslib dependency file v1.0
+1666882417 source:c:\users\vini\desktop\berenice 3.0\3.0\main.c
+	<stdio.h>
+	<stdlib.h>
+	"source.h"
+	"calculos.h"
+
+1666882515 c:\users\vini\desktop\berenice 3.0\3.0\source.h
+
+1666882701 c:\users\vini\desktop\berenice 3.0\3.0\calculos.h
+
