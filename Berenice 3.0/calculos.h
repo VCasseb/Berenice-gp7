@@ -2,6 +2,7 @@
 #define CALCULOS_H_INCLUDED
 
 extern int opc,sub_opc;
+extern float tt_stock[5];
 
 //----------Funcoes para o menu iniciar
 void mn_inicial(){
@@ -73,7 +74,9 @@ void sub_vendas(){
 }
 //----------Funcoes para o menu iniciar
 
-void ler_base_txt(){
+
+//----------Funcoes para manipular a base
+void ler_base_txt(){ //para printar itens da base
 
     FILE *base;
 
@@ -94,7 +97,7 @@ void ler_base_txt(){
     return;
 }
 
-void cadastrar_base_txt(){
+void cadastrar_base_txt(){ //para acrescentar novos itens na base
 
     FILE *base;
 
@@ -136,11 +139,12 @@ void cadastrar_base_txt(){
     scanf("%d",&x);
     fprintf(base,"%d\n\n",x);
 
-    printf("4 para sair");
+    printf("Digite 0 para sair");
     scanf("%d",&sair);
-    }while(sair !=4);
+    }while(sair !=0);
     fclose(base);
 }
+//----------Funcoes para manipular a base
 
 
 

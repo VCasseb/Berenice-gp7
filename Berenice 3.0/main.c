@@ -4,6 +4,7 @@
 #include "calculos.h"
 
 int opc=0,sub_opc=0;
+float tt_stock[5]; //TRANSFORMAR EM DINAMICA
 
 
 int main()
@@ -16,7 +17,5 @@ int main()
 
     }while(opc != 3);
 
-    //ler_base_txt();
-    cadastrar_base_txt();
     return 0;
 }
