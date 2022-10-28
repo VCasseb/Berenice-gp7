@@ -1,24 +1,20 @@
 #ifndef CALCULOS_H_INCLUDED
 #define CALCULOS_H_INCLUDED
 
-extern int opc,sub_opc;
-extern float tt_stock[5];
-
-//----------Funcoes para o menu iniciar
+//----------Functions for start menu
 void mn_inicial(){
+
     system("cls");
     printf("\n\t\t\t(1) - Produtos");
     printf("\n\t\t\t(2) - Vendas");
     printf("\n\t\t\t(3) - Sair");
     printf("\n\t\t\t---> ");
-    scanf("%d",&opc);
-    system("cls");
     return;
 }
 
-void switch_menu(){ //Swithc para o menu iniciar
+int switch_menu(int fopc){ //Switch for start menu
 
-    switch(opc){
+    switch(fopc){
 
         case 1:
             sub_produtos();
@@ -29,10 +25,12 @@ void switch_menu(){ //Swithc para o menu iniciar
         break;
         }
 
-    return;
+    return fopc;
 }
 
 void sub_produtos(){
+
+    int sub_opc=0;
 
     printf("\n\t\t\tVoce selecionou Produtos\n");
     do{
@@ -57,6 +55,8 @@ void sub_produtos(){
 
 void sub_vendas(){
 
+    int sub_opc=0;
+
     printf("\n\t\t\tVoce selecionou Vendas\n");
 
     do{
@@ -72,12 +72,11 @@ void sub_vendas(){
     }while(sub_opc!=3);
     return;
 }
-//----------Funcoes para o menu iniciar
+//----------Functions start menu
 
 
-//----------Funcoes para manipular a base
-void ler_base_txt(){ //para printar itens da base
-
+//----------Functions to change the base
+void ler_base_txt(){ //To read the base
     FILE *base;
 
     base = fopen("base.txt","r");
@@ -97,7 +96,7 @@ void ler_base_txt(){ //para printar itens da base
     return;
 }
 
-void cadastrar_base_txt(){ //para acrescentar novos itens na base
+void cadastrar_base_txt(){ //To change the base
 
     FILE *base;
 
@@ -144,7 +143,7 @@ void cadastrar_base_txt(){ //para acrescentar novos itens na base
     }while(sair !=0);
     fclose(base);
 }
-//----------Funcoes para manipular a base
+//----------Functions to change the base
 
 
 

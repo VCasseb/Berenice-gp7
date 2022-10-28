@@ -2,7 +2,7 @@
 #define SOURCE_H_INCLUDED
 
 void mn_inicial();
-void switch_menu();
+int switch_menu(int fopc);
 void sub_produtos();
 void sub_vendas();
 void ler_base_txt();

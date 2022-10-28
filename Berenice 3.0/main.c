@@ -3,17 +3,14 @@
 #include "source.h"
 #include "calculos.h"
 
-int opc=0,sub_opc=0;
-float tt_stock[5]; //TRANSFORMAR EM DINAMICA
-
-
 int main()
 {
-
+    int opc;
     do{
 
-    mn_inicial(); //Chama o primeiro menu
-    switch_menu(); //Chama o Switch Case
+    mn_inicial(); //Call start menu
+    scanf("%d",&opc); // Option for menu
+    opc = switch_menu(opc); //Call Switch Case
 
     }while(opc != 3);
 
