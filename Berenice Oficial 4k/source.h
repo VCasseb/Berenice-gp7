@@ -1,10 +1,10 @@
 #ifndef SOURCE_H_INCLUDED
 #define SOURCE_H_INCLUDED
 
-void mn_inicial(); // Printf do menu
-void sub_protudos(); //Printf do submenu
-void limpar_tela(); //SystemCLS
-void visualizar_estoque (item *base, int tam);
+void mn_inicial(); // Printf do menu linha 23
+void sub_protudos(); //Printf do submenu linha 32
+void limpar_tela(); //SystemCLS linha 45
+void visualizar_estoque (item *base, int tam); //linha 50
 int cadastrar_produto(item *base, int tam);
 void atualizar_produto (item *base, int tam);
 int excluir_produto(item *base, int tam);

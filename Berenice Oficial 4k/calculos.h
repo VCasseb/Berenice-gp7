@@ -65,7 +65,7 @@ int cadastrar_produto(item *base, int tam)
     }
     else
     {
-        base[tam].codigo = base[tam-1].codigo + 1; //validar e criar codigos em ordem crescente
+        base[tam].codigo = base[tam-1].codigo + 1; //apos reordenar se ha um salto entre duas posicoes, se sim, insere uma posicao entre
         for(int i=0; i<tam; i++)
         {
             if(base[i+1].codigo==base[i].codigo+1)
@@ -77,7 +77,7 @@ int cadastrar_produto(item *base, int tam)
         }
     }
     printf("\tInsira o nome do produto: ");
-    setbuf(stdin, NULL); //permite trocar entre o modo sem bufferização e o modo bufferização completa
+    setbuf(stdin, NULL); //limpar buffer do teclado
     gets(base[tam].nome);
     printf("\tInsira o valor preco: ");
     scanf("%f", &base[tam].valor_unitario);
@@ -120,7 +120,7 @@ void atualizar_produto (item *base, int tam)
     while(produto >tam || produto <0); //fechar loop de atualizar prod
     for(i=0; i<tam; i++)
     {
-        if(base[i].codigo==produto)
+        if(base[i].codigo==produto)//compara todas as posicoes com a do usuario
         {
             break;
         }
@@ -129,9 +129,8 @@ void atualizar_produto (item *base, int tam)
     {
         limpar_tela();
         printf("|  \tCodigo\t  |  \tValor\t  |  \tEstoque\t  |  \tNome\t  |\n--------------------------------------------------------------------\n");
-        printf("|  \t%d\t  |  \t%.2f\t  |  \t%d\t  |  \t%s\t\n", base[i].codigo, base[i].valor_unitario, base[i].estoque,base[i].nome);
+        printf("|  \t%d\t  |  \t%.2f\t  |  \t%d\t  |  \t%s\t\n", base[i].codigo, base[i].valor_unitario, base[i].estoque,base[i].nome); //printf com o i do usuario
         printf("\n\nO que deseja alterar?\n----> "
-               //"\n\t1 - Codigo"
                "\n\t1 - Nome do Produto"
                "\n\t2 - Preco"
                "\n\t3 - Estoque"
@@ -142,33 +141,9 @@ void atualizar_produto (item *base, int tam)
         system("cls");
         switch(opc)
         {
-        case 0:
-            break;
-        /*case 1:
-          do
-          {
-              printf("Insira o novo Codigo do produto: ");
-              scanf("%d", &base[i].codigo);
-              getchar();
-              for(j=0; j<tam; j++)
-              {
-                  if(i == j)
-                  {
-                      continue;
-                  }
-                  else if(base[i].codigo == base[j].codigo)
-                  {
-                      printf("Este código já existe.\nEscolha uma novo\n\n");
-                      system("pause");
-                      break;
-                  }
-              }
-          }
-          while(base[j].codigo==base[i].codigo);
-          break;*/
         case 1:
             printf("Insira o novo nome do produto: ");
-            setbuf(stdin, NULL);
+            setbuf(stdin, NULL); //limpar buffer do teclado
             gets(base[i].nome);
             break;
         case 2:
@@ -196,7 +171,7 @@ int excluir_produto(item *base, int tam)
     printf("\nDigite o código do item que deseja excluir: ");
     scanf("%d", &produto);
     getchar();
-    system("cls");
+    limpar_tela();
     for(i=0; i<tam; i++)
     {
         if(base[i].codigo==produto)
@@ -208,7 +183,7 @@ int excluir_produto(item *base, int tam)
     {
         base[i] =base[i+1];
     }
-    tam--; //reduzir tamanho pos exclusao
+    tam--;
     return tam;
 }
 
@@ -280,7 +255,6 @@ void realizar_venda(item *base,relatorio *rel, int tam)
         scanf("%d",&opc);
         base[i].estoque = base[i].estoque - quantidade; //subtrair estoque pela quantiddade desejada
         total_vet[i] = quantidade*base[i].valor_unitario; //multiplicar totais/qtd por posicoes
-        //total_vet[i] += total;
     }
     while(opc != 10); //fim loop
 
@@ -290,8 +264,6 @@ void realizar_venda(item *base,relatorio *rel, int tam)
 
         total += total_vet[i]; //somar totais
     }
-    //base[i].estoque = base[i].estoque - quantidade;
-    //total = quantidade*base[i].valor_unitario;
     printf("\n\tO valor total foi de R$%.2f (Sem desconto) \n\n",total);
 
     printf("Forma de Pagamento\n");
@@ -347,18 +319,6 @@ void realizar_venda(item *base,relatorio *rel, int tam)
         printf("\t|-----------------------------------------|\n\n\n");
         break;
     }
-
-    /*
-    printf("\n\t\t\t------RELATORIO------\n\n");
-    for(i=0;i<tam;i++){
-
-            printf("\t\tCodigo %d\n", rel[i].codigo);
-            printf("\t\tNome %s\n", base[i].nome);
-            printf("\t\tValor Total %.2f\n", rel[i].valor_unitario*rel[i].estoque);
-            printf("\t\tQuantidade %d\n", rel[i].estoque);
-
-
-    }*/
 }
 
 void salvar_base(item *base,relatorio *rel, int tam) //CUPOM FISCAL
