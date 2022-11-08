@@ -18,6 +18,7 @@ typedef struct estrutura_rel //stuct usada para copiar itens vendidos
     char nome[26];
     float valor_unitario;
     int estoque;
+    int venda;
 } relatorio;
 
 void mn_inicial() //cadeia de printf
@@ -207,7 +208,7 @@ void realizar_venda(item *base,relatorio *rel, int tam)
 {
 
     int produto, i,quantidade,opc,parcelas;
-    float total,total_vet[tam],total_parc; //total_vet usado para somar todos as posicoes e ter valor final
+    float total,total_vet[tam],total_parc,rcbd,troco; //total_vet usado para somar todos as posicoes e ter valor final
     do
     {
         printf("|  \tCodigo\t  |  \tValor\t  |  \tEstoque\t  |  \tNome\t  |\n--------------------------------------------------------------------\n");
@@ -245,18 +246,16 @@ void realizar_venda(item *base,relatorio *rel, int tam)
         rel[i].nome[26] = base[i].nome[26];
         rel[i].valor_unitario = base[i].valor_unitario;
         rel[i].estoque = base[i].estoque;
+        rel[i].venda = quantidade;
 
         printf("Deseja continuar vendendo?\n");
         printf("( 0 ) - Nao\n( 1 ) - Sim");
-        if(opc == 1)
-        {
-
-        }
         scanf("%d",&opc);
         base[i].estoque = base[i].estoque - quantidade; //subtrair estoque pela quantiddade desejada
         total_vet[i] = quantidade*base[i].valor_unitario; //multiplicar totais/qtd por posicoes
+
     }
-    while(opc != 10); //fim loop
+    while(opc != 0); //fim loop
 
 
     for(i=0; i<tam; i++)
@@ -286,7 +285,19 @@ void realizar_venda(item *base,relatorio *rel, int tam)
         {
             total*=0.82;
         }
-        printf("\t\tTotal com Desconto: %.2f\n\n",total);
+        do{
+            printf("\t\tTotal com Desconto: %.2f\n\n",total);
+            printf("\nDigite o dinheiro recebido:\n");
+            scanf("%f", &rcbd);
+            getchar();
+
+            if(rcbd<total){
+               printf("Valor do troco Invalido,Falta R$ %.2f\n", -rcbd+total);
+            }
+        }while(rcbd<total);
+        troco=-total+rcbd;
+        printf("\t\tTotal com desconto: %.2f\n", total);
+        printf("\t\tTroco comm desconto: %.2f\n\n", troco);
         break;
 
     case 2://parcelado
