@@ -295,12 +295,17 @@ void realizar_venda(item *base,relatorio *rel, int tam){
              rel[i].valor_unitario = base[i].valor_unitario;
              rel[i].estoque = base[i].estoque;
 
-             printf("Deseja continuar vendendo?");
+             printf("Deseja continuar vendendo?\n");
+             printf("( 0 ) - Nao\n( 1 ) - Sim");
+             if(opc == 1){
+
+             }
              scanf("%d",&opc);
         base[i].estoque = base[i].estoque - quantidade;
         total_vet[i] = quantidade*base[i].valor_unitario;
         //total_vet[i] += total;
     }while(opc != 10);
+
 
     for(i=0;i<tam;i++){
 
@@ -361,7 +366,7 @@ void realizar_venda(item *base,relatorio *rel, int tam){
     break;
     }
 
-
+    /*
     printf("\n\t\t\t------RELATORIO------\n\n");
     for(i=0;i<tam;i++){
 
@@ -371,10 +376,10 @@ void realizar_venda(item *base,relatorio *rel, int tam){
             printf("\t\tQuantidade %d\n", rel[i].estoque);
 
 
-    }
+    }*/
 }
 
-void salvar(item *base, int tam){
+void salvar_base(item *base,relatorio *rel, int tam){//CUPOM FISCAL
 
     char filename[40];
 
@@ -392,19 +397,72 @@ void salvar(item *base, int tam){
         return 1;
     }
 
-    fprintf(fp, "produtos_vendidos\n");
+    fprintf(fp, "Quantidade de Vendas\n");
     fprintf(fp, "%d\n", tam);
     for(int i = 0; i < tam; i++) {
-        fprintf(fp, "\n%d\n", base[i].codigo);
-        fprintf(fp, "%s\n", base[i].nome);
-        fprintf(fp, "%.2f\n", base[i].valor_unitario);
-        fprintf(fp, "%d\n", base[i].estoque);
-        //fprintf(fp, "%d\n", arr[i].quantVendida);
+        fprintf(fp, "\nItem: %d", rel[i].codigo);
+        fprintf(fp, "\nProduto: %s", base[i].nome);
+        fprintf(fp, "\nValor Total: %.2f", rel[i].valor_unitario*rel[i].estoque);
+        fprintf(fp, "\nQtd: %d", rel[i].estoque);
+        //fprintf(fp, "%d\n", qtd_vendas);
     }
 
     fclose(fp);
     printf("\t\tSalvamento com sucesso! Clique Enter para Continuar");
     getchar();
     limpar_tela();
+    return filename;
+}
+
+void ler(item *base, int tam){
+
+    char filename[40];
+    char str[50];
+
+    FILE *fp;
+
+    fp = fopen("base.txt", "r");
+
+    if(fp == NULL) {
+        printf("Erro ao abrir o arquivo %s", filename);
+        return 1;
+    }
+    while (fgets(str, 50, fp) != NULL) {
+        printf("\t\t%s", str);
+    }
+    fclose(fp );
+    printf("\n\t\t\tLeitura da base com sucesso! \tClique Enter para continuar...");
+    getchar();
+}
+
+void salvar(item *base, int tam){//BASE
+
+    char filename[40];
+    int qt_venda=0;
+
+    FILE *fp = fopen("base.txt", "w");
+
+    if(fp == NULL) {
+        printf("Erro ao abrir o arquivo %s", filename);
+        return 1;
+    }
+
+    fprintf(fp, "\n%d",tam);
+    for(int i = 0; i < tam; i++) {
+        if(i>-1){
+            qt_venda++;
+        }
+        fprintf(fp, "\n%d", base[i].codigo);
+        fprintf(fp, "\n%s", base[i].nome);
+        fprintf(fp, "\n%.2f", base[i].valor_unitario);
+        fprintf(fp, "\n%d", base[i].estoque);
+        fprintf(fp, "\n%d",qt_venda);
+    }
+
+    fclose(fp);
+    printf("\t\tSalvamento com sucesso! Clique Enter para Continuar");
+    getchar();
+    limpar_tela();
+    return filename;
 }
 #endif // CALCULOS_H_INCLUDED

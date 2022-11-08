@@ -6,14 +6,10 @@
 #include "calculos.h"
 #include "source.h"
 
-//argc = Quantidade de respostas no prompt
-//argv = Tem salvo as respostas utilizadas no prompt
 int main(int argc, char *argv[])
 {
-
-
     char arquivo[15];
-    int opc = 0;
+    int opc = 0; //utilizado para selecionar opc do usuario
     int tam = 0;
     float total;
     item *base = (item *)malloc(sizeof(item));//vetor vet acumula os itens cadastrados
@@ -95,19 +91,12 @@ int main(int argc, char *argv[])
 
             //Salvar os produtos Cadastrados
             case 5:
-                salvar(base, tam);
+                salvar(base,tam);
                 break;
 
             //Lê a lista de produtos no ultimo arquivo salvo.
             case 6:
-
-                if((arquivo == fopen(argv[1], "r"))==NULL){
-                    printf("Erro na abertura do Arquivo.");
-                }else{
-                    limpar_tela();
-                    printf("Arquivo Aberto com sucesso.");
-                }
-
+                ler(base,tam);
             default:
                 continue;
 
@@ -122,6 +111,9 @@ int main(int argc, char *argv[])
             exit(1);
         }
         realizar_venda(base,rel,tam);
+        printf("\n\t\tImprimindo Cupom Fiscal...\n");
+        getchar();
+        salvar_base(base,rel,tam);//CUPOM FISCAL
 
     }
     }while(opc !=3);

@@ -12,6 +12,7 @@ int excluir_produto(item *base, int tam);
 void reordena_estoque(item *base, int tam);
 void arquivo_horario();
 void realizar_venda(item *base,relatorio *rel, int tam);
+void salvar_base(item *base,relatorio *rel, int tam);
 void salvar(item *base, int tam);
 
 
