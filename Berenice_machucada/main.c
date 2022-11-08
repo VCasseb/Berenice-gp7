@@ -2,8 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h> //Usado para printar cupom
-//#include <conio.h> //manipular caracteres na tela
-#include "funcoes.c" //Chamar header
 #include "source.h" //Chamar header
 
 int main(int argc, char *argv[])
@@ -12,14 +10,9 @@ int main(int argc, char *argv[])
     int tam = 0; //Usado para dimensionar tamanho
     float total; //Total da compra
 
-    item *base = (item *)malloc(sizeof(item));//Struct dimensionada dos itens
+    item *base = NULL;
     relatorio *rel = (relatorio *)malloc(sizeof(relatorio));//Struct dimensionada dos itens (Usado para imprimir cupom)
 
-    if(base == NULL)
-    {
-        printf("Erro na alocação de memória");
-        return(1);
-    }
     do // do menu principal
     {
         mn_inicial(); //chama funcao printf

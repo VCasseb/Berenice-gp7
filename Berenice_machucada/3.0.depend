@@ -1,0 +1,131 @@
+# depslib dependency file v1.0
+1666882417 source:c:\users\vini\desktop\berenice 3.0\3.0\main.c
+	<stdio.h>
+	<stdlib.h>
+	"source.h"
+	"calculos.h"
+
+1666882515 c:\users\vini\desktop\berenice 3.0\3.0\source.h
+
+1666882701 c:\users\vini\desktop\berenice 3.0\3.0\calculos.h
+
+1667827670 source:c:\users\vini\desktop\berenice 3.0\main.c
+	<stdio.h>
+	<stdlib.h>
+	"source.h"
+	"calculos.h"
+
+1667827670 c:\users\vini\desktop\berenice 3.0\source.h
+
+1667828567 c:\users\vini\desktop\berenice 3.0\calculos.h
+
+1667827670 source:c:\users\vini\desktop\berenice 3.0 (variavel global)\main.c
+	<stdio.h>
+	<stdlib.h>
+	"source.h"
+	"calculos.h"
+
+1667827670 c:\users\vini\desktop\berenice 3.0 (variavel global)\source.h
+
+1667829989 c:\users\vini\desktop\berenice 3.0 (variavel global)\calculos.h
+
+1667868173 source:c:\users\vini\desktop\lixo\main.c
+	<stdio.h>
+	<stdlib.h>
+	"source.h"
+	"calculos.h"
+
+1667827670 c:\users\vini\desktop\lixo\source.h
+
+1667868208 c:\users\vini\desktop\lixo\calculos.h
+
+1667872179 source:c:\users\vini\desktop\lixo - copia\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"calculos.h"
+	"source.h"
+
+1667870860 c:\users\vini\desktop\lixo - copia\source.h
+
+1667872583 c:\users\vini\desktop\lixo - copia\calculos.h
+
+1667908132 source:c:\users\vini\desktop\berenice-gp7\atualizei\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<conio.h>
+	"calculos.h"
+	"source.h"
+
+1667908132 c:\users\vini\desktop\berenice-gp7\atualizei\calculos.h
+
+1667908132 c:\users\vini\desktop\berenice-gp7\atualizei\source.h
+
+1667923987 source:c:\users\vini\desktop\atualizei\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<conio.h>
+	"calculos.h"
+	"source.h"
+
+1667927562 c:\users\vini\desktop\atualizei\calculos.h
+
+1667922864 c:\users\vini\desktop\atualizei\source.h
+
+1667939047 source:c:\users\vini\desktop\atualizei_vini\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"calculos.h"
+	"source.h"
+
+1667940144 c:\users\vini\desktop\atualizei_vini\calculos.h
+
+1667938557 c:\users\vini\desktop\atualizei_vini\source.h
+
+1667939047 source:c:\users\vini\desktop\berenice-gp7\berenice oficial 4k\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"calculos.h"
+	"source.h"
+
+1667944333 c:\users\vini\desktop\berenice-gp7\berenice oficial 4k\calculos.h
+
+1667943360 c:\users\vini\desktop\berenice-gp7\berenice oficial 4k\source.h
+
+1667944354 source:d:\linguagem c\berenice 3.0\berenice-gp7-main\berenice oficial 4k\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"calculos.h"
+	"source.h"
+
+1667945772 d:\linguagem c\berenice 3.0\berenice-gp7-main\berenice oficial 4k\calculos.h
+
+1667944354 d:\linguagem c\berenice 3.0\berenice-gp7-main\berenice oficial 4k\source.h
+
+1667951575 source:c:\users\dell\onedrive\햞ea de trabalho\pasta nova\berenice oficial 4k\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"source.h"
+
+1667950634 c:\users\dell\onedrive\햞ea de trabalho\pasta nova\berenice oficial 4k\calculos.h
+
+1667951405 c:\users\dell\onedrive\햞ea de trabalho\pasta nova\berenice oficial 4k\source.h
+
+1667951668 source:c:\users\dell\onedrive\햞ea de trabalho\pasta nova\berenice oficial 4k\calculo.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"source.h"
+

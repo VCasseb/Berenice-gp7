@@ -1,0 +1,7 @@
+Quantidade de Vendas
+1
+
+Item: 1
+Produto: teste
+Valor Total: 50.00
+Qtd: 50
