@@ -1,0 +1,91 @@
+# depslib dependency file v1.0
+1666882417 source:c:\users\vini\desktop\berenice 3.0\3.0\main.c
+	<stdio.h>
+	<stdlib.h>
+	"source.h"
+	"calculos.h"
+
+1666882515 c:\users\vini\desktop\berenice 3.0\3.0\source.h
+
+1666882701 c:\users\vini\desktop\berenice 3.0\3.0\calculos.h
+
+1667827670 source:c:\users\vini\desktop\berenice 3.0\main.c
+	<stdio.h>
+	<stdlib.h>
+	"source.h"
+	"calculos.h"
+
+1667827670 c:\users\vini\desktop\berenice 3.0\source.h
+
+1667828567 c:\users\vini\desktop\berenice 3.0\calculos.h
+
+1667827670 source:c:\users\vini\desktop\berenice 3.0 (variavel global)\main.c
+	<stdio.h>
+	<stdlib.h>
+	"source.h"
+	"calculos.h"
+
+1667827670 c:\users\vini\desktop\berenice 3.0 (variavel global)\source.h
+
+1667829989 c:\users\vini\desktop\berenice 3.0 (variavel global)\calculos.h
+
+1667868173 source:c:\users\vini\desktop\lixo\main.c
+	<stdio.h>
+	<stdlib.h>
+	"source.h"
+	"calculos.h"
+
+1667827670 c:\users\vini\desktop\lixo\source.h
+
+1667868208 c:\users\vini\desktop\lixo\calculos.h
+
+1667872179 source:c:\users\vini\desktop\lixo - copia\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"calculos.h"
+	"source.h"
+
+1667870860 c:\users\vini\desktop\lixo - copia\source.h
+
+1667872583 c:\users\vini\desktop\lixo - copia\calculos.h
+
+1667908132 source:c:\users\vini\desktop\berenice-gp7\atualizei\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<conio.h>
+	"calculos.h"
+	"source.h"
+
+1667908132 c:\users\vini\desktop\berenice-gp7\atualizei\calculos.h
+
+1667908132 c:\users\vini\desktop\berenice-gp7\atualizei\source.h
+
+1667923987 source:c:\users\vini\desktop\atualizei\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<conio.h>
+	"calculos.h"
+	"source.h"
+
+1667927562 c:\users\vini\desktop\atualizei\calculos.h
+
+1667922864 c:\users\vini\desktop\atualizei\source.h
+
+1667930008 source:d:\usuario\documentos\github\berenice-gp7\atualizei_vini\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<conio.h>
+	"calculos.h"
+	"source.h"
+
+1667939221 d:\usuario\documentos\github\berenice-gp7\atualizei_vini\calculos.h
+
+1667930008 d:\usuario\documentos\github\berenice-gp7\atualizei_vini\source.h
+
