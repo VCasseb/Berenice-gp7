@@ -11,8 +11,6 @@
         int qtd;
     }itens;
 
-    itens base;
-
 void mn_inicial(){
 
     system("cls");
@@ -38,7 +36,7 @@ int switch_menu(int fopc){ //Switch for start menu
     return fopc;
 }
 
-void sub_produtos(){
+void sub_produtos(int tamanho){
 
     int sub_opc=0;
     itens base[5];
@@ -62,7 +60,9 @@ void sub_produtos(){
                 switch(sub_opc){
 
     case 1:
-
+        if(tamanho == NULL){
+        printf("Cadastro Vazio");
+    }
     break;
 
     case 2:
