@@ -47,7 +47,7 @@ void visualizar_estoque (item *base, int tam)
 
 int cadastrar_produto(item *base, int tam)
 {
-
+    int nd=0;
     if(tam==0)
     {
         base[tam].codigo = 1; //validar inicio
@@ -65,16 +65,44 @@ int cadastrar_produto(item *base, int tam)
             break;
         }
     }
+    printf("digite o cod do produto: ");
+    do{
+    scanf("%d",&base[tam].codigo);
+    if(base[tam].codigo<=0){
+        printf("Codigo invalido!");
+    }
+    }while(base[tam].codigo<=0);
+
     printf("\tInsira o nome do produto: ");
+    do{
     setbuf(stdin, NULL); //limpar buffer do teclado
     gets(base[tam].nome);
+    nd++;
+    for (int i = 0; i < strlen(base[tam].nome); i++) {
+            if (base[i].nome != ' ' && isspace(base[i].nome)) {
+                printf("\nNome invalido!\nTente novamente\n---->");
+                nd=0;
+                break;
+            }
+        }
+    }while(nd!=1);
     printf("\tInsira o valor preco: ");
+    do{
     scanf("%f", &base[tam].valor_unitario);
-    getchar();
-    printf("\tInsira a quantidade para o estoque: ");
-    scanf("%d", &base[tam].estoque);
+    if(base[tam].valor_unitario<=0){
+        printf("Valor invalido!");
+    }
+    }while(base[tam].valor_unitario<=0);
     getchar();
 
+    printf("\tInsira a quantidade para o estoque: ");
+    do{
+    scanf("%d", &base[tam].estoque);
+    getchar();
+    if(base[tam].estoque<=0){
+        printf("Valor invalido!");
+    }
+    }while(base[tam].estoque<=0);
     tam++; //aumentar o tamanho
     reordena_estoque(base, tam); //bubble sort
     return tam;
