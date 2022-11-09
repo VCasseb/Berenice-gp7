@@ -30,6 +30,15 @@ void sub_protudos() //cadeia de printf
     printf("\n\t\t\t----> ");
 }
 
+void sub_vendas() //cadeia de printf
+{
+    printf("\n\t\t\t------Sub Menu de Vendas------\n");
+    printf("\n\t\t\t(1) - Realizar Venda");
+    printf("\n\t\t\t(2) - Relatorio de Vendas");
+    printf("\n\t\t\t(0) - Voltar");
+    printf("\n\t\t\t----> ");
+}
+
 void limpar_tela() //system cls
 {
     system("cls");
@@ -47,7 +56,8 @@ void visualizar_estoque (item *base, int tam)
 
 int cadastrar_produto(item *base, int tam)
 {
-    int nd=0;
+    int nd=0,i=0;
+    int aux_cod=0;
     if(tam==0)
     {
         base[tam].codigo = 1; //validar inicio
@@ -65,44 +75,52 @@ int cadastrar_produto(item *base, int tam)
             break;
         }
     }
-    printf("digite o cod do produto: ");
-    do{
-    scanf("%d",&base[tam].codigo);
-    if(base[tam].codigo<=0){
-        printf("Codigo invalido!");
-    }
-    }while(base[tam].codigo<=0);
 
-    printf("\tInsira o nome do produto: ");
-    do{
-    setbuf(stdin, NULL); //limpar buffer do teclado
-    gets(base[tam].nome);
-    nd++;
-    for (int i = 0; i < strlen(base[tam].nome); i++) {
-            if (base[i].nome != ' ' && isspace(base[i].nome)) {
-                printf("\nNome invalido!\nTente novamente\n---->");
-                nd=0;
-                break;
+    printf("digite o cod do produto: ");
+    do
+    {
+        scanf("%d",&base[tam].codigo);
+        aux_cod = base[tam].codigo;
+        for(i=0;i<tam;i++){
+            if(base[i].codigo==aux_cod){
+                printf("\nCodigo existente!");
+                exit(1);
             }
         }
-    }while(nd!=1);
-    printf("\tInsira o valor preco: ");
-    do{
-    scanf("%f", &base[tam].valor_unitario);
-    if(base[tam].valor_unitario<=0){
-        printf("Valor invalido!");
+        if(base[tam].codigo<=0)
+        {
+            printf("\nCodigo invalido!");
+        }
     }
-    }while(base[tam].valor_unitario<=0);
+    while(base[tam].codigo<=0);
+
+    printf("\tInsira o nome do produto: ");
+    setbuf(stdin, NULL); //limpar buffer do teclado
+    gets(base[tam].nome);
+
+    printf("\tInsira o valor preco: ");
+    do
+    {
+        scanf("%f", &base[tam].valor_unitario);
+        if(base[tam].valor_unitario<=0)
+        {
+            printf("Valor invalido!");
+        }
+    }
+    while(base[tam].valor_unitario<=0);
     getchar();
 
     printf("\tInsira a quantidade para o estoque: ");
-    do{
-    scanf("%d", &base[tam].estoque);
-    getchar();
-    if(base[tam].estoque<=0){
-        printf("Valor invalido!");
+    do
+    {
+        scanf("%d", &base[tam].estoque);
+        getchar();
+        if(base[tam].estoque<=0)
+        {
+            printf("Valor invalido!");
+        }
     }
-    }while(base[tam].estoque<=0);
+    while(base[tam].estoque<=0);
     tam++; //aumentar o tamanho
     reordena_estoque(base, tam); //bubble sort
     return tam;
@@ -110,103 +128,160 @@ int cadastrar_produto(item *base, int tam)
 
 void atualizar_produto (item *base, int tam)
 {
-    int i, j;
-    int produto, opc;
+    int i, j,erro=0;
+    int produto, opc,etq_antes;
+    float pri_antes;
+    char nm_antes[26];
     visualizar_estoque(base, tam);
     printf("\nDigite o Codigo desejado para Atualizar\n----> ");
     scanf("%d", &produto);
     getchar();
     system("cls");
-    do
-    {
-        if(produto <=0 || produto >tam) //validar se o produto existe
-        {
-            limpar_tela();
-            printf("Codigo invalido! Tente novamente\n");
-            printf("|  \tCodigo\t  |  \tValor\t  |  \tEstoque\t  |  \tNome\t  |\n--------------------------------------------------------------------\n");
-            for(i=0; i<tam; i++)
-            {
-                printf("|  \t%d\t  |  \t%.2f\t  |  \t%d\t  |  \t%s\t\n", base[i].codigo, base[i].valor_unitario, base[i].estoque,base[i].nome);
-            }
-            printf("----> ");
-            scanf("%d",&produto);
-            getchar();
+    // do
+    //{
 
-        }
+    //limpar_tela();
+    //printf("Codigo invalido! Tente novamente\n");
+    printf("|  \tCodigo\t  |  \tValor\t  |  \tEstoque\t  |  \tNome\t  |\n--------------------------------------------------------------------\n");
+    for(i=0; i<tam; i++)
+    {
+        printf("|  \t%d\t  |  \t%.2f\t  |  \t%d\t  |  \t%s\t\n", base[i].codigo, base[i].valor_unitario, base[i].estoque,base[i].nome);
     }
-    while(produto >tam || produto <0); //fechar loop de atualizar prod
+    //printf("----> ");
+    //scanf("%d",&produto); DESEJA ALTERA ESSE PRODUTO?
+    //getchar();
+
+    //  }
+
+    // while(produto >tam || produto <0); //fechar loop de atualizar prod
+
+
     for(i=0; i<tam; i++)
     {
         if(base[i].codigo==produto)//compara todas as posicoes com a do usuario
         {
-            break;
+            limpar_tela();
+            printf("|  \tCodigo\t  |  \tValor\t  |  \tEstoque\t  |  \tNome\t  |\n--------------------------------------------------------------------\n");
+            printf("|  \t%d\t  |  \t%.2f\t  |  \t%d\t  |  \t%s\t\n", base[i].codigo, base[i].valor_unitario, base[i].estoque,base[i].nome); //printf com o i do usuario
+            printf("\n\nO que deseja alterar?\n----> "
+                   "\n\t1 - Nome do Produto"
+                   "\n\t2 - Preco"
+                   "\n\t3 - Estoque"
+                   "\n\t0 - Voltar"
+                   "\n\t--->: ");
+            scanf("%d", &opc);
+            getchar();
+            system("cls");
+            strcpy(nm_antes,base[i].nome);
+            pri_antes = base[i].valor_unitario;
+            etq_antes = base[i].estoque;
+            switch(opc)
+            {
+            case 1:
+                printf("Insira o novo nome do produto: ");
+                setbuf(stdin, NULL); //limpar buffer do teclado
+                gets(base[i].nome);
+                break;
+            case 2:
+                printf("Insira o novo preco do produto: ");
+                scanf("%f", &base[i].valor_unitario);
+                getchar();
+                if(base[i].valor_unitario<=0)
+                {
+                    printf("'\nDigite um valor valido!");
+                    base[i].valor_unitario=pri_antes;
+                    erro++;
+                }
+                break;
+            case 3:
+                printf("Insira o novo estoque do produto: ");
+                scanf("%d", &base[i].estoque);
+                getchar();
+                if(base[i].estoque<=0)
+                {
+                    printf("'\nDigite um valor valido!");
+                    base[i].estoque=pri_antes;
+                    erro++;
+                }
+                break;
+            default:
+                break;
+            }
+            if(erro<=0)
+            {
+                printf("\nAntes:\n");
+                printf("|  \tCodigo\t  |  \tValor\t  |  \tEstoque\t  |  \tNome\t  |\n--------------------------------------------------------------------\n");
+                printf("|  \t%d\t  |  \t%.2f\t  |  \t%d\t  |  \t%s\t\n", base[i].codigo, pri_antes, etq_antes,nm_antes); //printf com o i do usuario
+                printf("\nDepois:\n");
+                printf("|  \tCodigo\t  |  \tValor\t  |  \tEstoque\t  |  \tNome\t  |\n--------------------------------------------------------------------\n");
+                printf("|  \t%d\t  |  \t%.2f\t  |  \t%d\t  |  \t%s\t\n", base[i].codigo, base[i].valor_unitario, base[i].estoque,base[i].nome); //printf com o i do usuario
+                printf("\n\nDeseja alterar?\n( 0 ) - Nao\n( 1 ) - Sim\n--->");
+                scanf("%d",&opc);
+            }
+            if(opc == 0)
+            {
+                strcpy(base[i].nome,nm_antes);
+                base[i].valor_unitario=pri_antes;
+                base[i].estoque = etq_antes;
+                printf("\nAlteracoes desfeitas...");
+            }
+
+
         }
-    }
-    do
-    {
-        limpar_tela();
-        printf("|  \tCodigo\t  |  \tValor\t  |  \tEstoque\t  |  \tNome\t  |\n--------------------------------------------------------------------\n");
-        printf("|  \t%d\t  |  \t%.2f\t  |  \t%d\t  |  \t%s\t\n", base[i].codigo, base[i].valor_unitario, base[i].estoque,base[i].nome); //printf com o i do usuario
-        printf("\n\nO que deseja alterar?\n----> "
-               "\n\t1 - Nome do Produto"
-               "\n\t2 - Preco"
-               "\n\t3 - Estoque"
-               "\n\t0 - Voltar"
-               "\n\t--->: ");
-        scanf("%d", &opc);
-        getchar();
-        system("cls");
-        switch(opc)
+        else
         {
-        case 1:
-            printf("Insira o novo nome do produto: ");
-            setbuf(stdin, NULL); //limpar buffer do teclado
-            gets(base[i].nome);
-            break;
-        case 2:
-            printf("Insira o novo preco do produto: ");
-            scanf("%f", &base[i].valor_unitario);
-            getchar();
-            break;
-        case 3:
-            printf("Insira o novo estoque do produto: ");
-            scanf("%d", &base[i].estoque);
-            getchar();
-            break;
-        default:
-            break;
+            printf("Produto nao encontrado");
         }
+
     }
-    while(opc > 3);
 }
 
 int excluir_produto(item *base, int tam)
 {
-    int i;
+    int i,aux_tam,opc=0;
     int produto;
     visualizar_estoque(base, tam);
     printf("\nDigite o código do item que deseja excluir: ");
     scanf("%d", &produto);
     getchar();
     limpar_tela();
+    aux_tam = tam;
+
+    printf("|  \tCodigo\t  |  \tValor\t  |  \tEstoque\t  |  \tNome\t  |\n--------------------------------------------------------------------\n");
     for(i=0; i<tam; i++)
     {
-
-        if(base[i].codigo==produto)
+        if(base[i].codigo == produto)
         {
-            break;
+            printf("|  \t%d\t  |  \t%.2f\t  |  \t%d\t  |  \t%s\t\n", base[i].codigo, base[i].valor_unitario, base[i].estoque,base[i].nome); //printf com o i do usuario
+            printf("\nDeseja excluir?\n( 0 ) - Nao\n( 1 ) - Sim");
+            scanf("%d",&opc);
         }
     }
-    if(base[i].codigo==produto){
-    for(; i<tam-1; i++)
+
+    if(opc == 1)
     {
-        base[i] =base[i+1];
+        for(i=0; i<tam; i++)
+        {
+
+
+            if(base[i].codigo==produto)
+            {
+                for(; i<tam-1; i++)
+                {
+                    base[i] =base[i+1];
+                }
+                tam--;
+            }
+        }
+
     }
-    tam--;
-    }
-    if(produto<=0 || produto>base[i].codigo){
+
+
+    if(aux_tam == tam && opc == 100)
+    {
         printf("\n\t\tProduto nao encontrado");
     }
+
     return tam;
 }
 
@@ -302,16 +377,19 @@ void realizar_venda(item *base, int tam)
         {
             total*=0.82;
         }
-        do{
+        do
+        {
             printf("\t\tTotal com Desconto: %.2f\n\n",total);
             printf("\nDigite o dinheiro recebido:\n");
             scanf("%f", &rcbd);
             getchar();
 
-            if(rcbd<total){
-               printf("Valor do troco Invalido,Falta R$ %.2f\n", -rcbd+total);
+            if(rcbd<total)
+            {
+                printf("Valor do troco Invalido,Falta R$ %.2f\n", -rcbd+total);
             }
-        }while(rcbd<total);
+        }
+        while(rcbd<total);
         troco=-total+rcbd;
         printf("\t\tTotal com desconto: %.2f\n", total);
         printf("\t\tTroco comm desconto: %.2f\n\n", troco);

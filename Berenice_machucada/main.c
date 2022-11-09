@@ -99,6 +99,11 @@ int main(int argc, char *argv[])
             while(opc != 0); //sai do loop
         break;
         case 2: //Vendas
+            do{
+            limpar_tela();
+            sub_vendas();
+            scanf("%d",&opc);
+            if(opc == 1){
             limpar_tela();
             if(tam<=0)
             {
@@ -106,9 +111,14 @@ int main(int argc, char *argv[])
                 exit(1);
             }
             realizar_venda(base,tam);
+            }
+            if(opc == 2){
             printf("\n\t\tImprimindo Cupom Fiscal...\n");
             getchar(); //travar no imprimindo
             salvar_base(base,tam);//CUPOM FISCAL
+            }
+            limpar_tela();
+            }while(opc != 0);
         break;
         default:
             limpar_tela();

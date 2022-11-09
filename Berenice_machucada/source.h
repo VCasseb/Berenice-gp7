@@ -20,6 +20,7 @@ int excluir_produto(item *base, int tam);
 void reordena_estoque(item *base, int tam); //buble sort
 void salvar(item *base, int tam); //Salver cupom fiscal
 void ler();
+void sub_vendas();
 
 
 #endif // SOURCE_H_INCLUDED
