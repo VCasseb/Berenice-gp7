@@ -501,24 +501,23 @@ void ler(item *base, int tam)
     char filename[40];
     char str[50];
 
-    FILE *fp_bi;
+    FILE *fp;
 
-    fp_bi = fopen("base.bin", "rb"); //ler arquivo
+    fp = fopen("base.txt", "r"); //ler arquivo
 
-    if(fp_bi == NULL)
+    if(fp == NULL)
     {
         printf("Erro ao abrir o arquivo %s", filename);
-        return;
+        exit(1);
     }
-    fread(base,sizeof(base),tam,fp_bi);
-    for(int i=0;i<tam;i++){
-    printf("\n%i\t%s\n%.2f\n%i\n",base[i].codigo,base[i].nome,base[i].valor_unitario,base[i].estoque);
+    while(fgets(str, 50, fp) != NULL)
+    {
+    printf("\t\t%s", str);
     }
-    fclose(fp_bi);
-    printf("\n\t\t\tLeitura da base com sucesso! \tClique Enter para continuar...");
+    fclose(fp );
+    printf("\n\t\t\tLeitura da base com sucesso! \n\t\t\tClique Enter para continuar...");
     getchar();
 }
-
 void salvar(item *base, int tam) //BASE
 {
 

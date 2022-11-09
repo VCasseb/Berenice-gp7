@@ -145,3 +145,35 @@
 	<time.h>
 	"source.h"
 
+1668028524 source:c:\users\vini\desktop\berenice-gp7\berenice_machucada\calculo.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"source.h"
+	<string.h>
+
+1668028146 c:\users\vini\desktop\berenice-gp7\berenice_machucada\source.h
+
+1668027588 source:c:\users\vini\desktop\berenice-gp7\berenice_machucada\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"source.h"
+
+1668028524 source:c:\users\vini\desktop\arquivos\berenice_machucada\calculo.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"source.h"
+	<string.h>
+
+1668028146 c:\users\vini\desktop\arquivos\berenice_machucada\source.h
+
+1668027588 source:c:\users\vini\desktop\arquivos\berenice_machucada\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"source.h"
+

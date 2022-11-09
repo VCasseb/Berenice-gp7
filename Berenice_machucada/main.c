@@ -9,7 +9,7 @@ int main(int argc, char *argv[])
     int opc = 0; //utilizado para selecionar opc do usuario
     int tam = 0; //Usado para dimensionar tamanho
     int quantidade = 0; //Usado para adicionar uma quantidade pedida pelo cliente
-    int qtd_vendas;
+    int qtd_vendas=0;
     float total; //Total da compra
 
     item *base = NULL;
@@ -122,12 +122,11 @@ int main(int argc, char *argv[])
                 exit(1);
             }
             realizar_venda(base,tam,qtd_vendas);
-            qtd_vendas=0;
             qtd_vendas++;
             }
             if(opc == 2){
                 relatorio(base,tam,qtd_vendas);
-                printf("qtd_vendas %d",qtd_vendas);
+                //printf("qtd_vendas %d",qtd_vendas);
                 exit(1);
             }
             limpar_tela();

@@ -19,7 +19,7 @@ void atualizar_produto (item *base, int tam);
 int excluir_produto(item *base, int tam);
 void reordena_estoque(item *base, int tam); //buble sort
 void salvar(item *base, int tam); //Salver cupom fiscal
-void ler();
+void ler(item *base, int tam);
 void sub_vendas();
 void relatorio(item *base, int tam,int qtd_vendas);
 void realizar_venda(item *base, int tam,int qtd_vendas);
