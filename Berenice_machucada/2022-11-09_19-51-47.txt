@@ -1,0 +1,5 @@
+Quantidade de Vendas
+2
+
+Item: 6421840
+Item: 6421840
