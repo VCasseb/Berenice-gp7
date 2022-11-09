@@ -160,3 +160,19 @@
 	"source.h"
 	<string.h>
 
+1668025463 source:c:\users\vini\desktop\berenice-gp7\cadastro com qntd\calculo.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"source.h"
+	<string.h>
+
+1668025463 c:\users\vini\desktop\berenice-gp7\cadastro com qntd\source.h
+
+1668025463 source:c:\users\vini\desktop\berenice-gp7\cadastro com qntd\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"source.h"
+

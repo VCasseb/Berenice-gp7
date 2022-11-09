@@ -14,13 +14,14 @@ void mn_inicial(); // Printf do menu linha 23
 void sub_protudos(); //Printf do submenu linha 32
 void limpar_tela(); //SystemCLS linha 45
 void visualizar_estoque (item *base, int tam); //linha 50
-int cadastrar_produto(item *base, int tam);
+int cadastrar_produto(item *base, int tam, int quantidade);
 void atualizar_produto (item *base, int tam);
 int excluir_produto(item *base, int tam);
 void reordena_estoque(item *base, int tam); //buble sort
 void salvar(item *base, int tam); //Salver cupom fiscal
 void ler();
 void sub_vendas();
-
+void relatorio(item *base, int tam,int qtd_vendas);
+void realizar_venda(item *base, int tam,int qtd_vendas);
 
 #endif // SOURCE_H_INCLUDED

@@ -129,15 +129,16 @@
 	<time.h>
 	"source.h"
 
-1668011340 source:c:\users\vini\desktop\berenice_machucada\calculo.c
+1668027122 source:c:\users\vini\desktop\berenice_machucada\calculo.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
 	"source.h"
+	<string.h>
 
-1667999768 c:\users\vini\desktop\berenice_machucada\source.h
+1668026795 c:\users\vini\desktop\berenice_machucada\source.h
 
-1668000024 source:c:\users\vini\desktop\berenice_machucada\main.c
+1668026866 source:c:\users\vini\desktop\berenice_machucada\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>

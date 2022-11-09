@@ -8,6 +8,8 @@ int main(int argc, char *argv[])
 {
     int opc = 0; //utilizado para selecionar opc do usuario
     int tam = 0; //Usado para dimensionar tamanho
+    int quantidade = 0; //Usado para adicionar uma quantidade pedida pelo cliente
+    int qtd_vendas;
     float total; //Total da compra
 
     item *base = NULL;
@@ -46,13 +48,21 @@ int main(int argc, char *argv[])
 
                 //Cadastrar Produtos Novos.
                 case 2:
-                    base = (item *)realloc(base, (tam+1)*sizeof(item)); //Aumenta o dimensionamento da memoria
+                    printf("Quantos produtos deseja cadastrar?\n");
+                    do{
+                    scanf("%i", &quantidade);
+                    getchar();
+                    if(quantidade<0){
+                        printf("Valor invalido.\n");
+                    }
+                    }while(quantidade<=0);
+                    base = (item *)realloc(base, (tam+quantidade)*sizeof(item)); //Aumenta o dimensionamento da memoria
                     if(base == NULL)
                     {
                         printf("ERRO na realocação de memória");
                         exit(2); //fechar caso de problemas na memoria
                     }
-                    tam = cadastrar_produto(base, tam); //int main recebe de volta o valor do tamanho
+                    tam = cadastrar_produto(base, tam,quantidade); //int main recebe de volta o valor do tamanho
                     break;
 
                 case 3: //Atualizar um produto
@@ -90,9 +100,10 @@ int main(int argc, char *argv[])
                 //Lê a lista de produtos no ultimo arquivo salvo.
                 case 6:
                     ler(base,tam);
+                break;
                 default:
                     printf("\n\t\tOpcao Invalida! Clique Enter para continuar");
-                    getchar();
+                getchar();
 
                 }
             }
@@ -110,12 +121,14 @@ int main(int argc, char *argv[])
                 printf("...Vazio...");
                 exit(1);
             }
-            realizar_venda(base,tam);
+            realizar_venda(base,tam,qtd_vendas);
+            qtd_vendas=0;
+            qtd_vendas++;
             }
             if(opc == 2){
-            printf("\n\t\tImprimindo Cupom Fiscal...\n");
-            getchar(); //travar no imprimindo
-            salvar_base(base,tam);//CUPOM FISCAL
+                relatorio(base,tam,qtd_vendas);
+                printf("qtd_vendas %d",qtd_vendas);
+                exit(1);
             }
             limpar_tela();
             }while(opc != 0);

@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "source.h"
+#include <string.h>
 
 
 //----------Functions for start menu
@@ -54,74 +55,78 @@ void visualizar_estoque (item *base, int tam)
     printf("\nLinha: %d", tam); //printar quantos produtos tem
 }
 
-int cadastrar_produto(item *base, int tam)
+int cadastrar_produto(item *base, int tam, int quantidade)
 {
-    int nd=0,i=0;
+    int nd=0,i=0,j=0;
     int aux_cod=0;
-    if(tam==0)
-    {
-        base[tam].codigo = 1; //validar inicio
-    }
-    else
-    {
-        base[tam].codigo = base[tam-1].codigo + 1; //apos reordenar se ha um salto entre duas posicoes, se sim, insere uma posicao entre
-        for(int i=0; i<tam; i++)
+
+    for(j=0;j<quantidade;j++){
+        if(tam==0)
         {
-            if(base[i+1].codigo==base[i].codigo+1)
+            base[tam].codigo = 1; //validar inicio
+        }
+        else
+        {
+            base[tam].codigo = base[tam-1].codigo + 1; //apos reordenar se ha um salto entre duas posicoes, se sim, insere uma posicao entre
+            for(int i=0; i<tam; i++)
             {
-                continue;
-            }
-            base[tam].codigo = i+2;
-            break;
-        }
-    }
-
-    printf("digite o cod do produto: ");
-    do
-    {
-        scanf("%d",&base[tam].codigo);
-        aux_cod = base[tam].codigo;
-        for(i=0;i<tam;i++){
-            if(base[i].codigo==aux_cod){
-                printf("\nCodigo existente!");
-                exit(1);
+                if(base[i+1].codigo==base[i].codigo+1)
+                {
+                    continue;
+                }
+                base[tam].codigo = i+2;
+                break;
             }
         }
-        if(base[tam].codigo<=0)
+
+        printf("digite o cod do produto: \n");
+        do
         {
-            printf("\nCodigo invalido!");
+            scanf("%d",&base[tam].codigo);
+            aux_cod = base[tam].codigo;
+            for(i=0;i<tam;i++){
+                if(base[i].codigo==aux_cod){
+                    printf("\nCodigo existente!\n");
+                    base[tam].codigo=0;
+                }
+            }
+            if(base[tam].codigo<=0)
+            {
+                printf("Digite novamente o Cod do Produto:\n");
+            }
         }
-    }
-    while(base[tam].codigo<=0);
+        while(base[tam].codigo<=0);
 
-    printf("\tInsira o nome do produto: ");
-    setbuf(stdin, NULL); //limpar buffer do teclado
-    gets(base[tam].nome);
+        printf("\tInsira o nome do produto: \n");
+        setbuf(stdin, NULL); //limpar buffer do teclado
+        gets(base[tam].nome);
 
-    printf("\tInsira o valor preco: ");
-    do
-    {
-        scanf("%f", &base[tam].valor_unitario);
-        if(base[tam].valor_unitario<=0)
+        printf("\tInsira o valor preco: \n");
+        do
         {
-            printf("Valor invalido!");
+            scanf("%f", &base[tam].valor_unitario);
+            if(base[tam].valor_unitario<=0)
+            {
+                printf("Valor invalido!\n");
+            }
         }
-    }
-    while(base[tam].valor_unitario<=0);
-    getchar();
-
-    printf("\tInsira a quantidade para o estoque: ");
-    do
-    {
-        scanf("%d", &base[tam].estoque);
+        while(base[tam].valor_unitario<=0);
         getchar();
-        if(base[tam].estoque<=0)
+
+        printf("\tInsira a quantidade para o estoque: \n");
+        do
         {
-            printf("Valor invalido!");
+            scanf("%d", &base[tam].estoque);
+            getchar();
+            if(base[tam].estoque<=0)
+            {
+                printf("Valor invalido!\n");
+            }
         }
-    }
-    while(base[tam].estoque<=0);
+        while(base[tam].estoque<=0);
     tam++; //aumentar o tamanho
+    }
+    //tam=tam+quantidade;
     reordena_estoque(base, tam); //bubble sort
     return tam;
 }
@@ -301,11 +306,12 @@ void reordena_estoque(item *base, int tam) //bubble sort
     }
 }
 
-void realizar_venda(item *base, int tam)
+void realizar_venda(item *base, int tam,int qtd_vendas)
 {
 
     int produto, i,quantidade,opc,parcelas;
     float total,total_vet[tam],total_parc,rcbd,troco; //total_vet usado para somar todos as posicoes e ter valor final
+
     do
     {
         printf("|  \tCodigo\t  |  \tValor\t  |  \tEstoque\t  |  \tNome\t  |\n--------------------------------------------------------------------\n");
@@ -313,15 +319,41 @@ void realizar_venda(item *base, int tam)
         {
             printf("|  \t%d\t  |  \t%.2f\t  |  \t%d\t  |  \t%s\t\n", base[i].codigo, base[i].valor_unitario, base[i].estoque,base[i].nome);
         }
-        printf("\n\Linhas: %d\n", tam);
+        printf("\nLinhas: %d\n", tam);
 
 
         printf("\nDigite o Codigo desejado\n---->");
-        scanf("%d", &produto);
-        getchar();
+        do
+        {
+            scanf("%d", &produto);
+            getchar();
+            for(i=0; i<tam; i++)
+            {
+                base[i].codigo;
+                if(base[i].codigo == produto)
+                {
+                    break;
+                }
+                else
+                {
+                    printf("Digite um Codigo valido!\n----> ");
+                }
+            }
+
+        }
+        while(base[i].codigo != produto);
         limpar_tela();
         printf("Qual a quantidade? ");
-        scanf("%d",&quantidade);
+        do
+        {
+            scanf("%d",&quantidade);
+            if(quantidade <= 0 || quantidade >base[i].estoque)
+            {
+                limpar_tela();
+                printf("Quantidade invalida ou Estoque insuficiente!\n---->");
+            }
+        }
+        while(quantidade <= 0 || quantidade >base[i].estoque);
         for(i=0; i<tam; i++)
         {
             if(base[i].codigo==produto)//buscar codigo desejado
@@ -340,11 +372,13 @@ void realizar_venda(item *base, int tam)
         }
         //transferir produtos vendidos para struct de cupom
 
-        printf("Deseja continuar vendendo?\n");
-        printf("( 0 ) - Nao\n( 1 ) - Sim");
-        scanf("%d",&opc);
         base[i].estoque = base[i].estoque - quantidade; //subtrair estoque pela quantiddade desejada
         total_vet[i] = quantidade*base[i].valor_unitario; //multiplicar totais/qtd por posicoes
+
+
+            printf("Deseja continuar vendendo?\n");
+            printf("( 0 ) - Nao\n( 1 ) - Sim");
+            scanf("%d",&opc);
 
     }
     while(opc != 0); //fim loop
@@ -425,6 +459,7 @@ void realizar_venda(item *base, int tam)
         printf("\t|-----------------------------------------|\n\n\n");
         break;
     }
+    qtd_vendas++;
 }
 
 void salvar_base(item *base, int tam) //CUPOM FISCAL
@@ -444,7 +479,7 @@ void salvar_base(item *base, int tam) //CUPOM FISCAL
     if(fp == NULL)
     {
         printf("Erro ao abrir o arquivo %s", filename);
-        return 1;
+        exit(1);
     }
 
     fprintf(fp, "Quantidade de Vendas\n");
@@ -458,7 +493,6 @@ void salvar_base(item *base, int tam) //CUPOM FISCAL
     printf("\t\tSalvamento com sucesso! Clique Enter para Continuar");
     getchar();
     limpar_tela();
-    return filename;
 }
 
 void ler(item *base, int tam)
@@ -467,20 +501,20 @@ void ler(item *base, int tam)
     char filename[40];
     char str[50];
 
-    FILE *fp;
+    FILE *fp_bi;
 
-    fp = fopen("base.bin", "rb"); //ler arquivo
+    fp_bi = fopen("base.bin", "rb"); //ler arquivo
 
-    if(fp == NULL)
+    if(fp_bi == NULL)
     {
         printf("Erro ao abrir o arquivo %s", filename);
         return;
     }
-    while (fgets(str, 50, fp) != NULL)
-    {
-        printf("\t\t%s", str);
+    fread(base,sizeof(base),tam,fp_bi);
+    for(int i=0;i<tam;i++){
+    printf("\n%i\t%s\n%.2f\n%i\n",base[i].codigo,base[i].nome,base[i].valor_unitario,base[i].estoque);
     }
-    fclose(fp );
+    fclose(fp_bi);
     printf("\n\t\t\tLeitura da base com sucesso! \tClique Enter para continuar...");
     getchar();
 }
@@ -497,7 +531,7 @@ void salvar(item *base, int tam) //BASE
     if(fp == NULL || fp_bi == NULL)
     {
         printf("Erro ao abrir o arquivo %s", filename);
-        return 1;
+        exit(1);
     }
 
     fprintf(fp, "\n%d",tam);
@@ -510,10 +544,7 @@ void salvar(item *base, int tam) //BASE
         fprintf(fp, "\n%.2f", base[i].valor_unitario);
         fprintf(fp, "\n%d", base[i].estoque);
         //BINARIO
-        fprintf(fp_bi, "\n%d", base[i].codigo);
-        fprintf(fp_bi, "\n%s", base[i].nome);
-        fprintf(fp_bi, "\n%.2f", base[i].valor_unitario);
-        fprintf(fp_bi, "\n%d", base[i].estoque);
+        fwrite(base,sizeof(base),tam,fp_bi);
     }
 
     fclose(fp);//fechar arq string
@@ -523,3 +554,14 @@ void salvar(item *base, int tam) //BASE
     limpar_tela();
 }
 
+void relatorio(item *base, int tam, int qtd_vendas){
+    printf("\n\t\t\t------------------------------\n");
+    for(int i=0;i<tam;i++){
+    printf("\t\t\t%d\n",qtd_vendas);
+    printf("\t\t\t%d\n",base[i].codigo);
+    printf("\t\t\t%s\n",base[i].nome);
+    printf("\t\t\t%.2f\n",base[i].valor_unitario);
+    printf("\t\t\t%d\n",base[i].estoque);
+    }
+
+}
