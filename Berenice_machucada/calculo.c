@@ -427,6 +427,8 @@ void realizar_venda(item *base, int tam,int qtd_vendas)
         troco=-total+rcbd;
         printf("\t\tTotal com desconto: %.2f\n", total);
         printf("\t\tTroco comm desconto: %.2f\n\n", troco);
+        printf("\n\tClique Enter para continuar...");
+        getchar();
         break;
 
     case 2://parcelado
@@ -457,9 +459,9 @@ void realizar_venda(item *base, int tam,int qtd_vendas)
         printf("\t|O valor a prazo (%d meses) ficou: R$%.2f\n",parcelas,total);
         printf("\t|O valor total das parcelas ficou: R$%.2f\n\n",total_parc);
         printf("\t|-----------------------------------------|\n\n\n");
-        break;
+        printf("\n\tDigite ( 0 ) para voltar...");
+        scanf("%d",&opc);
     }
-    qtd_vendas++;
 }
 
 void salvar_base(item *base, int tam) //CUPOM FISCAL
