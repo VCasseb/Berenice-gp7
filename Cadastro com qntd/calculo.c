@@ -456,7 +456,6 @@ void salvar_base(item *base, int tam) //CUPOM FISCAL
     printf("\t\tSalvamento com sucesso! Clique Enter para Continuar");
     getchar();
     limpar_tela();
-    return filename;
 }
 
 void ler(item *base, int tam)
