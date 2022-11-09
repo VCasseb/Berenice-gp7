@@ -47,6 +47,7 @@ void visualizar_estoque (item *base, int tam)
 
 int cadastrar_produto(item *base, int tam)
 {
+
     if(tam==0)
     {
         base[tam].codigo = 1; //validar inicio
@@ -90,7 +91,7 @@ void atualizar_produto (item *base, int tam)
     system("cls");
     do
     {
-        if(produto <0 || produto >tam) //validar se o produto existe
+        if(produto <=0 || produto >tam) //validar se o produto existe
         {
             limpar_tela();
             printf("Codigo invalido! Tente novamente\n");
@@ -162,16 +163,22 @@ int excluir_produto(item *base, int tam)
     limpar_tela();
     for(i=0; i<tam; i++)
     {
+
         if(base[i].codigo==produto)
         {
             break;
         }
     }
+    if(base[i].codigo==produto){
     for(; i<tam-1; i++)
     {
         base[i] =base[i+1];
     }
     tam--;
+    }
+    if(produto<=0 || produto>base[i].codigo){
+        printf("\n\t\tProduto nao encontrado");
+    }
     return tam;
 }
 
@@ -191,7 +198,7 @@ void reordena_estoque(item *base, int tam) //bubble sort
     }
 }
 
-void realizar_venda(item *base,relatorio *rel, int tam)
+void realizar_venda(item *base, int tam)
 {
 
     int produto, i,quantidade,opc,parcelas;
@@ -229,11 +236,6 @@ void realizar_venda(item *base,relatorio *rel, int tam)
             }
         }
         //transferir produtos vendidos para struct de cupom
-        rel[i].codigo = base[i].codigo;
-        rel[i].nome[26] = base[i].nome[26];
-        rel[i].valor_unitario = base[i].valor_unitario;
-        rel[i].estoque = base[i].estoque;
-        rel[i].venda = quantidade;
 
         printf("Deseja continuar vendendo?\n");
         printf("( 0 ) - Nao\n( 1 ) - Sim");
@@ -319,7 +321,7 @@ void realizar_venda(item *base,relatorio *rel, int tam)
     }
 }
 
-void salvar_base(item *base,relatorio *rel, int tam) //CUPOM FISCAL
+void salvar_base(item *base, int tam) //CUPOM FISCAL
 {
 
     char filename[40];
@@ -343,11 +345,7 @@ void salvar_base(item *base,relatorio *rel, int tam) //CUPOM FISCAL
     fprintf(fp, "%d\n", tam);
     for(int i = 0; i < tam; i++) //usado para printar
     {
-        fprintf(fp, "\nItem: %d", rel[i].codigo);
-        fprintf(fp, "\nProduto: %s", base[i].nome);
-        fprintf(fp, "\nValor Total: %.2f", rel[i].valor_unitario*rel[i].estoque);
-        fprintf(fp, "\nQtd: %d", rel[i].estoque);
-
+        fprintf(fp, "\nItem: %d", base[i]);
     }
 
     fclose(fp);

@@ -11,14 +11,13 @@ int main(int argc, char *argv[])
     float total; //Total da compra
 
     item *base = NULL;
-    relatorio *rel = (relatorio *)malloc(sizeof(relatorio));//Struct dimensionada dos itens (Usado para imprimir cupom)
 
     do // do menu principal
     {
         mn_inicial(); //chama funcao printf
         scanf("%d",&opc);
-        if(opc == 1) //Produtos
-        {
+        switch(opc){ //Produtos
+        case 1:
             do // do sub menu
             {
                 limpar_tela();
@@ -92,26 +91,28 @@ int main(int argc, char *argv[])
                 case 6:
                     ler(base,tam);
                 default:
-                    continue;// n pausar o programa
+                    printf("\n\t\tOpcao Invalida! Clique Enter para continuar");
+                    getchar();
 
                 }
             }
             while(opc != 0); //sai do loop
-
-        }
-        if(opc == 2) //Vendas
-        {
+        break;
+        case 2: //Vendas
             limpar_tela();
             if(tam<=0)
             {
                 printf("...Vazio...");
                 exit(1);
             }
-            realizar_venda(base,rel,tam);
+            realizar_venda(base,tam);
             printf("\n\t\tImprimindo Cupom Fiscal...\n");
             getchar(); //travar no imprimindo
-            salvar_base(base,rel,tam);//CUPOM FISCAL
-
+            salvar_base(base,tam);//CUPOM FISCAL
+        break;
+        default:
+            limpar_tela();
+            printf("\t\t\tOpc Invalida!");
         }
     }
     while(opc !=3); //sai do loop
