@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+/*3.	A Uniamérica precisa de um programa que calcule a média de notas de uma sala.
+Portanto, faça um programa que use ponteiros e alocação dinâmica com os seguintes requisitos:
+a.	Leia a quantidade de notas da sala;
+b.	Crie o respectivo vetor para armazenar as notas de acordo com o tamanho dado no item a;
+c.	Ler as notas e armazenar no vetor criado no item b;
+d.	Realizar e imprimir a média aritmética simples das notas do vetor;
+*/
+int main()
+{
+    float *nota;
+    int tamanho;
+    float soma,media;
+
+   printf("Digite o tamanho do vetor:\n");
+    scanf("%i", &tamanho);
+
+    nota = (float*)malloc(tamanho*sizeof(float));
+
+    if(nota== NULL){
+        printf("Erro na Alocacao.");
+        exit(1);
+    }
+    for(int i=0;i<tamanho;i++){
+        printf("Digite a nota[%i]", i+1);
+        scanf("%f", &nota[i]);
+    }
+    for(int i=0;i<tamanho;i++){
+        for(int j=0;j<tamanho;j++){
+            if(nota[i]>nota[j]){
+                int aux=nota[i];
+                nota[i]=nota[j];
+                nota[j]=aux;
+            }
+        }
+    }
+    for(int i=0;i<tamanho;i++){
+        soma=soma+nota[i];
+    }
+    for(int i=0;i<tamanho;i++){
+        printf("\n%.2f", nota[i]);
+    }
+    media=soma/tamanho;
+    printf("\nSoma das Notas:\t%.2f", soma);
+    printf("\nMedia das Notas: %.2f", media);
+    return 0;
+}
