@@ -1,0 +1,41 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+struct cadastrocarros
+{
+    char marca[31];
+    char placa[10];
+    char proprietario[31];
+
+} cadastro[3];
+
+void ler();
+
+int main()
+{
+
+    for(int i=0; i<3; i++)
+    {
+        printf("Digite a Marca/Modelo do veiculo da posicao[%i]\n", i+1);
+        gets(cadastro[i].marca);
+        fflush(stdin);
+        printf("Digite a Placa do Veiculo da posicao[%i]:\n", i+1);
+        gets(cadastro[i].placa);
+        fflush(stdin);
+        printf("Digite o nome do Proprietario do Veiculo da posicao[%i]:\n", i+1);
+        gets(cadastro[i].proprietario);
+        fflush(stdin);
+    }
+    ler();
+    return 0;
+}
+
+void ler()
+{
+    printf("\n\n|   Marca e Modelo   |   Placa do Veiculo   |   Nome do Proprietario   |\n");
+    for(int i=0; i<3; i++)
+    {
+        printf("|   %s   |   %s   |   %s   |\n",cadastro[i].marca,cadastro[i].placa,cadastro[i].proprietario);
+    }
+}

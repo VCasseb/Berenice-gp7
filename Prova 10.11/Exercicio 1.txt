@@ -1,0 +1,32 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main()
+{
+    int i,j; //Contadores de repetições
+    int soma=0; //Realiza a Soma da diagonal principal
+    int matriz[3][3] = { {40,20,10},{20,50,80},{0,30,60} };
+//Exercicio A
+    for( i=0; i<3; i++)
+    {
+        printf("\n");
+        for( j=0; j<3; j++)
+        {
+            printf("[%i]\t",matriz[i][j]);
+        }
+    }
+
+//Exercicio B
+    for(i=0; i<3; i++)
+    {
+        for(j=0; j<3; j++)
+        {
+            if(i==j)
+            {
+                soma=soma+matriz[i][j]; //Realiza a soma da diagonal
+            }
+        }
+    }
+    printf("\n\nSoma da Diagonal:\n%i",soma);
+    return 0;
+}
