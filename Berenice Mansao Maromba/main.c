@@ -131,15 +131,21 @@ int main()
 
                 case 3:
                     //finalizar atualizar
-                    printf("Digite o valor");
-                    scanf("%d",&valor);
-                    removido = buscar(&lista,valor);
-                    if(removido)
-                        printf("Valor encontrado: %d",removido->valor);
-                    else
-                        printf("Nao encontrado");
+                    printf("O que deseja atualizar?\n1 - Codigo\n2 - Nome\n3 - Preco\n4 - Quantidade\n---> ");
+                    scanf("%d",&opc);
 
+                    switch(opc){
+
+                case 1:
+                   printf("Digite o valor");
+                   scanf("%d",&valor);
+                   //removido = editar(&lista,valor);
+                   if(removido)
+                   printf("Valor encontrado: %d",removido->valor);
+                   else
+                        printf("Nao encontrado");
                     break;
+                    }
 
                 case 4:
                     printf("Digite o valor");
@@ -201,6 +207,7 @@ No* buscar(Lista *lista, int num)
     aux = lista->inicio;
     while(aux && aux->valor != num)
         aux = aux->proximo;
+
     if(aux)
         no = aux;
     return no;
