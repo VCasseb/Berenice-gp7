@@ -3,7 +3,10 @@
 
 typedef struct no
 {
-    int valor;
+    float preco;
+    char nome[30];
+    int quantidade;
+    long int valor; //codigo
     struct no *proximo;
 } No;
 
@@ -14,7 +17,7 @@ typedef struct
 } Lista;
 
 void criar_lista(Lista *lista);
-void inserir_ini(Lista *lista,int num);
+void inserir_ini(Lista *lista,int num, int nomes[30], int pc, int qtds);
 /*
 void inserir_fim(Lista*lista,int num)
 {
@@ -75,7 +78,11 @@ int main()
 {
 
 
-    int opc,opc_2,valor,ant;
+    int opc,opc_2,ant;
+    int valor; //codigo
+    int quantidade;
+    char nm[30];
+    float preco;
 
     //No *lista = NULL;
     Lista lista;
@@ -106,9 +113,20 @@ int main()
                     break;
 
                 case 2:
-                    printf("Digite o valor ");
+                    printf("Digite o codigo: ");
                     scanf("%d",&valor);
-                    inserir_ini(&lista,valor);
+
+                    printf("Digite o nome: ");
+                    scanf("%c",&nm[30]);
+                    getchar();
+
+                    printf("Digite o preco: ");
+                    scanf("%f",&preco);
+
+                    printf("Digite a qtd: ");
+                    scanf("%d",&quantidade);
+
+                    inserir_ini(&lista,valor,nm[30],preco,quantidade);
                     break;
 
                 case 3:
@@ -166,6 +184,10 @@ void imprimir(Lista lista)
     while(no)
     {
         printf("%d ", no->valor);
+        printf("%c ", no->nome);
+        printf("%f ", no->preco);
+        printf("%d ", no->quantidade);
+        printf("\n");
         no = no->proximo;
     }
     printf("\n\n");
@@ -221,13 +243,16 @@ void criar_lista(Lista *lista)
     lista->tam = 0;
 }
 
-void inserir_ini(Lista *lista,int num)
+void inserir_ini(Lista *lista,int num, int nomes[30], int pc, int qtds)
 {
     No *novo = malloc(sizeof(No));
 
     if(novo)
     {
         novo->valor = num;
+        novo->nome[30] = nomes;
+        novo->preco = pc;
+        novo->quantidade = qtds;
         novo->proximo = lista->inicio;
         lista->inicio = novo;
         lista->tam++;

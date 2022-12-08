@@ -193,3 +193,19 @@
 	"source.h"
 	<string.h>
 
+1668086904 source:c:\users\vini\desktop\berenice-gp7\berenice_curada\calculo.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"source.h"
+	<string.h>
+
+1668086904 c:\users\vini\desktop\berenice-gp7\berenice_curada\source.h
+
+1668086904 source:c:\users\vini\desktop\berenice-gp7\berenice_curada\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"source.h"
+
