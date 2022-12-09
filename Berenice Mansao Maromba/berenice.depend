@@ -1,5 +1,6 @@
 # depslib dependency file v1.0
-1670507315 source:c:\users\vini\desktop\berenice-gp7\berenice mansao maromba\main.c
+1670597039 source:c:\users\vini\desktop\berenice-gp7\berenice mansao maromba\main.c
 	<stdio.h>
 	<stdlib.h>
+	<string.h>
 

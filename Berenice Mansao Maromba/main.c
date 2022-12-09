@@ -1,10 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 typedef struct no
 {
     float preco;
     char nome[30];
+    char *string;
     int quantidade;
     long int valor; //codigo
     struct no *proximo;
@@ -17,59 +19,12 @@ typedef struct
 } Lista;
 
 void criar_lista(Lista *lista);
-void inserir_ini(Lista *lista,int num, int nomes[30], int pc, int qtds);
-/*
-void inserir_fim(Lista*lista,int num)
-{
-    No *aux, *novo = malloc(sizeof(No));
+void inserir_ini(Lista *lista,int num, char nomes[30], int pc, int qtds);
 
-    if(novo)
-    {
-        novo->valor = num;
-        novo->proximo = NULL;
-
-        //primeiro?
-        if(lista->inicio == NULL)
-            lista->inicio = novo;
-        else
-        {
-            aux = lista->inicio;
-            while(aux->proximo)
-                aux = aux->proximo;
-            aux->proximo=novo;
-        }
-        lista->tam++;
-    }
-    else
-        printf("Erro ao alocar memoria");
-}
-
-void inserir_meio(Lista *lista, int num, int ant)
-{
-    No *aux, *novo = malloc(sizeof(No));
-
-    if(novo)
-    {
-        novo->valor = num;
-        if(lista->inicio == NULL)
-        {
-            novo->proximo = NULL;
-            lista->inicio = novo;
-        }
-        else
-        {
-            aux = lista->inicio;
-            while(aux->valor != ant && aux->proximo)
-                aux = aux->proximo;
-            novo->proximo = aux->proximo;
-            aux->proximo = novo;
-        }
-        lista->tam++;
-    }
-    else
-        printf("Erro ao alocar memoria");
-}
-*/
+No *editar_char(Lista *lista, int num);
+No *editar_preco(Lista *lista, int num);
+No *editar_qtd(Lista *lista, int num);
+No *editar_cod(Lista *lista, int num);
 No *remover(Lista *lista, int num);
 No* buscar(Lista *lista, int num);
 void imprimir(Lista lista);
@@ -117,8 +72,8 @@ int main()
                     scanf("%d",&valor);
 
                     printf("Digite o nome: ");
-                    scanf("%c",&nm[30]);
-                    getchar();
+                    setbuf(stdin,NULL);
+                    gets(nm);
 
                     printf("Digite o preco: ");
                     scanf("%f",&preco);
@@ -126,7 +81,7 @@ int main()
                     printf("Digite a qtd: ");
                     scanf("%d",&quantidade);
 
-                    inserir_ini(&lista,valor,nm[30],preco,quantidade);
+                    inserir_ini(&lista,valor,nm,preco,quantidade);
                     break;
 
                 case 3:
@@ -134,19 +89,42 @@ int main()
                     printf("O que deseja atualizar?\n1 - Codigo\n2 - Nome\n3 - Preco\n4 - Quantidade\n---> ");
                     scanf("%d",&opc);
 
-                    switch(opc){
+                    switch(opc)
+                    {
 
-                case 1:
-                   printf("Digite o valor");
-                   scanf("%d",&valor);
-                   //removido = editar(&lista,valor);
-                   if(removido)
-                   printf("Valor encontrado: %d",removido->valor);
-                   else
-                        printf("Nao encontrado");
+                    case 1:
+                        printf("Digite o item desejado: ");
+                        scanf("%d",&valor);
+
+                        editar_cod(&lista,valor);
+                    break;
+
+                    case 2:
+                        printf("Digite o item desejado: ");
+                        scanf("%d",&valor);
+
+                        editar_char(&lista,valor);
+                        break;
+
+                    case 3:
+                        printf("Digite o item desejado: ");
+                        scanf("%d",&valor);
+
+                        editar_preco(&lista,valor);
+                        break;
+
+                    case 4:
+                        printf("Digite o item desejado: ");
+                        scanf("%d",&valor);
+
+                        editar_qtd(&lista,valor);
+                    break;
+
+
+                default:
                     break;
                     }
-
+                break;
                 case 4:
                     printf("Digite o valor");
                     scanf("%d",&valor);
@@ -155,7 +133,8 @@ int main()
                     {
                         printf("Elemento Removido %d",removido->valor);
                         free(removido);
-                    }else
+                    }
+                    else
                         printf("Item n existe");
                     break;
 
@@ -190,7 +169,7 @@ void imprimir(Lista lista)
     while(no)
     {
         printf("%d ", no->valor);
-        printf("%c ", no->nome);
+        printf("%s ", no->nome);
         printf("%f ", no->preco);
         printf("%d ", no->quantidade);
         printf("\n");
@@ -207,9 +186,9 @@ No* buscar(Lista *lista, int num)
     aux = lista->inicio;
     while(aux && aux->valor != num)
         aux = aux->proximo;
-
     if(aux)
         no = aux;
+
     return no;
 }
 
@@ -250,14 +229,14 @@ void criar_lista(Lista *lista)
     lista->tam = 0;
 }
 
-void inserir_ini(Lista *lista,int num, int nomes[30], int pc, int qtds)
+void inserir_ini(Lista *lista,int num, char nomes[30], int pc, int qtds)
 {
     No *novo = malloc(sizeof(No));
 
     if(novo)
     {
         novo->valor = num;
-        novo->nome[30] = nomes;
+        strcpy(novo->nome, nomes);
         novo->preco = pc;
         novo->quantidade = qtds;
         novo->proximo = lista->inicio;
@@ -267,3 +246,130 @@ void inserir_ini(Lista *lista,int num, int nomes[30], int pc, int qtds)
     else
         printf("Erro ao alocar memoria");
 }
+
+No *editar_cod(Lista *lista, int num)
+{
+    int alterar;
+
+    printf("Digite o valor desejado: ");
+    scanf("%d",&alterar);
+
+    No *aux,*remover = NULL;
+
+    if(lista->inicio)
+    {
+        //Achar primeiro da lista OK
+        if(lista->inicio->valor == num)
+        {
+            lista->inicio->valor =  alterar;
+        }
+        else
+        {
+            //Achar proximo da Lista OK
+            aux = lista->inicio;
+            while(aux->proximo && aux->proximo->valor != num)
+                aux = aux->proximo;
+            if(aux->proximo)
+            {
+               aux->proximo->valor = alterar;
+            }
+        }
+    }
+}
+
+No *editar_qtd(Lista *lista, int num)
+{
+    int alterar;
+
+    printf("Digite o valor desejado: ");
+    scanf("%d",&alterar);
+
+    No *aux,*remover = NULL;
+
+    if(lista->inicio)
+    {
+        //Achar primeiro da lista OK
+        if(lista->inicio->valor == num)
+        {
+            lista->inicio->quantidade =  alterar;
+        }
+        else
+        {
+            //Achar proximo da Lista OK
+            aux = lista->inicio;
+            while(aux->proximo && aux->proximo->valor != num)
+                aux = aux->proximo;
+            if(aux->proximo)
+            {
+               aux->proximo->quantidade = alterar;
+            }
+        }
+    }
+}
+
+No *editar_preco(Lista *lista, int num)
+{
+    float alterar;
+
+    printf("Digite o valor desejado: ");
+    scanf("%f",&alterar);
+
+    No *aux,*remover = NULL;
+
+    if(lista->inicio)
+    {
+        //Achar primeiro da lista OK
+        if(lista->inicio->valor == num)
+        {
+            lista->inicio->preco =  alterar;
+        }
+        else
+        {
+            //Achar proximo da Lista OK
+            aux = lista->inicio;
+            while(aux->proximo && aux->proximo->valor != num)
+                aux = aux->proximo;
+            if(aux->proximo)
+            {
+               aux->proximo->preco = alterar;
+            }
+        }
+    }
+}
+
+No *editar_char(Lista *lista, int num)
+{
+    char alterar[30];
+
+    printf("Digite o valor desejado: ");
+    setbuf(stdin,NULL);
+    gets(alterar);
+
+    No *aux,*remover = NULL;
+
+    if(lista->inicio)
+    {
+        //Achar primeiro da lista OK
+        if(lista->inicio->valor == num)
+        {
+
+            strcpy(lista->inicio->nome, alterar);
+        }
+        else
+        {
+            //Achar proximo da Lista OK
+            aux = lista->inicio;
+            while(aux->proximo && aux->proximo->valor != num)
+                aux = aux->proximo;
+            if(aux->proximo)
+            {
+               strcpy(aux->proximo->nome, alterar);
+            }
+        }
+    }
+}
+
+
+
+
+
