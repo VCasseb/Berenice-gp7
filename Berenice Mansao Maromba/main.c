@@ -9,6 +9,12 @@ typedef struct no
     char *string;
     int quantidade;
     long int valor; //codigo
+
+    float preco_cp;
+    char nome_cp[30];
+    int qtd_cp;
+    long int valor_cp;
+    float venda;
     struct no *proximo;
 } No;
 
@@ -17,10 +23,11 @@ typedef struct
     No *inicio;
     int tam;
 } Lista;
-
+void cupom(Lista lista);
 void criar_lista(Lista *lista);
 void inserir_ini(Lista *lista,int num, char nomes[30], int pc, int qtds);
-
+int imprimir_estoque(Lista lista);
+No* venda(Lista *lista, int num);
 No *editar_char(Lista *lista, int num);
 No *editar_preco(Lista *lista, int num);
 No *editar_qtd(Lista *lista, int num);
@@ -38,11 +45,13 @@ int main()
     int quantidade;
     char nm[30];
     float preco;
+    int soma_estoque;
 
     //No *lista = NULL;
     Lista lista;
 
     No *removido;
+    No *aux;
 
     criar_lista(&lista);
 
@@ -154,12 +163,118 @@ int main()
             while(opc_2 != 0);
             break;
 
-            //case 2 VENDAS
+                case 2:
+                    do{
+                    soma_estoque = imprimir_estoque(lista);
+                    if(soma_estoque > 0){
+                    printf("\n\nDigite o codigo do item desejado para a venda\n---> ");
+                    scanf("%d",&valor);
+                    venda(&lista,valor);
+                    }else{
+                        printf("Nao ha estoque suficiente para vender!");
+                        break;
+                    }
+                    printf("\nDeseja continuar vendendo?\n---> ");
+                    scanf("%d",&opc);
+                    }while(opc != 0);
+
+                    //CUPOM FISCAL
+                    cupom(lista);
+                    system("pause");
+                    opc = 1;
+                    break;
         }
     }
     while(opc != 0);
 
     return 0;
+}
+
+No* venda(Lista *lista, int num)
+{
+    No *aux, *no = NULL;
+
+    float preco,total,subtotal,quant;
+    char nomes[30];
+    int quantidade,opc;
+    long int valor; //codigo
+
+    float preco_cu;
+
+    aux = lista->inicio;
+    while(aux && aux->valor != num)
+        aux = aux->proximo;
+        if(aux->valor == num){
+
+            preco = aux->preco;
+            strcpy(nomes,aux->nome);
+            quantidade = aux->quantidade;
+            valor = aux->valor;
+
+
+
+        }
+        printf("\npreco %f",preco);
+        printf("\nnome %s",nomes);
+        printf("\nqtd %d",quantidade);
+        printf("\ncod %d\n",valor);
+
+        printf("Digite a quantidade: ");
+        scanf("%f",&quant);
+
+        if(quant <=0  || quant > aux->quantidade){
+            printf("Quantidade invalida ou insuficiente!");
+        }
+        //fazer condicao para ver se quantidade eh valida
+        //subtrair quantidade desejada a quantidade do estoque real
+
+        if(quant >0  && quant <= aux->quantidade){
+
+
+        //passar valores para struct CUPOM
+        aux->quantidade = aux->quantidade - quant; //Subtrair do estoque real
+
+            aux->preco_cp = preco;
+            strcpy(aux->nome_cp, nomes);
+            aux->qtd_cp = aux->quantidade;
+            aux->valor_cp = valor;
+
+            aux->venda = quant*preco;
+        printf("total %f",aux->venda);
+
+        printf("preco cu %f",aux->preco_cp);
+        printf("preco cu %s",aux->nome_cp);
+        printf("preco cu %d",aux->qtd_cp);
+        printf("preco cu %d",aux->valor_cp);
+
+
+        system("pause");
+
+        printf("estoque atual: %d",aux->quantidade);
+        system("pause");
+    if(aux)
+        no = aux;
+        }
+
+    return no;
+}
+
+void cupom(Lista lista)
+{
+    No *no = lista.inicio;
+    printf("\nLista Tam %d\n",lista.tam);
+    while(no)
+    {
+        printf("%d ", no->valor_cp);
+        printf("%s ", no->nome_cp);
+        printf("%f ", no->preco_cp);
+        printf("%d ", no->qtd_cp);
+        printf("%f ", no->venda);
+        printf("\n");
+        no = no->proximo;
+    }
+    printf("\n\n");
+
 }
 
 void imprimir(Lista lista)
@@ -177,6 +292,29 @@ void imprimir(Lista lista)
     }
     printf("\n\n");
 
+}
+
+int imprimir_estoque(Lista lista)
+{
+    int soma;
+
+    No *no = lista.inicio;
+    printf("\nLista Tam %d\n",lista.tam);
+    while(no)
+    {
+        if(no->quantidade > 0){
+        printf("%d ", no->valor);
+        printf("%s ", no->nome);
+        printf("%f ", no->preco);
+        printf("%d ", no->quantidade);
+        printf("\n");
+        soma += no->quantidade;
+        }
+        no = no->proximo;
+    }
+    printf("\n\n");
+
+    return soma;
 }
 
 No* buscar(Lista *lista, int num)
