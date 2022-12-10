@@ -5,13 +5,13 @@
 typedef struct no
 {
     float preco;
-    char nome[30];
+    char nome[26];
     char *string;
     int quantidade;
     long int valor; //codigo
 
     float preco_cp;
-    char nome_cp[30];
+    char nome_cp[26];
     int qtd_cp;
     long int valor_cp;
     float venda;
@@ -27,7 +27,7 @@ typedef struct
 int imprimir_existente(Lista lista, int num);
 void cupom(Lista lista);
 void criar_lista(Lista *lista);
-void inserir_ini(Lista *lista,int num, char nomes[30], int pc, int qtds);
+void inserir_ini(Lista *lista,int num, char nomes[30], float pc, int qtds);
 int imprimir_estoque(Lista lista);
 No* venda(Lista *lista, int num);
 No *editar_char(Lista *lista, int num);
@@ -42,11 +42,11 @@ int main()
 {
 
 
-    int opc,opc_2,ant, qtd_usuario=0,i,j=1;
+    int opc,opc_2,ant, qtd_usuario=0,i;
     int receber=0;
     int valor; //codigo
     int quantidade;
-    char nm[30];
+    char nm[26];
     float preco;
     int soma_estoque;
 
@@ -84,79 +84,87 @@ int main()
                     scanf("%d",&qtd_usuario);
 
                     for(i=0;qtd_usuario>i;i++){
-                    printf("Digite o codigo %d: ",j);
-                    scanf("%d",&valor);
-                    receber = imprimir_existente(lista, valor);
-                    if(receber > 0){
-                        printf("Codigo Existente!");
-                        system("pause");
-                        break;
-                    }
+                        printf("[%d]Digite o codigo: ",i+1);
+                        scanf("%d",&valor);
+                        receber = imprimir_existente(lista, valor);
+                        if(receber > 0){
+                            printf("Codigo Existente!");
+                            system("pause");
+                            break;
+                        }
 
-                    printf("Digite o nome: %d",j);
-                    setbuf(stdin,NULL);
-                    gets(nm);
+                        printf("[%d]Digite o nome: ",i+1);
+                        setbuf(stdin,NULL);
+                        gets(nm);
 
-                    printf("Digite o preco: %d",j);
-                    scanf("%f",&preco);
-                    if(preco <=0){
-                        printf("Valor incorreto!");
-                        break;
-                    }
+                        printf("[%d]Digite o preco: ",i+1);
+                        scanf("%f",&preco);
+                        if(preco <=0){
+                            printf("Valor incorreto!");
+                            break;
+                        }
 
-                    printf("Digite a qtd: %d",j);
-                    scanf("%d",&quantidade);
-                    if(quantidade <=0){
-                        printf("Valor incorreto!");
-                        break;
-                    }
+                        printf("[%d]Digite a qtd: ",i+1);
+                        scanf("%d",&quantidade);
+                        if(quantidade <=0){
+                            printf("Valor incorreto!");
+                            break;
+                        }
 
-                    inserir_ini(&lista,valor,nm,preco,quantidade);
-                    j++;
+                        inserir_ini(&lista,valor,nm,preco,quantidade);
                     }
                     break;
 
                 case 3:
                     //finalizar atualizar
-                    printf("O que deseja atualizar?\n1 - Codigo\n2 - Nome\n3 - Preco\n4 - Quantidade\n---> ");
-                    scanf("%d",&opc);
+                    if( altera a condição aqui){
 
-                    switch(opc)
-                    {
-
-                    case 1:
-                        printf("Digite o item desejado: ");
+                        do{
+                        imprimir(lista);
+                        printf("Digite o codigo do produto que deseja atualizar: ");
                         scanf("%d",&valor);
+                        int aux = buscar(&lista, valor);
+                        if(valor == aux){
+                            do{
+                                printf("O que deseja atualizar?\n1 - Codigo\n2 - Nome\n3 - Preco\n4 - Quantidade\n---> ");
+                                scanf("%d",&opc);
 
-                        editar_cod(&lista,valor);
-                    break;
+                                switch(opc)
+                                {
 
-                    case 2:
-                        printf("Digite o item desejado: ");
-                        scanf("%d",&valor);
+                                case 1:
+                                    editar_cod(&lista,valor);
+                                break;
 
-                        editar_char(&lista,valor);
-                        break;
+                                case 2:
+                                   editar_char(&lista,valor);
+                                    break;
 
-                    case 3:
-                        printf("Digite o item desejado: ");
-                        scanf("%d",&valor);
+                                case 3:
+                                    editar_preco(&lista,valor);
+                                    break;
 
-                        editar_preco(&lista,valor);
-                        break;
+                                case 4:
+                                    editar_qtd(&lista,valor);
+                                break;
+                                default:
+                                    printf("Opcao Invalida\n");
+                                    opc=99;
+                                }
+                            }while(opc==99);
+                            break;
 
-                    case 4:
-                        printf("Digite o item desejado: ");
-                        scanf("%d",&valor);
+                        }else{
+                            printf("Produto Nao encotrado\n");
 
-                        editar_qtd(&lista,valor);
-                    break;
-
-
-                default:
-                    break;
+                        }
+                        }while(valor ==aux);
+                    }else{
+                        printf("Nao ha produtos cadastrados");
                     }
-                break;
+
+
+                    break;
                 case 4:
                     printf("Digite o valor");
                     scanf("%d",&valor);
@@ -308,7 +316,7 @@ void imprimir(Lista lista)
     {
         printf("%d ", no->valor);
         printf("%s ", no->nome);
-        printf("%f ", no->preco);
+        printf("%.2f ", no->preco);
         printf("%d ", no->quantidade);
         printf("\n");
         no = no->proximo;
@@ -405,7 +413,7 @@ void criar_lista(Lista *lista)
     lista->tam = 0;
 }
 
-void inserir_ini(Lista *lista,int num, char nomes[30], int pc, int qtds)
+void inserir_ini(Lista *lista,int num, char nomes[26], float pc, int qtds)
 {
     int receber;
     No *novo = malloc(sizeof(No));
