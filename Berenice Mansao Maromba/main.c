@@ -173,6 +173,10 @@ int main()
 
                     break;
                 case 4:
+                    if(lista.tam <= 0){
+                        printf("Vazio...\n");
+                        break;
+                    }
                     printf("Digite o valor");
                     scanf("%d",&valor);
                     removido = remover(&lista,valor);
@@ -186,11 +190,17 @@ int main()
                     break;
 
                 case 5:
-                    //salvar a fazer
+                    if(lista.tam <= 0){
+                        printf("Vazio...\n");
+                        break;
+                    }
                     break;
 
                 case 6:
-                    //ler a fazer
+                    if(lista.tam <= 0){
+                        printf("Vazio...\n");
+                        break;
+                    }
                     break;
 
                 default:
