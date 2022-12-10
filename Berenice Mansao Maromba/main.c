@@ -15,6 +15,8 @@ typedef struct no
     int qtd_cp;
     long int valor_cp;
     float venda;
+    float subtt;
+    float tt;
     struct no *proximo;
 } No;
 
@@ -41,7 +43,7 @@ void imprimir(Lista lista);
 int main()
 {
 
-    int opc,opc_2,ant, qtd_usuario=0,i=0,k=0,j=0;
+    int opc,opc_2,ant, qtd_usuario=0,k=0,j=0,c=0,d=0,y=1;
     int receber=0;
     int valor; //codigo
     int quantidade;
@@ -59,7 +61,7 @@ int main()
 
     do
     {
-        printf("( 1 ) - Produtos\n( 2 ) - Vendas\n( 3 ) - Sair");
+        printf("\n( 1 ) - Produtos\n( 2 ) - Vendas\n( 3 ) - Sair");
         scanf("%d",&opc);
 
         switch(opc)
@@ -67,7 +69,7 @@ int main()
         case 1:
             do
             {
-                printf("1 - Exibir\n2 - Cadastrar\n3 - Atualizar\n4 - Excluir\n5 - Salvar\n6 - Ler\n0 - Voltar");
+                printf("\n1 - Exibir\n2 - Cadastrar\n3 - Atualizar\n4 - Excluir\n5 - Salvar\n6 - Ler\n0 - Voltar");
 
                 scanf("%d",&opc_2);
 
@@ -84,12 +86,12 @@ int main()
                     break;
 
                 case 2:
-                    printf("Deseja cadastrar quantos produtos?");
+                    printf("Deseja cadastrar quantos produtos?\n---> ");
                     scanf("%d",&qtd_usuario);
-
-                    for(i=0; qtd_usuario>i; i++)
+                    for(int i=0; i<qtd_usuario; i++)
                     {
-                        printf("[%d]Digite o codigo: ",i+1);
+                        printf("\n");
+                        printf("[%d]Digite o codigo: ",y);
                         scanf("%d",&valor);
                         receber = imprimir_existente(lista, valor);
                         if(receber > 0)
@@ -99,35 +101,36 @@ int main()
                             break;
                         }
 
-                        printf("[%d]Digite o nome: ",i+1);
+                        printf("[%d]Digite o nome: ",y);
                         setbuf(stdin,NULL);
                         gets(nm);
 
                         //validar se eh so espaco
-                        for(i=0; i<26; i++)
+                        for(c=0; c<26; c++)
                         {
-                            if(nm[i] != NULL)
+                            if(nm[c] != NULL)
                             {
                                 k++;
                             }
                         }
 
-                        for(i=0; i<k; i++)
+                        for(d=0; d<k; d++)
                         {
 
-                            if(nm[i] == ' ')
+                            if(nm[d] == ' ')
                             {
                                 j++;
                             }
+
                         }
 
-                        if(j == i)
+                        if(j == c)
                         {
                             printf("\nNome invalido!\n");
                             break;
                         }
 
-                        printf("[%d]Digite o preco: ",i+1);
+                        printf("[%d]Digite o preco: ",y);
                         scanf("%f",&preco);
                         if(preco <=0)
                         {
@@ -135,14 +138,14 @@ int main()
                             break;
                         }
 
-                        printf("[%d]Digite a qtd: ",i+1);
+                        printf("[%d]Digite a qtd: ",y);
                         scanf("%d",&quantidade);
                         if(quantidade <=0)
                         {
                             printf("Valor incorreto!");
                             break;
                         }
-
+                        y++;
                         inserir_ini(&lista,valor,nm,preco,quantidade);
                     }
                     break;
@@ -186,12 +189,9 @@ int main()
                                 case 4:
                                     editar_qtd(&lista,valor);
                                     break;
-                                default:
-                                    printf("Opcao Invalida\n");
-                                    opc=99;
                                 }
                             }
-                            while(opc==99);
+                            while(opc == 'n');
                             break;
 
                         }
@@ -214,16 +214,25 @@ int main()
                         printf("Vazio...\n");
                         break;
                     }
-                    printf("Digite o valor");
+                    imprimir(lista);
+                    printf("Digite o Codigo desejado:\n---> ");
                     scanf("%d",&valor);
+                    printf("\nElemento a ser removido: %d\nDeseja continuar?\n( 1 ) - Sim\n( 2 ) - Nao\n---> ",valor);
+                    scanf("%d",&opc);
+                    if(opc == 1){
                     removido = remover(&lista,valor);
                     if(removido)
                     {
-                        printf("Elemento Removido %d",removido->valor);
+                        printf("\nElemento Removido ( %d )",removido->valor);
                         free(removido);
                     }
                     else
-                        printf("Item n existe");
+                        printf("\nCodigo Inexistente");
+                    }else
+                    {
+                        printf("Operacao Cancelada...");
+                        break;
+                    }
                     break;
 
                 case 5:
@@ -242,7 +251,12 @@ int main()
                     }
                     break;
 
+                case 0:
+                    break;
+
                 default:
+
+                    printf("\nOpc invalida!\n");
                     break;
                 }
 
@@ -256,16 +270,16 @@ int main()
                 soma_estoque = imprimir_estoque(lista);
                 if(soma_estoque > 0)
                 {
-                    printf("\n\nDigite o codigo do item desejado para a venda\n---> ");
+                    printf("Digite o codigo do item desejado para a venda\n---> ");
                     scanf("%d",&valor);
                     venda(&lista,valor);
                 }
                 else
                 {
-                    printf("Nao ha estoque suficiente para vender!");
-                    break;
+                    printf("\nNao ha estoque suficiente para vender!");
                 }
-                printf("\nDeseja continuar vendendo?\n---> ");
+                printf("\nDeseja continuar vendendo?");
+                printf("\n( 1 ) - Sim\n( 0 ) - Nao\n---> ");
                 scanf("%d",&opc);
             }
             while(opc != 0);
@@ -274,6 +288,12 @@ int main()
             cupom(lista);
             system("pause");
             opc = 1;
+            break;
+
+        default:
+            if(opc != 0 ){
+            printf("\nOpc invalida!\n");
+            }
             break;
         }
     }
@@ -286,7 +306,7 @@ No* venda(Lista *lista, int num)
 {
     No *aux, *no = NULL;
 
-    float preco,total,subtotal,quant;
+    float preco,total=0,subtotal=0,quant;
     char nomes[30];
     int quantidade,opc;
     long int valor; //codigo
@@ -298,34 +318,29 @@ No* venda(Lista *lista, int num)
         aux = aux->proximo;
     if(aux->valor == num)
     {
-
         preco = aux->preco;
         strcpy(nomes,aux->nome);
         quantidade = aux->quantidade;
         valor = aux->valor;
-
-
-
     }
-    printf("\npreco %f",preco);
-    printf("\nnome %s",nomes);
-    printf("\nqtd %d",quantidade);
-    printf("\ncod %d\n",valor);
+    printf("\n-----------");
+    printf("\n\nCodigo: %d",valor);
+    printf("\nNome: %s",nomes);
+    printf("\nPreco: %.2f",preco);
+    printf("\nQuantidade: %d\n",quantidade);
+    printf("-----------\n");
 
-    printf("Digite a quantidade: ");
+
+    printf("\nDigite a quantidade\n---> ");
     scanf("%f",&quant);
 
     if(quant <=0  || quant > aux->quantidade)
     {
         printf("Quantidade invalida ou insuficiente!");
     }
-    //fazer condicao para ver se quantidade eh valida
-    //subtrair quantidade desejada a quantidade do estoque real
 
     if(quant >0  && quant <= aux->quantidade)
     {
-
-
         //passar valores para struct CUPOM
         aux->quantidade = aux->quantidade - quant; //Subtrair do estoque real
 
@@ -334,19 +349,13 @@ No* venda(Lista *lista, int num)
         aux->qtd_cp = aux->quantidade;
         aux->valor_cp = valor;
 
-        aux->venda = quant*preco;
-        printf("total %f",aux->venda);
+        subtotal = quant*preco;
+        aux->venda = total+subtotal;
 
-        printf("preco cu %f",aux->preco_cp);
-        printf("preco cu %s",aux->nome_cp);
-        printf("preco cu %d",aux->qtd_cp);
-        printf("preco cu %d",aux->valor_cp);
-
+        printf("\nTotal: %.2f",aux->venda);
 
         system("pause");
 
-        printf("estoque atual: %d",aux->quantidade);
-        system("pause");
         if(aux)
             no = aux;
     }
@@ -374,14 +383,21 @@ void cupom(Lista lista)
 
 void imprimir(Lista lista)
 {
+    printf("\n");
+    printf("-------------");
+    printf("\n");
+
     No *no = lista.inicio;
-    printf("\nLista Tam %d\n",lista.tam);
+    printf("Itens %d\n",lista.tam);
+    printf("-------------\n\n");
     while(no)
     {
-        printf("%d ", no->valor);
-        printf("%s ", no->nome);
-        printf("%.2f ", no->preco);
-        printf("%d ", no->quantidade);
+        printf("Codigo do Produto: %d\n", no->valor);
+        printf("Nome: %s\n", no->nome);
+        printf("Preco: %.2f\n", no->preco);
+        printf("Quantidade: %d\n", no->quantidade);
+        printf("\n");
+        printf("-------------\n");
         printf("\n");
         no = no->proximo;
     }
@@ -395,14 +411,13 @@ int imprimir_existente(Lista lista, int num)
 
     while(no)
     {
-        printf("%d ", no->valor);
+        //printf("%d ", no->valor);
         if(no->valor == num)
         {
             return 1;
         }
         no = no->proximo;
     }
-    printf("\n\n");
 }
 
 int imprimir_estoque(Lista lista)
