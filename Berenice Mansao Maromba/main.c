@@ -41,12 +41,11 @@ void imprimir(Lista lista);
 int main()
 {
 
-
-    int opc,opc_2,ant, qtd_usuario=0,i;
+    int opc,opc_2,ant, qtd_usuario=0,i=0,k=0,j=0;
     int receber=0;
     int valor; //codigo
     int quantidade;
-    char nm[26];
+    char nm[26] = "";
     float preco;
     int soma_estoque;
 
@@ -76,7 +75,8 @@ int main()
                 {
 
                 case 1:
-                    if(lista.tam <= 0){
+                    if(lista.tam <= 0)
+                    {
                         printf("Vazio...\n");
                         break;
                     }
@@ -87,11 +87,13 @@ int main()
                     printf("Deseja cadastrar quantos produtos?");
                     scanf("%d",&qtd_usuario);
 
-                    for(i=0;qtd_usuario>i;i++){
+                    for(i=0; qtd_usuario>i; i++)
+                    {
                         printf("[%d]Digite o codigo: ",i+1);
                         scanf("%d",&valor);
                         receber = imprimir_existente(lista, valor);
-                        if(receber > 0){
+                        if(receber > 0)
+                        {
                             printf("Codigo Existente!");
                             system("pause");
                             break;
@@ -101,16 +103,42 @@ int main()
                         setbuf(stdin,NULL);
                         gets(nm);
 
+                        //validar se eh so espaco
+                        for(i=0; i<26; i++)
+                        {
+                            if(nm[i] != NULL)
+                            {
+                                k++;
+                            }
+                        }
+
+                        for(i=0; i<k; i++)
+                        {
+
+                            if(nm[i] == ' ')
+                            {
+                                j++;
+                            }
+                        }
+
+                        if(j == i)
+                        {
+                            printf("\nNome invalido!\n");
+                            break;
+                        }
+
                         printf("[%d]Digite o preco: ",i+1);
                         scanf("%f",&preco);
-                        if(preco <=0){
+                        if(preco <=0)
+                        {
                             printf("Valor incorreto!");
                             break;
                         }
 
                         printf("[%d]Digite a qtd: ",i+1);
                         scanf("%d",&quantidade);
-                        if(quantidade <=0){
+                        if(quantidade <=0)
+                        {
                             printf("Valor incorreto!");
                             break;
                         }
@@ -121,18 +149,22 @@ int main()
 
                 case 3:
                     //finalizar atualizar
-                    if(lista.tam<=0){
-                            printf("Vazio...\n");
-                            break;
+                    if(lista.tam<=0)
+                    {
+                        printf("Vazio...\n");
+                        break;
                     }
 
-                        do{
+                    do
+                    {
                         imprimir(lista);
                         printf("Digite o codigo do produto que deseja atualizar: ");
                         scanf("%d",&valor);
                         int aux = buscar(&lista, valor);
-                        if(valor == aux){
-                            do{
+                        if(valor == aux)
+                        {
+                            do
+                            {
                                 printf("O que deseja atualizar?\n1 - Codigo\n2 - Nome\n3 - Preco\n4 - Quantidade\n---> ");
                                 scanf("%d",&opc);
 
@@ -141,10 +173,10 @@ int main()
 
                                 case 1:
                                     editar_cod(&lista,valor);
-                                break;
+                                    break;
 
                                 case 2:
-                                   editar_char(&lista,valor);
+                                    editar_char(&lista,valor);
                                     break;
 
                                 case 3:
@@ -153,19 +185,23 @@ int main()
 
                                 case 4:
                                     editar_qtd(&lista,valor);
-                                break;
+                                    break;
                                 default:
                                     printf("Opcao Invalida\n");
                                     opc=99;
                                 }
-                            }while(opc==99);
+                            }
+                            while(opc==99);
                             break;
 
-                        }else{
+                        }
+                        else
+                        {
                             printf("Produto Nao encotrado\n");
 
                         }
-                        }while(valor ==aux);
+                    }
+                    while(valor ==aux);
                     //}else{
                     //    printf("Nao ha produtos cadastrados");
                     //}
@@ -173,7 +209,8 @@ int main()
 
                     break;
                 case 4:
-                    if(lista.tam <= 0){
+                    if(lista.tam <= 0)
+                    {
                         printf("Vazio...\n");
                         break;
                     }
@@ -190,14 +227,16 @@ int main()
                     break;
 
                 case 5:
-                    if(lista.tam <= 0){
+                    if(lista.tam <= 0)
+                    {
                         printf("Vazio...\n");
                         break;
                     }
                     break;
 
                 case 6:
-                    if(lista.tam <= 0){
+                    if(lista.tam <= 0)
+                    {
                         printf("Vazio...\n");
                         break;
                     }
@@ -211,26 +250,31 @@ int main()
             while(opc_2 != 0);
             break;
 
-                case 2:
-                    do{
-                    soma_estoque = imprimir_estoque(lista);
-                    if(soma_estoque > 0){
+        case 2:
+            do
+            {
+                soma_estoque = imprimir_estoque(lista);
+                if(soma_estoque > 0)
+                {
                     printf("\n\nDigite o codigo do item desejado para a venda\n---> ");
                     scanf("%d",&valor);
                     venda(&lista,valor);
-                    }else{
-                        printf("Nao ha estoque suficiente para vender!");
-                        break;
-                    }
-                    printf("\nDeseja continuar vendendo?\n---> ");
-                    scanf("%d",&opc);
-                    }while(opc != 0);
-
-                    //CUPOM FISCAL
-                    cupom(lista);
-                    system("pause");
-                    opc = 1;
+                }
+                else
+                {
+                    printf("Nao ha estoque suficiente para vender!");
                     break;
+                }
+                printf("\nDeseja continuar vendendo?\n---> ");
+                scanf("%d",&opc);
+            }
+            while(opc != 0);
+
+            //CUPOM FISCAL
+            cupom(lista);
+            system("pause");
+            opc = 1;
+            break;
         }
     }
     while(opc != 0);
@@ -252,42 +296,45 @@ No* venda(Lista *lista, int num)
     aux = lista->inicio;
     while(aux && aux->valor != num)
         aux = aux->proximo;
-        if(aux->valor == num){
+    if(aux->valor == num)
+    {
 
-            preco = aux->preco;
-            strcpy(nomes,aux->nome);
-            quantidade = aux->quantidade;
-            valor = aux->valor;
+        preco = aux->preco;
+        strcpy(nomes,aux->nome);
+        quantidade = aux->quantidade;
+        valor = aux->valor;
 
 
 
-        }
-        printf("\npreco %f",preco);
-        printf("\nnome %s",nomes);
-        printf("\nqtd %d",quantidade);
-        printf("\ncod %d\n",valor);
+    }
+    printf("\npreco %f",preco);
+    printf("\nnome %s",nomes);
+    printf("\nqtd %d",quantidade);
+    printf("\ncod %d\n",valor);
 
-        printf("Digite a quantidade: ");
-        scanf("%f",&quant);
+    printf("Digite a quantidade: ");
+    scanf("%f",&quant);
 
-        if(quant <=0  || quant > aux->quantidade){
-            printf("Quantidade invalida ou insuficiente!");
-        }
-        //fazer condicao para ver se quantidade eh valida
-        //subtrair quantidade desejada a quantidade do estoque real
+    if(quant <=0  || quant > aux->quantidade)
+    {
+        printf("Quantidade invalida ou insuficiente!");
+    }
+    //fazer condicao para ver se quantidade eh valida
+    //subtrair quantidade desejada a quantidade do estoque real
 
-        if(quant >0  && quant <= aux->quantidade){
+    if(quant >0  && quant <= aux->quantidade)
+    {
 
 
         //passar valores para struct CUPOM
         aux->quantidade = aux->quantidade - quant; //Subtrair do estoque real
 
-            aux->preco_cp = preco;
-            strcpy(aux->nome_cp, nomes);
-            aux->qtd_cp = aux->quantidade;
-            aux->valor_cp = valor;
+        aux->preco_cp = preco;
+        strcpy(aux->nome_cp, nomes);
+        aux->qtd_cp = aux->quantidade;
+        aux->valor_cp = valor;
 
-            aux->venda = quant*preco;
+        aux->venda = quant*preco;
         printf("total %f",aux->venda);
 
         printf("preco cu %f",aux->preco_cp);
@@ -300,9 +347,9 @@ No* venda(Lista *lista, int num)
 
         printf("estoque atual: %d",aux->quantidade);
         system("pause");
-    if(aux)
-        no = aux;
-        }
+        if(aux)
+            no = aux;
+    }
 
     return no;
 }
@@ -349,7 +396,8 @@ int imprimir_existente(Lista lista, int num)
     while(no)
     {
         printf("%d ", no->valor);
-        if(no->valor == num){
+        if(no->valor == num)
+        {
             return 1;
         }
         no = no->proximo;
@@ -365,13 +413,14 @@ int imprimir_estoque(Lista lista)
     printf("\nLista Tam %d\n",lista.tam);
     while(no)
     {
-        if(no->quantidade > 0){
-        printf("%d ", no->valor);
-        printf("%s ", no->nome);
-        printf("%f ", no->preco);
-        printf("%d ", no->quantidade);
-        printf("\n");
-        soma += no->quantidade;
+        if(no->quantidade > 0)
+        {
+            printf("%d ", no->valor);
+            printf("%s ", no->nome);
+            printf("%f ", no->preco);
+            printf("%d ", no->quantidade);
+            printf("\n");
+            soma += no->quantidade;
         }
         no = no->proximo;
     }
@@ -474,9 +523,10 @@ No *editar_cod(Lista *lista, int num)
             {
                 printf("Digite o valor desejado: ");
                 scanf("%d",&alterar);
-               aux->proximo->valor = alterar;
+                aux->proximo->valor = alterar;
             }
-            else{
+            else
+            {
                 printf("Item nao Existe!");
             }
         }
@@ -508,9 +558,10 @@ No *editar_qtd(Lista *lista, int num)
             {
                 printf("Digite o valor desejado: ");
                 scanf("%d",&alterar);
-               aux->proximo->quantidade = alterar;
+                aux->proximo->quantidade = alterar;
             }
-            else{
+            else
+            {
                 printf("Item nao Existe!");
             }
         }
@@ -542,9 +593,10 @@ No *editar_preco(Lista *lista, int num)
             {
                 printf("Digite o valor desejado: ");
                 scanf("%f",&alterar);
-               aux->proximo->preco = alterar;
+                aux->proximo->preco = alterar;
             }
-            else{
+            else
+            {
                 printf("Item nao Existe!");
             }
         }
@@ -578,9 +630,10 @@ No *editar_char(Lista *lista, int num)
                 printf("Digite o valor desejado: ");
                 setbuf(stdin,NULL);
                 gets(alterar);
-               strcpy(aux->proximo->nome, alterar);
+                strcpy(aux->proximo->nome, alterar);
             }
-            else{
+            else
+            {
                 printf("Item nao Existe!");
             }
         }
