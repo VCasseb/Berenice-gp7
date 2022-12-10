@@ -76,6 +76,10 @@ int main()
                 {
 
                 case 1:
+                    if(lista.tam <= 0){
+                        printf("Vazio...\n");
+                        break;
+                    }
                     imprimir(lista);
                     break;
 
@@ -117,7 +121,10 @@ int main()
 
                 case 3:
                     //finalizar atualizar
-                    if( altera a condição aqui){
+                    if(lista.tam<=0){
+                            printf("Vazio...\n");
+                            break;
+                    }
 
                         do{
                         imprimir(lista);
@@ -159,9 +166,9 @@ int main()
 
                         }
                         }while(valor ==aux);
-                    }else{
-                        printf("Nao ha produtos cadastrados");
-                    }
+                    //}else{
+                    //    printf("Nao ha produtos cadastrados");
+                    //}
 
 
                     break;
