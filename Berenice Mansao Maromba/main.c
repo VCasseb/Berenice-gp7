@@ -123,8 +123,7 @@ int main()
                             }
 
                         }
-
-                        if(j == c)
+                        if(j == k)
                         {
                             printf("\nNome invalido!\n");
                             break;

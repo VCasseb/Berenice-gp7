@@ -1,0 +1,30 @@
+# depslib dependency file v1.0
+1670790211 source:c:\users\vini\desktop\berenice-gp7\berenice mansao maromba\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1670793949 source:c:\users\vini\desktop\berenice mansao maromba\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1670686077 source:d:\usuario\documentos\github\berenice-gp7\berenice mansao maromba\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1670794894 source:c:\users\vini\desktop\berenice mansao maromba - copia\calculos.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"header.h"
+
+1670795004 c:\users\vini\desktop\berenice mansao maromba - copia\header.h
+
+1670794997 source:c:\users\vini\desktop\berenice mansao maromba - copia\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"header.h"
+
