@@ -358,18 +358,18 @@ int salvar_txt(Lista lista)
 
     No *no = lista.inicio;
 
-    if(no->qtd_venda > 100)
+    while(no)
+    {
+            if(no->qtd_venda > 100)
     {
         no->qtd_venda = 0;
     }
 
-    while(no)
-    {
-        fprintf(fp,"%ld ", no->valor);
-        fprintf(fp,"\n%s ", no->nome);
-        fprintf(fp,"\n%f ", no->preco);
-        fprintf(fp,"\n%d ", no->quantidade);
-        fprintf(fp,"\n%d ", no->qtd_venda);
+        fprintf(fp,"%ld", no->valor);
+        fprintf(fp,"\n%s", no->nome);
+        fprintf(fp,"\n%f", no->preco);
+        fprintf(fp,"\n%d", no->quantidade);
+        fprintf(fp,"\n%d\n", no->qtd_venda);
         no = no->proximo;
     }
     fclose(fp);

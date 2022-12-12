@@ -10,11 +10,19 @@ int main()
     float total = 0;
     int total_aux=0;
     int receber=0;
-    int valor; //codigo
+    long int valor; //codigo
     int quantidade;
     char nm[26] = "";
     float preco;
+    int l=0;
     int soma_estoque;
+
+    FILE *fp;
+
+    long int fvalor;
+    int fqtd, fqtd_venda;
+    float fpreco;
+    char fnome[26];
 
     Lista lista;
 
@@ -55,7 +63,7 @@ int main()
                     {
                         printf("\n");
                         printf("[%d]Digite o codigo: ",y);
-                        scanf("%d",&valor);
+                        scanf("%ld",&valor);
                         receber = imprimir_existente(lista, valor);
                         if(receber > 0)
                         {
@@ -207,6 +215,25 @@ int main()
                     break;
 
                 case 6:
+                    fp = fopen("stock.txt","r");
+
+                    if(fp == NULL)
+                    {
+                        printf("Erro na abertura do arquivo");
+                        return 1;
+                    }
+
+                    No *no = lista.inicio;
+
+                    printf("Vai ler quantos codigos?");
+                    scanf("%d",&l);
+                    for(int i=0;i<l;i++){ //DEIXAR DINAMICO
+                    fscanf(fp,"%ld\n%s\n%f\n%d\n%d\n",&fvalor,&fnome,&fpreco,&fqtd,&fqtd_venda);
+                    printf("cod %ld\n nome %s\npreco %f\n qtd %d\n",fvalor,fnome,fpreco,fqtd,fqtd_venda);
+                    inserir_ini(&lista,fvalor,fnome,fpreco,fqtd);
+                    }
+
+                    fclose(fp);
                     if(lista.tam <= 0)
                     {
                         printf("Vazio...\n");
@@ -348,9 +375,7 @@ int main()
 
             if(opc_2 == 2)
             {
-
                 relatorio(lista);
-
             }
             if(opc_2 == 0)
             {
