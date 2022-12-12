@@ -12,7 +12,6 @@ float vendas(Lista *lista, int num, float total_tt)
     char nomes[26];
     int quantidade;
     long int valor; //codigo
-    //float preco_cu;
 
     aux = lista->inicio;
     while(aux && aux->valor != num) //rodar todas posicoes ate achar valor do usuario
@@ -414,4 +413,45 @@ void relatorio(Lista lista)
         }
     }
     printf("---------------------------\n\n");
+}
+
+char validar_vazio(char nm[26])
+{
+
+    int k=0,j=0,c=0,d=0,y=1,l=0;
+
+    do
+    {
+        printf("[%d]Digite o nome: ",y);
+        setbuf(stdin,NULL); //limpar buf
+        gets(nm);
+
+        //validar se eh so espaco
+        for(c=0; c<26; c++)
+        {
+            if(nm[c] != NULL)
+            {
+                k++;
+            }
+        }
+
+        for(d=0; d<k; d++)
+        {
+
+            if(nm[d] == ' ')
+            {
+                j++;
+            }
+
+        }
+        if(j == k)
+        {
+            printf("\nNome invalido!\n"); //Caso seja apenas espaco
+        }
+        else
+            break;
+    }
+    while(j == k);
+
+    return nm;
 }

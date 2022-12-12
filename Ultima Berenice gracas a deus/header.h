@@ -8,6 +8,7 @@ typedef struct no
     char nome[26];
     int quantidade;
     long int valor; //codigo
+    int estoque_ant;
 
     //usado para Vendas
     float preco_cp;
@@ -28,6 +29,7 @@ typedef struct
 } Lista;
 
 //funcoes
+char validar_vazio(char sstring[26]);
 void relatorio(Lista lista);
 int salvar_txt(Lista lista);
 float vendas(Lista *lista, int num, float total_tt);

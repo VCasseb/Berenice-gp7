@@ -7,7 +7,7 @@ int main()
 {
     long int valor; //codigo
     int opc,opc_2, qtd_usuario=0,parcelas=0;
-    int k=0,j=0,c=0,d=0,y=1,l=0; //Utilizados para validar se o char esta vazio
+    int y=1,l=0; //Utilizados para validar se o char esta vazio
     int total_aux=0,quantidade,soma_estoque;
     int receber=0; //utilizado para validar se o cod existe
     float total = 0,preco;
@@ -71,38 +71,8 @@ int main()
                         }
                         while(receber > 0);
 
-                        do
-                        {
-                            printf("[%d]Digite o nome: ",y);
-                            setbuf(stdin,NULL); //limpar buf
-                            gets(nm);
-
-                            //validar se eh so espaco
-                            for(c=0; c<26; c++)
-                            {
-                                if(nm[c] != NULL)
-                                {
-                                    k++;
-                                }
-                            }
-
-                            for(d=0; d<k; d++)
-                            {
-
-                                if(nm[d] == ' ')
-                                {
-                                    j++;
-                                }
-
-                            }
-                            if(j == k)
-                            {
-                                printf("\nNome invalido!\n"); //Caso seja apenas espaco
-                            }
-                            else
-                                break;
-                        }
-                        while(j == k);
+                        //captar string
+                        validar_vazio(nm);
 
                         do
                         {
