@@ -126,16 +126,17 @@ int imprimir_estoque(Lista lista)
     int soma;
 
     No *no = lista.inicio;
-    printf("\nLista Tam %d\n",lista.tam);
+    printf("\nProdutos com Estoque: %d\n",lista.tam);
+    printf("\n------------\n");
     while(no)
     {
         if(no->quantidade > 0)
         {
-            printf("%ld ", no->valor);
-            printf("%s ", no->nome);
-            printf("%f ", no->preco);
-            printf("%d ", no->quantidade);
-            printf("\n");
+            printf("Codigo: %ld ", no->valor);
+            printf("\nNome: %s ", no->nome);
+            printf("\nPreco: %.2f ", no->preco);
+            printf("\nEstoque: %d ", no->quantidade);
+            printf("\n------------\n");
             soma += no->quantidade;
         }
         no = no->proximo;
@@ -198,7 +199,7 @@ void inserir_ini(Lista *lista,int num, char nomes[26], float pc, int qtds)
         lista->tam++;
     }
     else
-        printf("Erro ao alocar memoria");
+        printf("\nErro ao alocar memoria");
 }
 
 No *editar_cod(Lista *lista, int num)
@@ -212,7 +213,7 @@ No *editar_cod(Lista *lista, int num)
         //Achar primeiro da lista OK
         if(lista->inicio->valor == num)
         {
-            printf("Digite o valor desejado: ");
+            printf("\nDigite o valor desejado: ");
             scanf("%d",&alterar);
             lista->inicio->valor =  alterar;
         }
@@ -224,13 +225,13 @@ No *editar_cod(Lista *lista, int num)
                 aux = aux->proximo;
             if(aux->proximo)
             {
-                printf("Digite o valor desejado: ");
+                printf("\nDigite o valor desejado: ");
                 scanf("%d",&alterar);
                 aux->proximo->valor = alterar;
             }
             else
             {
-                printf("Item nao Existe!");
+                printf("\nItem nao Existe!");
             }
         }
     }
@@ -247,7 +248,7 @@ No *editar_qtd(Lista *lista, int num)
         //Achar primeiro da lista OK
         if(lista->inicio->valor == num)
         {
-            printf("Digite o valor desejado: ");
+            printf("\nDigite o valor desejado: ");
             scanf("%d",&alterar);
             lista->inicio->quantidade =  alterar;
         }
@@ -259,13 +260,13 @@ No *editar_qtd(Lista *lista, int num)
                 aux = aux->proximo;
             if(aux->proximo)
             {
-                printf("Digite o valor desejado: ");
+                printf("\nDigite o valor desejado: ");
                 scanf("%d",&alterar);
                 aux->proximo->quantidade = alterar;
             }
             else
             {
-                printf("Item nao Existe!");
+                printf("\nItem nao Existe!");
             }
         }
     }
@@ -282,7 +283,7 @@ No *editar_preco(Lista *lista, int num)
         //Achar primeiro da lista OK
         if(lista->inicio->valor == num)
         {
-            printf("Digite o valor desejado: ");
+            printf("\nDigite o valor desejado: ");
             scanf("%f",&alterar);
             lista->inicio->preco =  alterar;
         }
@@ -294,13 +295,13 @@ No *editar_preco(Lista *lista, int num)
                 aux = aux->proximo;
             if(aux->proximo)
             {
-                printf("Digite o valor desejado: ");
+                printf("\nDigite o valor desejado: ");
                 scanf("%f",&alterar);
                 aux->proximo->preco = alterar;
             }
             else
             {
-                printf("Item nao Existe!");
+                printf("\nItem nao Existe!");
             }
         }
     }
@@ -317,7 +318,7 @@ No *editar_char(Lista *lista, int num)
         //Achar primeiro da lista OK
         if(lista->inicio->valor == num)
         {
-            printf("Digite o valor desejado: ");
+            printf("\nDigite o valor desejado: ");
             setbuf(stdin,NULL);
             gets(alterar);
             strcpy(lista->inicio->nome, alterar);
@@ -330,14 +331,14 @@ No *editar_char(Lista *lista, int num)
                 aux = aux->proximo;
             if(aux->proximo)
             {
-                printf("Digite o valor desejado: ");
+                printf("\nDigite o valor desejado: ");
                 setbuf(stdin,NULL);
                 gets(alterar);
                 strcpy(aux->proximo->nome, alterar);
             }
             else
             {
-                printf("Item nao Existe!");
+                printf("\nItem nao Existe!\n");
             }
         }
     }

@@ -32,7 +32,7 @@ int main()
 
     do
     {
-        printf("\n( 1 ) - Produtos\n( 2 ) - Vendas\n( 0 ) - Sair");
+        printf("\n( 1 ) - Produtos\n( 2 ) - Vendas\n( 0 ) - Sair\n--->");
         scanf("%d",&opc);
 
         switch(opc)
@@ -40,7 +40,7 @@ int main()
         case 1:
             do
             {
-                printf("\n1 - Exibir\n2 - Cadastrar\n3 - Atualizar\n4 - Excluir\n5 - Salvar\n6 - Ler\n0 - Voltar");
+                printf("\n1 - Exibir\n2 - Cadastrar\n3 - Atualizar\n4 - Excluir\n5 - Salvar\n6 - Ler\n0 - Voltar\n--->");
 
                 scanf("%d",&opc_2);
 
@@ -61,60 +61,65 @@ int main()
                     scanf("%d",&qtd_usuario);
                     for(int i=0; i<qtd_usuario; i++)
                     {
-                        printf("\n");
-                        printf("[%d]Digite o codigo: ",y);
-                        scanf("%ld",&valor);
-                        receber = imprimir_existente(lista, valor);
-                        if(receber > 0)
-                        {
-                            printf("Codigo Existente!");
-                            system("pause");
-                            break;
-                        }
-
-                        printf("[%d]Digite o nome: ",y);
-                        setbuf(stdin,NULL);
-                        gets(nm);
-
-                        //validar se eh so espaco
-                        for(c=0; c<26; c++)
-                        {
-                            if(nm[c] != NULL)
+                        do{
+                            printf("\n");
+                            printf("[%d]Digite o codigo: ",y);
+                            scanf("%ld",&valor);
+                            receber = imprimir_existente(lista, valor);
+                            if(receber > 0)
                             {
-                                k++;
+                                printf("\nCodigo Existente!\n");
                             }
-                        }
+                        }while(receber > 0);
 
-                        for(d=0; d<k; d++)
-                        {
+                        do{
+                            printf("[%d]Digite o nome: ",y);
+                            setbuf(stdin,NULL);
+                            gets(nm);
 
-                            if(nm[d] == ' ')
+                            //validar se eh so espaco
+                            for(c=0; c<26; c++)
                             {
-                                j++;
+                                if(nm[c] != NULL)
+                                {
+                                    k++;
+                                }
                             }
 
-                        }
-                        if(j == k)
-                        {
-                            printf("\nNome invalido!\n");
-                            break;
-                        }
+                            for(d=0; d<k; d++)
+                            {
 
-                        printf("[%d]Digite o preco: ",y);
-                        scanf("%f",&preco);
-                        if(preco <=0)
-                        {
-                            printf("Valor incorreto!");
-                            break;
-                        }
+                                if(nm[d] == ' ')
+                                {
+                                    j++;
+                                }
 
-                        printf("[%d]Digite a qtd: ",y);
-                        scanf("%d",&quantidade);
-                        if(quantidade <=0)
-                        {
-                            printf("Valor incorreto!");
-                            break;
-                        }
+                            }
+                            if(j == k)
+                            {
+                                printf("\nNome invalido!\n");
+                            }
+                            else
+                                break;
+                        }while(j == k);
+
+                        do{
+                            printf("[%d]Digite o preco: ",y);
+                            scanf("%f",&preco);
+                            if(preco <=0)
+                            {
+                                printf("\nValor incorreto!\n");
+                            }
+                        }while(preco <= 0);
+
+                        do{
+                            printf("[%d]Digite a qtd: ",y);
+                            scanf("%d",&quantidade);
+                            if(quantidade <=0)
+                            {
+                                printf("\nValor incorreto!\n");
+                            }
+                        }while(quantidade<=0);
                         y++;
                         inserir_ini(&lista,valor,nm,preco,quantidade);
                     }
@@ -228,9 +233,9 @@ int main()
                     printf("Vai ler quantos codigos?");
                     scanf("%d",&l);
                     for(int i=0;i<l;i++){ //DEIXAR DINAMICO
-                    fscanf(fp,"%ld\n%s\n%f\n%d\n%d\n",&fvalor,&fnome,&fpreco,&fqtd,&fqtd_venda);
-                    printf("cod %ld\n nome %s\npreco %f\n qtd %d\n",fvalor,fnome,fpreco,fqtd,fqtd_venda);
-                    inserir_ini(&lista,fvalor,fnome,fpreco,fqtd);
+                        fscanf(fp,"%ld\n%s\n%f\n%d\n%d\n",&fvalor,&fnome,&fpreco,&fqtd,&fqtd_venda);
+                        printf("cod %ld\n nome %s\npreco %f\n qtd %d\n",fvalor,fnome,fpreco,fqtd,fqtd_venda);
+                        inserir_ini(&lista,fvalor,fnome,fpreco,fqtd);
                     }
 
                     fclose(fp);
@@ -267,7 +272,7 @@ int main()
                     {
                         printf("Digite o codigo do item desejado para a venda\n---> ");
                         scanf("%d",&valor);
-                        total =vendas(&lista,valor,total);
+                        total = vendas(&lista,valor,total);
                     }
                     else
                     {
@@ -338,7 +343,7 @@ int main()
                     {
                         if(parcelas<=0)
                         {
-                            printf("Valor invalido! Digite novamente\n---> ");
+                            printf("\nValor invalido! \nDigite novamente\n---> ");
                             scanf("%d",&parcelas);
                         }
                     }
@@ -367,7 +372,7 @@ int main()
                     break;
 
                 default:
-                    printf("Digite um valor valido!");
+                    printf("\nDigite um valor valido!\n");
                     break;
                 }
                 opc = 1;
