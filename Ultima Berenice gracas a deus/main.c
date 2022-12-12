@@ -5,10 +5,9 @@
 
 int main()
 {
-
-    int opc,opc_2,ant, qtd_usuario=0,k=0,j=0,c=0,d=0,y=1;
+    int opc,opc_2, qtd_usuario=0,k=0,j=0,c=0,d=0,y=1;
     int parcelas=0;
-    int total = 0;
+    float total = 0;
     int total_aux=0;
     int receber=0;
     int valor; //codigo
@@ -17,17 +16,15 @@ int main()
     float preco;
     int soma_estoque;
 
-    //No *lista = NULL;
     Lista lista;
 
     No *removido;
     No *aux;
-
     criar_lista(&lista);
 
     do
     {
-        printf("\n( 1 ) - Produtos\n( 2 ) - Vendas\n( 3 ) - Sair");
+        printf("\n( 1 ) - Produtos\n( 2 ) - Vendas\n( 0 ) - Sair");
         scanf("%d",&opc);
 
         switch(opc)
@@ -113,10 +110,10 @@ int main()
                         y++;
                         inserir_ini(&lista,valor,nm,preco,quantidade);
                     }
+                    y=1;
                     break;
 
                 case 3:
-                    //finalizar atualizar
                     if(lista.tam<=0)
                     {
                         printf("Vazio...\n");
@@ -125,11 +122,13 @@ int main()
 
                     do
                     {
+                        receber = 0;
                         imprimir(lista);
                         printf("Digite o codigo do produto que deseja atualizar: ");
                         scanf("%d",&valor);
-                        int aux = buscar(&lista, valor);
-                        if(valor == aux)
+                        receber = imprimir_existente(lista, valor);
+
+                        if(receber == 1)
                         {
                             do
                             {
@@ -166,11 +165,7 @@ int main()
 
                         }
                     }
-                    while(valor ==aux);
-                    //}else{
-                    //    printf("Nao ha produtos cadastrados");
-                    //}
-
+                    while(valor == aux);
 
                     break;
                 case 4:
@@ -189,7 +184,7 @@ int main()
                         removido = remover(&lista,valor);
                         if(removido)
                         {
-                            printf("\nElemento Removido ( %d )",removido->valor);
+                            printf("\nElemento Removido ( %ld )",removido->valor);
                             free(removido);
                         }
                         else
@@ -203,6 +198,7 @@ int main()
                     break;
 
                 case 5:
+                    salvar_txt(lista);
                     if(lista.tam <= 0)
                     {
                         printf("Vazio...\n");
@@ -232,118 +228,134 @@ int main()
             break;
 
         case 2:
-            do
+            printf("\n1 - Vender\n2 - Relatorio de Vendas\n0 - Voltar");
+            scanf("%d",&opc_2);
+
+            if(opc_2 == 1)
             {
-                soma_estoque = imprimir_estoque(lista);
-                if(soma_estoque > 0)
+                do
                 {
-                    printf("Digite o codigo do item desejado para a venda\n---> ");
-                    scanf("%d",&valor);
-                    total =venda(&lista,valor,total);
-                }
-                else
-                {
-                    printf("\nNao ha estoque suficiente para vender!");
-                }
-                printf("TOTAL AQUI: %d",total);
-                printf("\nDeseja continuar vendendo?");
-                printf("\n( 1 ) - Sim\n( 0 ) - Nao\n---> ");
-                scanf("%d",&opc);
-            }
-            while(opc != 0);
-
-            do
-            {
-                printf("\nComo deseja pagar?\n( 1 ) - A vista\n( 2 ) - Parcelado\n---> ");
-                scanf("%d",&opc);
-
-                if(opc != 1 && opc !=2)
-                    printf("\nDigite uma opc Valida!");
-
-            }
-            while(opc != 1 && opc != 2);
-
-            switch(opc)
-            {
-            case 1:
-                if(total >0 && total <=50)
-                {
-                    total_aux = total*0.05;
-                    total = total - total_aux;
-                    //CUPOM FISCAL
-                    printf("\n-----Cupom Fiscal-----");
-                    cupom(lista);
-                    printf("----------\n");
-                    printf("5%% Desconto\n");
-                    printf("\nTotal ---> %d\n",total);
-                }
-                if(total >50 && total <=100)
-                {
-                    total_aux = total*0.10;
-                    total = total - total_aux;
-                    //CUPOM FISCAL
-                    printf("\n-----Cupom Fiscal-----\n");
-                    cupom(lista);
-                    printf("----------\n");
-                    printf("10%% Desconto\n");
-                    printf("\nTotal ---> %d\n",total);
-                }
-                if(total >=100)
-                {
-                    total_aux = total*0.18;
-                    total = total - total_aux;
-                    //CUPOM FISCAL
-                    printf("\n-----Cupom Fiscal-----");
-                    cupom(lista);
-                    printf("----------\n");
-                    printf("18%% Desconto\n");
-                    printf("\nTotal ---> %d\n",total);
-                }
-                total = 0,total_aux=0;
-                break;
-
-            case 2:
-
-                printf("\nDigite o numero de parcelas\n---> ");
-                scanf("%d",&parcelas);
-
-                while(parcelas <=0)
-                {
-                    if(parcelas<=0)
+                    soma_estoque = imprimir_estoque(lista);
+                    if(soma_estoque > 0)
                     {
-                        printf("Valor invalido! Digite novamente\n---> ");
-                        scanf("%d",&parcelas);
+                        printf("Digite o codigo do item desejado para a venda\n---> ");
+                        scanf("%d",&valor);
+                        total =vendas(&lista,valor,total);
                     }
+                    else
+                    {
+                        printf("\nNao ha estoque suficiente para vender!");
+                    }
+                    printf("\nDeseja continuar vendendo?");
+                    printf("\n( 1 ) - Sim\n( 0 ) - Nao\n---> ");
+                    scanf("%d",&opc);
                 }
-                if(parcelas <=3)
-                {
-                    total = total*1.05;
-                    //CUPOM FISCAL
-                    printf("\n-----Cupom Fiscal-----");
-                    cupom(lista);
-                    printf("----------\n");
-                    printf("3%% juros\n");
-                    printf("\nTotal ---> %d\n",total);
-                }
-                if(parcelas >3)
-                {
-                    total = total*1.08;
-                    //CUPOM FISCAL
-                    printf("\n-----Cupom Fiscal-----");
-                    cupom(lista);
-                    printf("----------\n");
-                    printf("8%% juros\n");
-                    printf("\nTotal ---> %d\n",total);
-                }
-                total = 0,total_aux=0;
+                while(opc != 0);
 
-                break;
+                do
+                {
+                    printf("\nComo deseja pagar?\n( 1 ) - A vista\n( 2 ) - Parcelado\n---> ");
+                    scanf("%d",&opc);
 
-            default:
-                printf("Digite um valor valido!");
+                    if(opc != 1 && opc !=2)
+                        printf("\nDigite uma opc Valida!");
+
+                }
+                while(opc != 1 && opc != 2);
+
+                switch(opc)
+                {
+                case 1:
+                    if(total >0 && total <=50)
+                    {
+                        total_aux = total*0.05;
+                        total = total - total_aux;
+                        //CUPOM FISCAL
+                        printf("\n-----Cupom Fiscal-----");
+                        cupom(lista);
+                        printf("----------\n");
+                        printf("5%% Desconto\n");
+                        printf("\nTotal ---> %.2f\n",total);
+                    }
+                    if(total >50 && total <=100)
+                    {
+                        total_aux = total*0.10;
+                        total = total - total_aux;
+                        //CUPOM FISCAL
+                        printf("\n-----Cupom Fiscal-----\n");
+                        cupom(lista);
+                        printf("----------\n");
+                        printf("10%% Desconto\n");
+                        printf("\nTotal ---> %.2f\n",total);
+                    }
+                    if(total >=100)
+                    {
+                        total_aux = total*0.18;
+                        total = total - total_aux;
+                        //CUPOM FISCAL
+                        printf("\n-----Cupom Fiscal-----");
+                        cupom(lista);
+                        printf("----------\n");
+                        printf("18%% Desconto\n");
+                        printf("\nTotal ---> %.2f\n",total);
+                    }
+                    total = 0,total_aux=0;
+                    break;
+
+                case 2:
+
+                    printf("\nDigite o numero de parcelas\n---> ");
+                    scanf("%d",&parcelas);
+
+                    while(parcelas <=0)
+                    {
+                        if(parcelas<=0)
+                        {
+                            printf("Valor invalido! Digite novamente\n---> ");
+                            scanf("%d",&parcelas);
+                        }
+                    }
+                    if(parcelas <=3)
+                    {
+                        total = total*1.05;
+                        //CUPOM FISCAL
+                        printf("\n-----Cupom Fiscal-----");
+                        cupom(lista);
+                        printf("----------\n");
+                        printf("3%% juros\n");
+                        printf("\nTotal ---> %.2f\n",total);
+                    }
+                    if(parcelas >3)
+                    {
+                        total = total*1.08;
+                        //CUPOM FISCAL
+                        printf("\n-----Cupom Fiscal-----");
+                        cupom(lista);
+                        printf("----------\n");
+                        printf("8%% juros\n");
+                        printf("\nTotal ---> %.2f\n",total);
+                    }
+                    total = 0,total_aux=0;
+
+                    break;
+
+                default:
+                    printf("Digite um valor valido!");
+                    break;
+                }
+                opc = 1;
+            }
+
+            if(opc_2 == 2)
+            {
+
+                relatorio(lista);
+
+            }
+            if(opc_2 == 0)
+            {
                 break;
             }
-            opc = 1;
             break;
 
 

@@ -5,7 +5,6 @@ typedef struct no
 {
     float preco;
     char nome[26];
-    char *string;
     int quantidade;
     long int valor; //codigo
 
@@ -15,6 +14,7 @@ typedef struct no
     long int valor_cp;
     float venda;
     int qtd_venda;
+    int ctg_vendas;
 
     struct no *proximo;
 } No;
@@ -25,6 +25,9 @@ typedef struct
     int tam;
 } Lista;
 
+void relatorio(Lista lista);
+int salvar_txt(Lista lista);
+float vendas(Lista *lista, int num, float total_tt);
 int imprimir_existente(Lista lista, int num);
 void cupom(Lista lista);
 void criar_lista(Lista *lista);
@@ -36,7 +39,6 @@ No *editar_preco(Lista *lista, int num);
 No *editar_qtd(Lista *lista, int num);
 No *editar_cod(Lista *lista, int num);
 No *remover(Lista *lista, int num);
-No* buscar(Lista *lista, int num);
 void imprimir(Lista lista);
 
 #endif // HEADER_H_INCLUDED

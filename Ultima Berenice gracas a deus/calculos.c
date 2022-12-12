@@ -3,16 +3,15 @@
 #include <string.h>
 #include "header.h"
 
-No* venda(Lista *lista, int num, int total_tt)
+float vendas(Lista *lista, int num, float total_tt)
 {
     No *aux, *no = NULL;
 
-    float preco,total=0,subtotal=0,quant;
-    char nomes[30];
-    int quantidade,opc;
+    float preco,subtotal=0,quant;
+    char nomes[26];
+    int quantidade;
     long int valor; //codigo
-
-    float preco_cu;
+    //float preco_cu;
 
     aux = lista->inicio;
     while(aux && aux->valor != num)
@@ -25,7 +24,7 @@ No* venda(Lista *lista, int num, int total_tt)
         valor = aux->valor;
     }
     printf("\n-----------");
-    printf("\n\nCodigo: %d",valor);
+    printf("\n\nCodigo: %ld",valor);
     printf("\nNome: %s",nomes);
     printf("\nPreco: %.2f",preco);
     printf("\nQuantidade: %d\n",quantidade);
@@ -56,6 +55,8 @@ No* venda(Lista *lista, int num, int total_tt)
         subtotal = quant*preco;
         total_tt += subtotal;
 
+
+
         if(aux)
             no = aux;
     }
@@ -69,7 +70,7 @@ void cupom(Lista lista)
     printf("\nItens: %d\n---------\n",lista.tam);
     while(no)
     {
-        printf("\nCodigo: %d ", no->valor_cp);
+        printf("\nCodigo: %ld ", no->valor_cp);
         printf("\nNome:%s ", no->nome_cp);
         printf("\nPreco: %f ", no->preco_cp);
         printf("\nQuantidade: %d ", no->qtd_venda);
@@ -92,7 +93,7 @@ void imprimir(Lista lista)
     printf("-------------\n\n");
     while(no)
     {
-        printf("Codigo do Produto: %d\n", no->valor);
+        printf("Codigo do Produto: %ld\n", no->valor);
         printf("Nome: %s\n", no->nome);
         printf("Preco: %.2f\n", no->preco);
         printf("Quantidade: %d\n", no->quantidade);
@@ -130,7 +131,7 @@ int imprimir_estoque(Lista lista)
     {
         if(no->quantidade > 0)
         {
-            printf("%d ", no->valor);
+            printf("%ld ", no->valor);
             printf("%s ", no->nome);
             printf("%f ", no->preco);
             printf("%d ", no->quantidade);
@@ -144,18 +145,6 @@ int imprimir_estoque(Lista lista)
     return soma;
 }
 
-No* buscar(Lista *lista, int num)
-{
-    No *aux, *no = NULL;
-
-    aux = lista->inicio;
-    while(aux && aux->valor != num)
-        aux = aux->proximo;
-    if(aux)
-        no = aux;
-
-    return no;
-}
 
 No *remover(Lista *lista, int num)
 {
@@ -196,7 +185,6 @@ void criar_lista(Lista *lista)
 
 void inserir_ini(Lista *lista,int num, char nomes[26], float pc, int qtds)
 {
-    int receber;
     No *novo = malloc(sizeof(No));
 
     if(novo)
@@ -217,7 +205,7 @@ No *editar_cod(Lista *lista, int num)
 {
     int alterar;
 
-    No *aux,*remover = NULL;
+    No *aux;
 
     if(lista->inicio)
     {
@@ -252,7 +240,7 @@ No *editar_qtd(Lista *lista, int num)
 {
     int alterar;
 
-    No *aux,*remover = NULL;
+    No *aux;
 
     if(lista->inicio)
     {
@@ -287,7 +275,7 @@ No *editar_preco(Lista *lista, int num)
 {
     float alterar;
 
-    No *aux,*remover = NULL;
+    No *aux;
 
     if(lista->inicio)
     {
@@ -322,7 +310,7 @@ No *editar_char(Lista *lista, int num)
 {
     char alterar[30];
 
-    No *aux,*remover = NULL;
+    No *aux;
 
     if(lista->inicio)
     {
@@ -353,4 +341,60 @@ No *editar_char(Lista *lista, int num)
             }
         }
     }
+}
+
+int salvar_txt(Lista lista)
+{
+
+    FILE *fp;
+
+    fp = fopen("stock.txt","w");
+
+    if(fp == NULL)
+    {
+        printf("Erro na abertura do arquivo");
+        return 1;
+    }
+
+    No *no = lista.inicio;
+
+    if(no->qtd_venda > 100)
+    {
+        no->qtd_venda = 0;
+    }
+
+    while(no)
+    {
+        fprintf(fp,"%ld ", no->valor);
+        fprintf(fp,"\n%s ", no->nome);
+        fprintf(fp,"\n%f ", no->preco);
+        fprintf(fp,"\n%d ", no->quantidade);
+        fprintf(fp,"\n%d ", no->qtd_venda);
+        no = no->proximo;
+    }
+    fclose(fp);
+}
+
+void relatorio(Lista lista)
+{
+    printf("\n\n----- Relatorio de Vendas -----\n");
+
+    No *no = lista.inicio;
+
+    if(no->qtd_venda > 100)
+    {
+        no->qtd_venda = 0;
+    }
+
+    while(no)
+    {
+        printf("\nCodigo: %ld ", no->valor_cp);
+        printf("\nNome: %s ", no->nome_cp);
+        printf("\nPreco: %.2f ", no->preco_cp);
+        printf("\nEstoque Atual: %d ", no->quantidade);
+        printf("\nVendas Efetuadas: %d ", no->qtd_venda);
+        no = no->proximo;
+        printf("\n\n");
+    }
+    printf("---------------------------\n\n");
 }
