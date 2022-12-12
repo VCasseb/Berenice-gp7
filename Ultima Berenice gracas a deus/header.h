@@ -3,11 +3,13 @@
 
 typedef struct no
 {
+    //usado para produtos
     float preco;
     char nome[26];
     int quantidade;
     long int valor; //codigo
 
+    //usado para Vendas
     float preco_cp;
     char nome_cp[26];
     int qtd_cp;
@@ -25,6 +27,7 @@ typedef struct
     int tam;
 } Lista;
 
+//funcoes
 void relatorio(Lista lista);
 int salvar_txt(Lista lista);
 float vendas(Lista *lista, int num, float total_tt);

@@ -5,76 +5,76 @@
 
 int main()
 {
-    int opc,opc_2, qtd_usuario=0,k=0,j=0,c=0,d=0,y=1;
-    int parcelas=0;
-    float total = 0;
-    int total_aux=0;
-    int receber=0;
     long int valor; //codigo
-    int quantidade;
+    int opc,opc_2, qtd_usuario=0,parcelas=0;
+    int k=0,j=0,c=0,d=0,y=1,l=0; //Utilizados para validar se o char esta vazio
+    int total_aux=0,quantidade,soma_estoque;
+    int receber=0; //utilizado para validar se o cod existe
+    float total = 0,preco;
     char nm[26] = "";
-    float preco;
-    int l=0;
-    int soma_estoque;
 
-    FILE *fp;
+    FILE *fp; //declarar ponteiro para arquivo
 
+    //Variaveis para leitura e salvamento do arquivo
     long int fvalor;
     int fqtd, fqtd_venda;
     float fpreco;
     char fnome[26];
 
-    Lista lista;
+    Lista lista; //declaracao struct
 
-    No *removido;
-    No *aux;
-    criar_lista(&lista);
+    No *removido; //Atribui No para ponteiro
+    No *aux; //Atribui No para ponteiro
+    criar_lista(&lista); //Inicializar lista encadeada com null
 
     do
     {
         printf("\n( 1 ) - Produtos\n( 2 ) - Vendas\n( 0 ) - Sair\n--->");
-        scanf("%d",&opc);
+        scanf("%d",&opc); //Menu principal
 
         switch(opc)
         {
+        //----------------------IMPRIMIR-------------------
         case 1:
             do
             {
+                //Submenu
                 printf("\n1 - Exibir\n2 - Cadastrar\n3 - Atualizar\n4 - Excluir\n5 - Salvar\n6 - Ler\n0 - Voltar\n--->");
-
                 scanf("%d",&opc_2);
-
                 switch(opc_2)
                 {
 
                 case 1:
-                    if(lista.tam <= 0)
+                    if(lista.tam <= 0) //Se nao houver produtos:
                     {
                         printf("Vazio...\n");
                         break;
                     }
-                    imprimir(lista);
+                    imprimir(lista); //impressao de todos os produtos
                     break;
-
+                //----------------CADASTRAR----------------
                 case 2:
                     printf("Deseja cadastrar quantos produtos?\n---> ");
                     scanf("%d",&qtd_usuario);
-                    for(int i=0; i<qtd_usuario; i++)
+                    for(int i=0; i<qtd_usuario; i++) //for para rodar a qtd que o usuario digitou
                     {
-                        do{
+                        do
+                        {
                             printf("\n");
-                            printf("[%d]Digite o codigo: ",y);
+                            printf("[%d]Digite o codigo: ",y); //y para printar ao usuario qual posicao esta
                             scanf("%ld",&valor);
-                            receber = imprimir_existente(lista, valor);
+                            receber = imprimir_existente(lista, valor); //funcao usada para validar existente
                             if(receber > 0)
                             {
-                                printf("\nCodigo Existente!\n");
+                                printf("\nCodigo Existente!\n"); //if para validar se o cod existe
                             }
-                        }while(receber > 0);
+                        }
+                        while(receber > 0);
 
-                        do{
+                        do
+                        {
                             printf("[%d]Digite o nome: ",y);
-                            setbuf(stdin,NULL);
+                            setbuf(stdin,NULL); //limpar buf
                             gets(nm);
 
                             //validar se eh so espaco
@@ -97,51 +97,56 @@ int main()
                             }
                             if(j == k)
                             {
-                                printf("\nNome invalido!\n");
+                                printf("\nNome invalido!\n"); //Caso seja apenas espaco
                             }
                             else
                                 break;
-                        }while(j == k);
+                        }
+                        while(j == k);
 
-                        do{
+                        do
+                        {
                             printf("[%d]Digite o preco: ",y);
                             scanf("%f",&preco);
                             if(preco <=0)
                             {
-                                printf("\nValor incorreto!\n");
+                                printf("\nValor incorreto!\n"); //Validar se o preco for negativo ou 0
                             }
-                        }while(preco <= 0);
+                        }
+                        while(preco <= 0);
 
-                        do{
+                        do
+                        {
                             printf("[%d]Digite a qtd: ",y);
                             scanf("%d",&quantidade);
                             if(quantidade <=0)
                             {
-                                printf("\nValor incorreto!\n");
+                                printf("\nValor incorreto!\n"); //Validar se a qtd for negativo ou 0
                             }
-                        }while(quantidade<=0);
+                        }
+                        while(quantidade<=0);
                         y++;
-                        inserir_ini(&lista,valor,nm,preco,quantidade);
+                        inserir_ini(&lista,valor,nm,preco,quantidade); //funcao para inserir os valores no inicio da lista
                     }
                     y=1;
                     break;
-
+                //--------------ATUALIZAR----------------
                 case 3:
                     if(lista.tam<=0)
                     {
-                        printf("Vazio...\n");
+                        printf("Vazio...\n"); //Se n houver itens
                         break;
                     }
 
                     do
                     {
-                        receber = 0;
+                        receber = 0; //incializar receber 0 para garantir q n haja lixo
                         imprimir(lista);
                         printf("Digite o codigo do produto que deseja atualizar: ");
                         scanf("%d",&valor);
-                        receber = imprimir_existente(lista, valor);
+                        receber = imprimir_existente(lista, valor); //verificar se cod existe
 
-                        if(receber == 1)
+                        if(receber == 1) // se existir
                         {
                             do
                             {
@@ -168,36 +173,36 @@ int main()
                                     break;
                                 }
                             }
-                            while(opc == 'n');
+                            while(opc == 'n'); //propositalmente para n ter como sair
                             break;
 
                         }
                         else
                         {
                             printf("Produto Nao encotrado\n");
-
                         }
                     }
                     while(valor == aux);
 
                     break;
+                //-----------------REMOVER---------------
                 case 4:
                     if(lista.tam <= 0)
                     {
-                        printf("Vazio...\n");
+                        printf("Vazio...\n"); //validar se ha produtos
                         break;
                     }
-                    imprimir(lista);
+                    imprimir(lista); //impressao dos itens
                     printf("Digite o Codigo desejado:\n---> ");
                     scanf("%d",&valor);
                     printf("\nElemento a ser removido: %d\nDeseja continuar?\n( 1 ) - Sim\n( 2 ) - Nao\n---> ",valor);
                     scanf("%d",&opc);
                     if(opc == 1)
                     {
-                        removido = remover(&lista,valor);
+                        removido = remover(&lista,valor); //remover recebe item removido
                         if(removido)
                         {
-                            printf("\nElemento Removido ( %ld )",removido->valor);
+                            printf("\nElemento Removido ( %ld )",removido->valor); //printando item removido
                             free(removido);
                         }
                         else
@@ -205,20 +210,20 @@ int main()
                     }
                     else
                     {
-                        printf("Operacao Cancelada...");
+                        printf("Operacao Cancelada..."); //caso o usuario digite nao
                         break;
                     }
                     break;
-
+                //-------------------SALVAR-----------------
                 case 5:
-                    salvar_txt(lista);
                     if(lista.tam <= 0)
                     {
                         printf("Vazio...\n");
                         break;
                     }
+                    salvar_txt(lista); //salvar itens no txt
                     break;
-
+                //-------------------LER---------------------
                 case 6:
                     fp = fopen("stock.txt","r");
 
@@ -228,14 +233,12 @@ int main()
                         return 1;
                     }
 
-                    No *no = lista.inicio;
-
-                    printf("Vai ler quantos codigos?");
+                    printf("Vai ler quantos Produtos?"); //Deixar dinamico
                     scanf("%d",&l);
-                    for(int i=0;i<l;i++){ //DEIXAR DINAMICO
-                        fscanf(fp,"%ld\n%s\n%f\n%d\n%d\n",&fvalor,&fnome,&fpreco,&fqtd,&fqtd_venda);
-                        printf("cod %ld\n nome %s\npreco %f\n qtd %d\n",fvalor,fnome,fpreco,fqtd,fqtd_venda);
-                        inserir_ini(&lista,fvalor,fnome,fpreco,fqtd);
+                    for(int i=0; i<l; i++) //DEIXAR DINAMICO
+                    {
+                        fscanf(fp,"%ld\n%s\n%f\n%d\n%d\n",&fvalor,&fnome,&fpreco,&fqtd,&fqtd_venda); //leitura fixa
+                        inserir_ini(&lista,fvalor,fnome,fpreco,fqtd); //cadastrar itens lidos
                     }
 
                     fclose(fp);
@@ -267,12 +270,23 @@ int main()
             {
                 do
                 {
-                    soma_estoque = imprimir_estoque(lista);
+                    soma_estoque = imprimir_estoque(lista); //Se o estoque for 0, n tem produto pra vender
                     if(soma_estoque > 0)
                     {
                         printf("Digite o codigo do item desejado para a venda\n---> ");
                         scanf("%d",&valor);
-                        total = vendas(&lista,valor,total);
+                        receber = imprimir_existente(lista, valor);
+                        do
+                        {
+                            if(receber == 0)
+                            {
+                                printf("Digite um codigo valido!");
+                                scanf("%d",&valor);
+                                receber = imprimir_existente(lista, valor); //do para caso digite um valor incorreto
+                            }
+                        }
+                        while(receber != 1);
+                        total = vendas(&lista,valor,total); //total recebe da funcao
                     }
                     else
                     {
@@ -283,7 +297,7 @@ int main()
                     scanf("%d",&opc);
                 }
                 while(opc != 0);
-
+                //-------------TIPOS DE PAGAMENTO-----------
                 do
                 {
                     printf("\nComo deseja pagar?\n( 1 ) - A vista\n( 2 ) - Parcelado\n---> ");
@@ -291,7 +305,6 @@ int main()
 
                     if(opc != 1 && opc !=2)
                         printf("\nDigite uma opc Valida!");
-
                 }
                 while(opc != 1 && opc != 2);
 
@@ -380,7 +393,7 @@ int main()
 
             if(opc_2 == 2)
             {
-                relatorio(lista);
+                relatorio(lista);//funcao relatorio
             }
             if(opc_2 == 0)
             {
@@ -401,7 +414,3 @@ int main()
 
     return 0;
 }
-
-
-
-
